@@ -34,8 +34,8 @@ flowchart TD
   F --> G[Hooks metier]
   G --> D
   B --> H[SEO technique]
-  H --> I[/sitemap.xml]
-  H --> J[/robots.txt]
+  H --> I["/sitemap.xml"]
+  H --> J["/robots.txt"]
 ```
 
 ### Structure Principale
