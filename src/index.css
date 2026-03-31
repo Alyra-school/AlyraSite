@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap");
+
+:root {
+  font-family: "Manrope", system-ui, sans-serif;
+  color: #08060d;
+  background-color: #f6f5fb;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Sora", system-ui, sans-serif;
+  --ink: #08060d;
+  --muted: #4b4f63;
+  --accent: #aa3bff;
+  --accent-2: #211b59;
+  --surface: #ffffff;
+  --surface-dark: #1b1640;
+  --stroke: rgba(33, 27, 89, 0.14);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #ffffff 0%, #f6f5fb 60%)
+      fixed,
+    linear-gradient(
+        120deg,
+        rgba(33, 27, 89, 0.12),
+        rgba(170, 59, 255, 0.16)
+      )
+      fixed;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a,
+summary,
+label[for],
+[role="button"],
+.clickable,
+input {
+  font-family: inherit;
+}
+
+button,
+a,
+summary,
+[role="button"],
+.clickable {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
