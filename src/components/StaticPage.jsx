@@ -1,6 +1,10 @@
-import { useState } from "react";
+"use client";
 
-export default function StaticPage({ page, onHome }) {
+import Link from "next/link";
+import { useState } from "react";
+import Breadcrumbs from "./Breadcrumbs";
+
+export default function StaticPage({ page }) {
   const [selectedFinancing, setSelectedFinancing] = useState(
     page.financingOptions?.[0]?.key ?? null
   );
@@ -9,13 +13,7 @@ export default function StaticPage({ page, onHome }) {
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
       <header className="hero programs-hero">
-        <nav className="breadcrumbs" aria-label="Fil d'Ariane">
-          <button type="button" className="breadcrumb-link" onClick={onHome}>
-            Accueil
-          </button>
-          <span className="breadcrumb-sep">/</span>
-          <span aria-current="page">{page.title}</span>
-        </nav>
+        <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: page.title }]} />
         <div className="section-head">
           <h1>{page.title}</h1>
           <p>{page.subtitle}</p>
@@ -31,6 +29,8 @@ export default function StaticPage({ page, onHome }) {
                 type="button"
                 role="tab"
                 aria-selected={option.key === selectedFinancing}
+                aria-controls={`financing-panel-${option.key}`}
+                id={`financing-tab-${option.key}`}
                 className={`financing-tab ${option.key === selectedFinancing ? "active" : ""}`}
                 onClick={() => setSelectedFinancing(option.key)}
               >
@@ -41,7 +41,13 @@ export default function StaticPage({ page, onHome }) {
           </div>
 
           {activeFinancing && (
-            <article className="card financing-panel" role="tabpanel">
+            <article
+              className="card financing-panel"
+              role="tabpanel"
+              id={`financing-panel-${activeFinancing.key}`}
+              aria-labelledby={`financing-tab-${activeFinancing.key}`}
+              tabIndex={0}
+            >
               <h3>{activeFinancing.title}</h3>
               <ul className="simple-list">
                 {activeFinancing.modalities.map((point) => (
@@ -64,6 +70,11 @@ export default function StaticPage({ page, onHome }) {
                 </ul>
               </article>
             ))}
+          </div>
+          <div className="hero-actions">
+            <Link href="/rendez-vous" className="primary">
+              Prendre rendez-vous
+            </Link>
           </div>
         </section>
       )}

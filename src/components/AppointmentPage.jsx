@@ -1,3 +1,5 @@
+import Breadcrumbs from "./Breadcrumbs";
+
 function buildMonthGrid(date) {
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -20,7 +22,7 @@ function buildMonthGrid(date) {
   return weeks;
 }
 
-export default function AppointmentPage({ onHome }) {
+export default function AppointmentPage() {
   const now = new Date();
   const monthLabel = now.toLocaleDateString("fr-FR", {
     month: "long",
@@ -32,13 +34,7 @@ export default function AppointmentPage({ onHome }) {
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
       <header className="hero programs-hero">
-        <nav className="breadcrumbs" aria-label="Fil d'Ariane">
-          <button type="button" className="breadcrumb-link" onClick={onHome}>
-            Accueil
-          </button>
-          <span className="breadcrumb-sep">/</span>
-          <span aria-current="page">Prendre rendez-vous</span>
-        </nav>
+        <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Prendre rendez-vous" }]} />
         <div className="section-head">
           <h1>Prendre rendez-vous</h1>
           <p>
@@ -51,19 +47,19 @@ export default function AppointmentPage({ onHome }) {
       <section className="appointment-layout">
         <article className="card">
           <h3>Vos informations</h3>
-          <div className="appointment-form">
+          <form className="appointment-form">
             <label className="sr-only" htmlFor="appt-name">
               Nom complet
             </label>
-            <input id="appt-name" placeholder="Nom complet" />
+            <input id="appt-name" placeholder="Nom complet" autoComplete="name" />
             <label className="sr-only" htmlFor="appt-email">
               Email
             </label>
-            <input id="appt-email" placeholder="Email" type="email" />
+            <input id="appt-email" placeholder="Email" type="email" autoComplete="email" />
             <label className="sr-only" htmlFor="appt-phone">
               Telephone
             </label>
-            <input id="appt-phone" placeholder="Telephone" />
+            <input id="appt-phone" placeholder="Telephone" autoComplete="tel" />
             <label className="sr-only" htmlFor="appt-track">
               Formation d'interet
             </label>
@@ -82,8 +78,10 @@ export default function AppointmentPage({ onHome }) {
               Heure
             </label>
             <input id="appt-time" type="time" />
-            <button className="primary">Confirmer le rendez-vous</button>
-          </div>
+            <button type="submit" className="primary">
+              Confirmer le rendez-vous
+            </button>
+          </form>
         </article>
 
         <article className="card">
@@ -96,7 +94,7 @@ export default function AppointmentPage({ onHome }) {
               <span key={day}>{day}</span>
             ))}
           </div>
-          <div className="calendar-weeks">
+          <div className="calendar-weeks" role="grid" aria-label={`Disponibilites ${monthLabel}`}>
             {weeks.map((week, index) => (
               <div key={`week-${index}`} className="calendar-grid">
                 {week.map((day, idx) => (

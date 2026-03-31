@@ -652,15 +652,15 @@
   flex-direction: column;
 }
 
-.catalog-card-button {
+.catalog-card-link {
   text-align: left;
   padding: 0;
-  cursor: pointer;
+  color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.catalog-card-button:hover,
-.catalog-card-button:focus-visible {
+.catalog-card-link:hover,
+.catalog-card-link:focus-visible {
   transform: translateY(-4px);
   box-shadow: 0 16px 28px rgba(33, 27, 89, 0.16);
 }

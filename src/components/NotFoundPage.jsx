@@ -1,8 +1,8 @@
+import Link from "next/link";
+
 export default function NotFoundPage({
   title = "Page introuvable",
   message = "La page que vous recherchez n'existe pas ou n'est plus disponible.",
-  onHome,
-  onCatalog,
 }) {
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
@@ -13,12 +13,12 @@ export default function NotFoundPage({
           <p>{message}</p>
         </div>
         <div className="hero-actions">
-          <button type="button" className="primary" onClick={onCatalog}>
+          <Link href="/programmes" className="primary">
             Voir les programmes
-          </button>
-          <button type="button" className="ghost" onClick={onHome}>
+          </Link>
+          <Link href="/" className="ghost">
             Retour a l'accueil
-          </button>
+          </Link>
         </div>
       </section>
     </main>

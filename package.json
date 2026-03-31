@@ -4,22 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "sitemap": "node scripts/generate-sitemap.mjs",
+    "dev": "next dev",
     "seed:supabase": "node scripts/seed-supabase-programs.mjs",
     "seed:supabase:pages": "node scripts/seed-supabase-program-pages.mjs",
-    "prebuild": "npm run sitemap",
-    "build": "vite build",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint .",
-    "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.101.1",
+    "next": "^16.2.1",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.2"
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

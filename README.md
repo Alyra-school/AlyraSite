@@ -1,6 +1,55 @@
-# Alyra Site
+# Alyra, l'ecole Blockchain et IA
 
-## Setup
+<p align="center">
+  <img src="./public/logo_bleu.svg" alt="Logo Alyra" width="240" />
+</p>
+
+## Objectif Du Site
+
+Ce projet est un site vitrine/cataloque de formations autour de la **Blockchain** et de l'**IA** :
+- page d'accueil institutionnelle
+- catalogue filtrable de programmes
+- page detaillee par formation (SSR)
+- pages statiques (financement, blog, etc.)
+- prise de rendez-vous
+
+## Stack Technique
+
+- `Next.js` (App Router)
+- `React`
+- `Supabase` (catalogue + contenu de pages formation)
+- `ESLint`
+- `Vitest` + `Testing Library` + `vitest-axe` (tests + accessibilite)
+- CSS maison (`src/index.css`, `src/App.css`)
+
+## Architecture (Schema)
+
+```mermaid
+flowchart TD
+  A[Utilisateur] --> B[Next.js App Router]
+  B --> C[Pages SSR / SSG]
+  C --> D[Data Layer: src/lib/programData.js]
+  D --> E[(Supabase)]
+  B --> F[Composants UI]
+  F --> G[Hooks metier]
+  G --> D
+  B --> H[SEO technique]
+  H --> I[/sitemap.xml]
+  H --> J[/robots.txt]
+```
+
+### Structure Principale
+
+- `app/`: routes Next (pages, metadata, API routes, sitemap/robots)
+- `src/components/`: composants UI reutilisables
+- `src/components/program-catalog/`: composants dedies catalogue
+- `src/hooks/`: hooks metier (filtres, hydration)
+- `src/lib/`: acces donnees Supabase + SEO helpers
+- `src/data/`: contenus statiques
+- `supabase/migrations/`: scripts SQL de schema
+- `supabase/seeds/`: scripts SQL/JS de seed
+
+## Lancement Local
 
 ```bash
 npm install
@@ -8,36 +57,10 @@ cp .env.example .env
 npm run dev
 ```
 
-## Supabase migration (catalog)
+## Variables D'Environnement
 
-1. Create a Supabase project.
-2. Run SQL migrations in Supabase SQL Editor:
-   - `supabase/migrations/20260331_create_programs_table.sql`
-   - `supabase/migrations/20260331_create_program_pages_table.sql`
-3. Fill `.env` for frontend:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
-4. Seed initial data from local catalog:
-
-```bash
-SUPABASE_URL="https://<project>.supabase.co" \
-SUPABASE_SERVICE_ROLE_KEY="<service_role_key>" \
-npm run seed:supabase
-```
-
-5. Seed detail content table (linked by `program_id` -> `programs.id`):
-
-```bash
-SUPABASE_URL="https://<project>.supabase.co" \
-SUPABASE_SERVICE_ROLE_KEY="<service_role_key>" \
-npm run seed:supabase:pages
-```
-
-## Notes
-
-- If Supabase env vars are missing or unavailable, the catalog will be empty.
-- Programs are read from `public.programs`.
-- Program detail pages are read from `public.program_pages`.
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 ## Scripts
 
@@ -45,6 +68,10 @@ npm run seed:supabase:pages
 - `npm run lint`
 - `npm run test`
 - `npm run build`
-- `npm run sitemap`
+- `npm run start`
 - `npm run seed:supabase`
 - `npm run seed:supabase:pages`
+
+## Auteur
+
+**cyril castagnet**

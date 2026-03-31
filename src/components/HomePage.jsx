@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   communityHighlights,
   events,
@@ -11,7 +12,7 @@ import {
   tracks,
 } from "../data/homeData";
 
-export default function HomePage({ onProgramList, onSection }) {
+export default function HomePage() {
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
       <header className="hero">
@@ -25,9 +26,9 @@ export default function HomePage({ onProgramList, onSection }) {
               concrets.
             </p>
             <div className="hero-actions">
-              <button type="button" className="primary" onClick={onProgramList}>
+              <Link href="/programmes" className="primary">
                 Voir les programmes
-              </button>
+              </Link>
               <button type="button" className="ghost">
                 Telecharger le syllabus
               </button>
@@ -57,9 +58,9 @@ export default function HomePage({ onProgramList, onSection }) {
                 <p>Projets encadres</p>
               </div>
             </div>
-            <button type="button" className="primary full">
+            <Link href="/rendez-vous" className="primary full">
               Planifier un entretien
-            </button>
+            </Link>
           </div>
         </div>
       </header>
@@ -81,9 +82,9 @@ export default function HomePage({ onProgramList, onSection }) {
               </div>
               <h3>{program.title}</h3>
               <p>{program.desc}</p>
-              <button type="button" className="text-button">
+              <Link href="/programmes" className="text-button">
                 Voir le contenu
-              </button>
+              </Link>
             </article>
           ))}
         </div>
@@ -157,7 +158,13 @@ export default function HomePage({ onProgramList, onSection }) {
         <div className="team-grid">
           {teamMembers.map((member) => (
             <article key={member.name} className="team-card">
-              <img src={member.avatar} alt={member.name} className="team-avatar" />
+              <img
+                src={member.avatar}
+                alt={member.name}
+                className="team-avatar"
+                loading="lazy"
+                decoding="async"
+              />
               <h3>{member.name}</h3>
               <span>{member.role}</span>
               <p>{member.focus}</p>
@@ -294,23 +301,26 @@ export default function HomePage({ onProgramList, onSection }) {
           <p>Ecole blockchain fondee par des builders, pour des builders.</p>
         </div>
         <div className="footer-links">
-          <button type="button" className="nav-link" onClick={onProgramList}>
+          <Link href="/programmes" className="nav-link">
             Programmes
-          </button>
-          <button type="button" className="nav-link" onClick={() => onSection("parcours")}>
+          </Link>
+          <a className="nav-link" href="/#parcours">
             Admissions
-          </button>
-          <button type="button" className="nav-link" onClick={() => onSection("resultats")}>
+          </a>
+          <a className="nav-link" href="/#resultats">
             Carriere
-          </button>
-          <button type="button" className="nav-link">
+          </a>
+          <Link href="/rendez-vous" className="nav-link">
             Contact
-          </button>
+          </Link>
         </div>
         <div className="footer-news">
           <span>Newsletter</span>
           <div className="newsletter">
-            <input placeholder="Votre email" />
+            <label className="sr-only" htmlFor="newsletter-email">
+              Votre email
+            </label>
+            <input id="newsletter-email" placeholder="Votre email" type="email" autoComplete="email" />
             <button type="button" className="ghost">
               S'inscrire
             </button>

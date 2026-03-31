@@ -1,29 +1,38 @@
-import { useEffect, useState } from "react";
+"use client";
 
-export default function NavBar({
-  navRef,
-  isProgramsArea,
-  isFinancement,
-  isVosBesoins,
-  isBlog,
-  isQuiSommesNous,
-  isNosAnciens,
-  isRendezVous,
-  onHome,
-  onCatalogAll,
-  onCatalogBlockchain,
-  onCatalogIA,
-  onFeaturedLong,
-  featuredLongTitle,
-  onFinancement,
-  onVosBesoins,
-  onBlog,
-  onQuiSommesNous,
-  onNosAnciens,
-  onRendezVous,
-}) {
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { parseDurationWeeks } from "../utils/programUtils";
+
+const staticPages = [
+  { label: "Financement", href: "/financement" },
+  { label: "Vos besoins", href: "/vos-besoins" },
+  { label: "Blog", href: "/blog" },
+  { label: "Qui sommes nous", href: "/qui-sommes-nous" },
+  { label: "Nos Anciens", href: "/nos-anciens" },
+];
+
+export default function NavBar({ programs = [] }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const navRef = useRef(null);
+  const mobileNavBaseHeightRef = useRef(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+
+  const featuredLongProgram = useMemo(() => {
+    return [...programs]
+      .sort((a, b) => parseDurationWeeks(b.duration) - parseDurationWeeks(a.duration))
+      .at(0);
+  }, [programs]);
+
+  const isProgramsArea = pathname === "/programmes" || pathname.startsWith("/programmes/");
+
+  const closeMenus = () => {
+    setIsMobileMenuOpen(false);
+    setIsProgramsOpen(false);
+  };
 
   useEffect(() => {
     const onResize = () => {
@@ -37,11 +46,38 @@ export default function NavBar({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const runAction = (callback) => () => {
-    callback();
-    setIsMobileMenuOpen(false);
-    setIsProgramsOpen(false);
-  };
+  useEffect(() => {
+    const updateNavHeight = () => {
+      const navElement = navRef.current;
+      if (!navElement) return;
+
+      const isMobileNav = window.innerWidth <= 1180;
+      const isMenuOpen = navElement.classList.contains("mobile-open");
+      let navHeight = navElement.offsetHeight;
+
+      if (isMobileNav && isMenuOpen && mobileNavBaseHeightRef.current > 0) {
+        navHeight = mobileNavBaseHeightRef.current;
+      } else if (isMobileNav) {
+        mobileNavBaseHeightRef.current = navHeight;
+      }
+
+      document.documentElement.style.setProperty("--nav-height", `${navHeight}px`);
+    };
+
+    updateNavHeight();
+    window.addEventListener("resize", updateNavHeight);
+    if (document.fonts?.ready) document.fonts.ready.then(updateNavHeight);
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined" && navRef.current
+        ? new ResizeObserver(updateNavHeight)
+        : null;
+    if (resizeObserver && navRef.current) resizeObserver.observe(navRef.current);
+
+    return () => {
+      window.removeEventListener("resize", updateNavHeight);
+      if (resizeObserver) resizeObserver.disconnect();
+    };
+  }, []);
 
   return (
     <nav
@@ -50,20 +86,20 @@ export default function NavBar({
       aria-label="Navigation principale"
     >
       <div className="nav-top-row">
-        <button type="button" className="logo logo-btn" onClick={runAction(onHome)}>
+        <Link href="/" className="logo logo-btn" onClick={closeMenus}>
           <img className="logo-mark" src="/symbole_bleu.svg" alt="Alyra symbole" />
           <span>Alyra, l'ecole Blockchain et IA</span>
-        </button>
+        </Link>
 
         <div className="nav-top-actions">
-          <button
-            type="button"
-            className={`nav-cta ${isRendezVous ? "active" : ""}`}
-            onClick={runAction(onRendezVous)}
-            aria-current={isRendezVous ? "page" : undefined}
+          <Link
+            href="/rendez-vous"
+            className={`nav-cta ${pathname === "/rendez-vous" ? "active" : ""}`}
+            onClick={closeMenus}
+            aria-current={pathname === "/rendez-vous" ? "page" : undefined}
           >
             Rendez-vous
-          </button>
+          </Link>
           <button
             type="button"
             className="nav-toggle"
@@ -88,72 +124,71 @@ export default function NavBar({
               className={`nav-link nav-trigger ${isProgramsArea ? "active" : ""}`}
               aria-haspopup="true"
               aria-expanded={isProgramsOpen}
-              onClick={() => setIsProgramsOpen((current) => !current)}
+              onClick={() => {
+                if (window.innerWidth <= 1180) {
+                  setIsProgramsOpen((current) => !current);
+                  return;
+                }
+                closeMenus();
+                router.push("/programmes");
+              }}
             >
               Programmes
             </button>
 
             <div className="nav-dropdown">
-              <button type="button" className="nav-dropdown-item" onClick={runAction(onCatalogAll)}>
-                <span>Toutes nos formations</span>
-              </button>
-              <button
-                type="button"
+              <Link
+                href="/programmes"
                 className="nav-dropdown-item"
-                onClick={runAction(onCatalogBlockchain)}
+                onClick={closeMenus}
+              >
+                <span>Toutes nos formations</span>
+              </Link>
+              <Link
+                href="/programmes?track=blockchain"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
               >
                 <span>Nos Formations Blockchain</span>
-              </button>
-              <button type="button" className="nav-dropdown-item" onClick={runAction(onCatalogIA)}>
+              </Link>
+              <Link
+                href="/programmes?track=ia"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
+              >
                 <span>Nos Formations IA</span>
-              </button>
-              <button type="button" className="nav-dropdown-item" onClick={runAction(onFeaturedLong)}>
-                <span>{featuredLongTitle}</span>
-                <small>Notre formation pour vous</small>
-              </button>
+              </Link>
+              {featuredLongProgram ? (
+                <Link
+                  href={`/programmes/${featuredLongProgram.slug}`}
+                  className="nav-dropdown-item"
+                  onClick={closeMenus}
+                >
+                  <span>{featuredLongProgram.title}</span>
+                  <small>Notre formation pour vous</small>
+                </Link>
+              ) : (
+                <span className="nav-dropdown-item">
+                  <span>Programme long</span>
+                  <small>Notre formation pour vous</small>
+                </span>
+              )}
             </div>
           </div>
 
-          <button
-            type="button"
-            className={`nav-link ${isFinancement ? "active" : ""}`}
-            onClick={runAction(onFinancement)}
-            aria-current={isFinancement ? "page" : undefined}
-          >
-            Financement
-          </button>
-          <button
-            type="button"
-            className={`nav-link ${isVosBesoins ? "active" : ""}`}
-            onClick={runAction(onVosBesoins)}
-            aria-current={isVosBesoins ? "page" : undefined}
-          >
-            Vos besoins
-          </button>
-          <button
-            type="button"
-            className={`nav-link ${isBlog ? "active" : ""}`}
-            onClick={runAction(onBlog)}
-            aria-current={isBlog ? "page" : undefined}
-          >
-            Blog
-          </button>
-          <button
-            type="button"
-            className={`nav-link nav-link-compact-break ${isQuiSommesNous ? "active" : ""}`}
-            onClick={runAction(onQuiSommesNous)}
-            aria-current={isQuiSommesNous ? "page" : undefined}
-          >
-            Qui sommes nous
-          </button>
-          <button
-            type="button"
-            className={`nav-link ${isNosAnciens ? "active" : ""}`}
-            onClick={runAction(onNosAnciens)}
-            aria-current={isNosAnciens ? "page" : undefined}
-          >
-            Nos Anciens
-          </button>
+          {staticPages.map((item) => (
+            <Link
+              key={item.href}
+              className={`nav-link ${item.href === "/qui-sommes-nous" ? "nav-link-compact-break" : ""} ${
+                pathname === item.href ? "active" : ""
+              }`}
+              href={item.href}
+              onClick={closeMenus}
+              aria-current={pathname === item.href ? "page" : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
 
         <div className="nav-actions">
@@ -167,14 +202,14 @@ export default function NavBar({
             placeholder="Rechercher une formation..."
             aria-label="Rechercher une formation"
           />
-          <button
-            type="button"
-            className={`nav-cta ${isRendezVous ? "active" : ""}`}
-            onClick={runAction(onRendezVous)}
-            aria-current={isRendezVous ? "page" : undefined}
+          <Link
+            href="/rendez-vous"
+            className={`nav-cta ${pathname === "/rendez-vous" ? "active" : ""}`}
+            onClick={closeMenus}
+            aria-current={pathname === "/rendez-vous" ? "page" : undefined}
           >
             Rendez-vous
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

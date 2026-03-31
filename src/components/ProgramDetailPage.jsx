@@ -1,12 +1,11 @@
+import Link from "next/link";
+import Breadcrumbs from "./Breadcrumbs";
+
 export default function ProgramDetailPage({
   program,
   similarPrograms,
   detailContent,
   isContentLoading,
-  onBack,
-  onOpenProgram,
-  onHome,
-  onCatalog,
 }) {
   const professors = detailContent?.professors ?? [];
   const learningPath = detailContent?.learningPath ?? [];
@@ -15,21 +14,17 @@ export default function ProgramDetailPage({
     <main className="main-content" id="main-content" tabIndex="-1">
       <section className="hero hero-program">
         <div className="program-page">
-          <nav className="breadcrumbs" aria-label="Fil d'Ariane">
-            <button type="button" className="breadcrumb-link" onClick={onHome}>
-              Accueil
-            </button>
-            <span className="breadcrumb-sep">/</span>
-            <button type="button" className="breadcrumb-link" onClick={onCatalog}>
-              Programmes
-            </button>
-            <span className="breadcrumb-sep">/</span>
-            <span aria-current="page">{program.title}</span>
-          </nav>
+          <Breadcrumbs
+            items={[
+              { label: "Accueil", href: "/" },
+              { label: "Programmes", href: "/programmes" },
+              { label: program.title },
+            ]}
+          />
 
-          <button type="button" className="ghost back-btn" onClick={onBack}>
+          <Link href="/programmes" className="ghost back-btn">
             Retour au catalogue
-          </button>
+          </Link>
 
           <div className="program-hero">
             <div>
@@ -48,10 +43,6 @@ export default function ProgramDetailPage({
                 <div>
                   <strong>Prix</strong>
                   <span>{program.price.toLocaleString("fr-FR")} EUR</span>
-                </div>
-                <div>
-                  <strong>ID</strong>
-                  <span>{program.id}</span>
                 </div>
               </div>
             </div>
@@ -82,13 +73,9 @@ export default function ProgramDetailPage({
                     <span>{item.duration}</span>
                     <span>{item.price.toLocaleString("fr-FR")} EUR</span>
                   </div>
-                  <button
-                    type="button"
-                    className="text-button"
-                    onClick={() => onOpenProgram(item.slug)}
-                  >
+                  <Link className="text-button" href={`/programmes/${item.slug}`}>
                     Voir cette formation
-                  </button>
+                  </Link>
                 </article>
               ))}
             </div>

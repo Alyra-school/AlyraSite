@@ -11,6 +11,13 @@ node_modules
 dist
 dist-ssr
 *.local
+.next/
+out/
+coverage/
+.next
+next/
+.next/*
+next/*
 
 # Editor directories and files
 .vscode/*
@@ -23,6 +30,7 @@ dist-ssr
 *.sln
 *.sw?
 
+supabase/
 
 .env
 .env.*
