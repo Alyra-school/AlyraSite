@@ -1,4 +1,5 @@
 import NavBar from "../src/components/NavBar";
+import SiteFooter from "../src/components/SiteFooter";
 import { getPrograms } from "../src/lib/programData";
 import { defaultMetadata } from "../src/lib/seo";
 import "./globals.css";
@@ -21,6 +22,7 @@ export default async function RootLayout({ children }) {
           </a>
           <NavBar programs={programs} />
           {children}
+          <SiteFooter />
         </div>
       </body>
     </html>

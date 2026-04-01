@@ -8,9 +8,6 @@ import {
   events,
   financingHighlights,
   financingPartners,
-  footerColumns,
-  footerCertifications,
-  footerSocials,
   freeCourses,
   learnerFeedback,
   latestNews,
@@ -106,8 +103,8 @@ export default function HomePage() {
         <div className="hero-grid">
           <div className="hero-copy">
             <div className="hero-proof">
-              <span>Excellent 4.9 sur 5 Trustpilot</span>
-              <span>★★★★★ 4,9/5</span>
+              <span>4.9 sur 5 sur Trustpilot</span>
+              <span>★★★★★ Excellent</span>
             </div>
             <h1>
               La Blockchain et l'IA ne vous remplaceront pas.
@@ -138,7 +135,7 @@ export default function HomePage() {
           <div className="hero-orbit" aria-hidden="true" ref={orbitRef}>
             <div className="orbit-ring"></div>
             <div className="orbit-center" data-depth="0.1" data-drift="1.2" data-speed="0.6" data-phase="0.4">
-              <img src="/logo_blanc.svg" alt="" />
+              <img src="/symbole_blanc.svg" alt="" />
             </div>
             <Link href="/programmes/dev-blockchain" className="orbit-pill orbit-pill-1" data-depth="0.38" data-xmult="1" data-ymult="-0.9" data-drift="2.2" data-speed="0.7" data-phase="0.2">
               Developpement blockchain
@@ -515,72 +512,6 @@ export default function HomePage() {
         </button>
       </section>
 
-      <footer className="footer footer-alyra">
-        <div className="footer-main">
-          <div className="footer-brand-col">
-            <div className="logo">
-              <img className="logo-mark" src="/logo_bleu.svg" alt="Alyra logo" />
-              <span>Alyra, l'ecole Blockchain et IA</span>
-            </div>
-            <p>Ecole blockchain fondee par des builders, pour des builders.</p>
-            <div className="footer-socials">
-              {footerSocials.map((social) => (
-                <a key={social.name} href={social.href} target="_blank" rel="noreferrer" aria-label={social.name}>
-                  <img src={social.icon} alt="" />
-                </a>
-              ))}
-            </div>
-          </div>
-          {footerColumns.map((column) => (
-            <div key={column.title} className="footer-links">
-              <strong>{column.title}</strong>
-              {column.links.map((item) => (
-                <Link key={item.label} href={item.href} className="nav-link">
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <div className="footer-qualiopi">
-          <a
-            href="https://cdn.prod.website-files.com/638473041a643140c382a182/676139e944857c6ae61b2aa1_certificat-B02397-2024-11-15T23_00_00Z.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="primary"
-          >
-            Telecharger le certificat Qualiopi
-          </a>
-          <div className="newsletter footer-newsletter-inline">
-            <span className="newsletter-kicker">Newsletter Alyra</span>
-            <div className="newsletter-controls">
-            <label className="sr-only" htmlFor="newsletter-email-footer">
-              Votre email
-            </label>
-            <input
-              id="newsletter-email-footer"
-              placeholder="Votre email"
-              type="email"
-              autoComplete="email"
-            />
-            <button type="button" className="ghost">
-              S'inscrire
-            </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer-certs footer-certs-row">
-          {footerCertifications.map((cert) => (
-            <article key={cert.name} className="footer-cert-item">
-              <img src={cert.logo} alt={`Certification ${cert.name}`} loading="lazy" decoding="async" />
-            </article>
-          ))}
-        </div>
-
-        <p className="footer-legal">Tous droits reserves a Alyra, fait par Cyril Castagnet.</p>
-      </footer>
     </main>
   );
 }
