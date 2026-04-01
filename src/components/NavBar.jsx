@@ -12,6 +12,7 @@ const staticPages = [
   { label: "Qui sommes nous", href: "/qui-sommes-nous" },
   { label: "Nos Anciens", href: "/nos-anciens" },
 ];
+const MOBILE_BREAKPOINT = 1200;
 
 export default function NavBar({ programs = [] }) {
   const pathname = usePathname();
@@ -36,7 +37,7 @@ export default function NavBar({ programs = [] }) {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth > 1180) {
+      if (window.innerWidth > MOBILE_BREAKPOINT) {
         setIsMobileMenuOpen(false);
         setIsProgramsOpen(false);
       }
@@ -51,7 +52,7 @@ export default function NavBar({ programs = [] }) {
       const navElement = navRef.current;
       if (!navElement) return;
 
-      const isMobileNav = window.innerWidth <= 1180;
+      const isMobileNav = window.innerWidth <= MOBILE_BREAKPOINT;
       const isMenuOpen = navElement.classList.contains("mobile-open");
       let navHeight = navElement.offsetHeight;
 
@@ -125,7 +126,7 @@ export default function NavBar({ programs = [] }) {
               aria-haspopup="true"
               aria-expanded={isProgramsOpen}
               onClick={() => {
-                if (window.innerWidth <= 1180) {
+                if (window.innerWidth <= MOBILE_BREAKPOINT) {
                   setIsProgramsOpen((current) => !current);
                   return;
                 }

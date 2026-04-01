@@ -26,6 +26,7 @@
 
 body {
   min-height: 100vh;
+  line-height: 1.6;
   background: radial-gradient(circle at top left, #ffffff 0%, #f6f5fb 60%)
       fixed,
     linear-gradient(

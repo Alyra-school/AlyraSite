@@ -22,6 +22,43 @@ export const programs = [
   },
 ];
 
+export const parcoursBlockchain = [
+  {
+    title: "Consulting blockchain : analyser, pratiquer, creer",
+    image: "/inspired/parcours/consulting-blockchain.avif",
+  },
+  {
+    title: "Developpement blockchain : concevoir, securiser, deployer",
+    image: "/inspired/parcours/dev-blockchain.avif",
+  },
+  {
+    title: "Finance decentralisee blockchain : evaluer, securiser, gerer",
+    image: "/inspired/parcours/defi.avif",
+  },
+];
+
+export const parcoursIA = [
+  {
+    title: "Developpement intelligence artificielle : coder, entrainer, visualiser",
+    image: "/inspired/parcours/dev-ia.avif",
+  },
+  {
+    title: "Consulting intelligence artificielle : s'adapter, utiliser, evoluer",
+    image: "/inspired/parcours/consulting-ia.avif",
+  },
+];
+
+export const parcoursEntreprise = [
+  {
+    title: "Parcours Intelligence Artificielle Entreprise",
+    image: "/inspired/parcours/enterprise-ia.avif",
+  },
+  {
+    title: "Parcours Blockchain Entreprise",
+    image: "/inspired/parcours/enterprise-blockchain.avif",
+  },
+];
+
 export const tracks = [
   {
     title: "Bootcamp intensif",
@@ -94,25 +131,25 @@ export const teamMembers = [
     name: "Pascal Tallarida",
     role: "Fondateur & Expert DeFi",
     focus: "Tokenomics, modeles economiques et strategie protocoles.",
-    avatar: "https://picsum.photos/seed/alyra-team-1/220/220",
+    avatar: "/inspired/team/ph.avif",
   },
   {
     name: "Lea Morel",
     role: "Lead IA Applied",
     focus: "Mise en production d'applications IA et evaluation des modeles.",
-    avatar: "https://picsum.photos/seed/alyra-team-2/220/220",
+    avatar: "/inspired/team/cyril.avif",
   },
   {
     name: "Romain Guez",
     role: "Head of Pedagogy",
     focus: "Parcours professionnalisants, mentorat et progression individuelle.",
-    avatar: "https://picsum.photos/seed/alyra-team-3/220/220",
+    avatar: "/inspired/team/daniel.avif",
   },
   {
     name: "Sarah Benhamou",
     role: "Coach Carriere",
     focus: "Positionnement metier, portfolio et preparation entretiens.",
-    avatar: "https://picsum.photos/seed/alyra-team-4/220/220",
+    avatar: "/inspired/team/corco.avif",
   },
 ];
 
@@ -176,6 +213,14 @@ export const financingHighlights = [
   },
 ];
 
+export const financingPartners = [
+  { name: "Mon Compte Formation", logo: "/inspired/finance/cpf.png" },
+  { name: "Opcommerce", logo: "/inspired/finance/opcommerce.png" },
+  { name: "AFDAS", logo: "/inspired/finance/afdas.png" },
+  { name: "Transitions Pro", logo: "/inspired/finance/transitions.png" },
+  { name: "AGEFICE", logo: "/inspired/finance/agefice.jpg" },
+];
+
 export const learnerFeedback = [
   {
     name: "Camille R.",
@@ -194,5 +239,135 @@ export const learnerFeedback = [
     role: "Alumni - DeFi",
     quote:
       "La communaute Discord et les ateliers live m'ont permis de ne jamais rester bloquee seule sur mes livrables.",
+  },
+];
+
+export const recruiterCompanies = [
+  { name: "Ledger", logo: "/inspired/partners/ledger.avif" },
+  { name: "Consensys", logo: "/inspired/partners/consensys.avif" },
+  { name: "Coinhouse", logo: "/inspired/partners/coinhouse.avif" },
+  { name: "KPMG", logo: "/inspired/partners/kpmg.avif" },
+  { name: "BNP Paribas", logo: "/inspired/partners/bnp.avif" },
+  { name: "IBM", logo: "/inspired/partners/ibm.avif" },
+  { name: "HSBC", logo: "/inspired/partners/hsbc.png" },
+  { name: "Thales", logo: "/inspired/partners/thales.png" },
+  { name: "Capgemini", logo: "/inspired/partners/capgemini.png" },
+  { name: "Bpifrance", logo: "/inspired/partners/bpifrance.avif" },
+];
+
+export const certificationBlocks = [
+  {
+    title: "Formations certifiantes",
+    text: "Parcours construits pour valider des competences professionnelles reconnues.",
+  },
+  {
+    title: "Contenu pedagogique structure",
+    text: "Progression par blocs, ateliers pratiques et evaluations continues.",
+  },
+  {
+    title: "Accompagnement vers la reussite",
+    text: "Mentorat expert, coaching et suivi jusqu'a l'obtention de la certification.",
+  },
+];
+
+export const trainingHighlights = [
+  {
+    title: "Formation 100% a distance",
+    text: "Suivez les cours en direct ou en replay, de n'importe ou.",
+  },
+  {
+    title: "Faites financer votre formation a 100%",
+    text: "CPF, OPCO et solutions adaptees a votre situation.",
+  },
+  {
+    title: "Formations certifiantes",
+    text: "Un cadre professionnalisant pour transformer vos competences en opportunites.",
+  },
+];
+
+export const freeCourses = [
+  "Introduction a la blockchain",
+  "Crypto-economie: fondamentaux",
+  "Initiation smart contracts",
+  "IA generative: premiers cas d'usage",
+  "Automatisation no-code avec l'IA",
+];
+
+export const whyLearnCards = [
+  {
+    title: "Des domaines en pleine croissance",
+    text: "La blockchain et l'IA structurent deja les nouveaux usages business et produit.",
+  },
+  {
+    title: "Une forte demande",
+    text: "Les entreprises recherchent des profils capables de passer de la theorie a la pratique.",
+  },
+  {
+    title: "Un manque de profils qualifies",
+    text: "Se former maintenant permet de se positionner sur des metiers en tension.",
+  },
+];
+
+export const latestNews = [
+  {
+    title: "IA et emplois : dossier complet 2026 - 2027",
+    text: "Un decryptage des tendances de recrutement et des competences qui montent.",
+  },
+  {
+    title: "Clap de fin pour Sora: ce qu'il faut retenir",
+    text: "Analyse des impacts produit et des opportunites pour les entreprises.",
+  },
+  {
+    title: "Nouvelle certification pour le parcours Consulting IA",
+    text: "Un nouveau cadre de validation des acquis, oriente usage terrain.",
+  },
+];
+
+export const pressLogos = [
+  { name: "Le Figaro", logo: "/inspired/media/figaro.avif" },
+  { name: "Challenges", logo: "/inspired/media/challenges.avif" },
+  { name: "Journal du Coin", logo: "/inspired/media/journalducoin.png" },
+];
+
+export const footerSocials = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/school/alyra", icon: "/inspired/social/linkedin.svg" },
+  { name: "Facebook", href: "https://www.facebook.com/alyrablockchain/", icon: "/inspired/social/facebook.svg" },
+  { name: "Instagram", href: "https://www.instagram.com/alyralecoleblockchain/", icon: "/inspired/social/instagram.svg" },
+  { name: "TikTok", href: "https://www.tiktok.com/@alyraformation", icon: "/inspired/social/tiktok.svg" },
+  { name: "YouTube", href: "https://www.youtube.com/channel/UCcXhEjtsxLvNw03Rn7eIXwA", icon: "/inspired/social/youtube.svg" },
+  { name: "X", href: "https://twitter.com/alyraBlockchain", icon: "/inspired/social/x.svg" },
+];
+
+export const footerCertifications = [
+  { name: "Qualiopi", logo: "/inspired/cert/qualiopi.jpg" },
+  { name: "ICPF", logo: "/inspired/cert/icpf.png" },
+  { name: "BCdiploma", logo: "/inspired/cert/bcdiploma.avif" },
+  { name: "Atlas", logo: "/inspired/cert/atlas.png" },
+];
+
+export const footerColumns = [
+  {
+    title: "L'ecole",
+    links: [
+      { label: "Qui sommes nous", href: "/qui-sommes-nous" },
+      { label: "Nos Anciens", href: "/nos-anciens" },
+      { label: "Blog", href: "/blog" },
+    ],
+  },
+  {
+    title: "Formations",
+    links: [
+      { label: "Catalogue", href: "/programmes" },
+      { label: "Formations Blockchain", href: "/programmes?track=blockchain" },
+      { label: "Formations IA", href: "/programmes?track=ia" },
+    ],
+  },
+  {
+    title: "Aide",
+    links: [
+      { label: "Financement", href: "/financement" },
+      { label: "Vos besoins", href: "/vos-besoins" },
+      { label: "Rendez-vous", href: "/rendez-vous" },
+    ],
   },
 ];
