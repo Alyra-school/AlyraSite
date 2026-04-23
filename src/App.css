@@ -27,9 +27,10 @@
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: 88px;
+  gap: clamp(100px, 8vw, 136px);
   flex: 1 0 auto;
   color: var(--text-body);
+  background: transparent;
 }
 
 .hero {
@@ -327,7 +328,7 @@
 }
 
 .hero-grid {
-  margin-top: 56px;
+  margin-top: 68px;
   display: grid;
   grid-template-columns: minmax(300px, 1fr) minmax(320px, 1fr);
   gap: 56px;
@@ -339,7 +340,7 @@
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 3.1vw, 3.35rem);
   line-height: 1.15;
-  margin: 12px 0 22px;
+  margin: 12px 0 30px;
   color: var(--text-strong);
 }
 
@@ -366,7 +367,7 @@
   font-size: 1rem;
   max-width: 560px;
   color: var(--muted);
-  margin-bottom: 32px;
+  margin-bottom: 42px;
 }
 
 .hero-actions {
@@ -478,6 +479,11 @@
 }
 
 .orbit-center img {
+  width: 84px;
+  height: auto;
+}
+
+.hero-orbit-logo {
   width: 84px;
   height: auto;
 }
@@ -760,7 +766,7 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: clamp(46px, 3.8vw, 68px);
 }
 
 .section--full {
@@ -1054,11 +1060,16 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 720px;
+  --section-head-space: clamp(28px, 3.2vw, 52px);
+}
+
+.section > .section-head {
+  margin-bottom: var(--section-head-space);
 }
 
 .hero .section-head {
   max-width: 100%;
+  margin-bottom: 0;
 }
 
 .hero .section-head h1 {
@@ -1154,30 +1165,45 @@
 .employability-stack {
   display: flex;
   flex-direction: column;
-  gap: 58px;
+  gap: 48px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .employability-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(360px, 1.2fr);
+  width: min(100%, 1240px);
   align-items: center;
   justify-content: center;
-  gap: 56px;
-  transform: translateX(28px);
+  justify-items: center;
+  gap: clamp(28px, 4vw, 64px);
+  transform: none;
 }
 
 .employability-row-reverse {
-  flex-direction: row;
-  transform: translateX(-28px);
+  transform: none;
+}
+
+.employability-row-reverse .employability-badge-card {
+  order: 2;
+}
+
+.employability-row-reverse .employability-copy {
+  order: 1;
 }
 
 .employability-badge-card {
   display: grid;
   place-items: center;
-  flex: 0 0 300px;
+  width: 100%;
+  max-width: 460px;
+  padding: 24px;
 }
 
 .employability-badge {
-  width: clamp(210px, 18vw, 260px);
+  width: clamp(180px, 16vw, 250px);
   aspect-ratio: 1 / 1;
   border-radius: 999px;
   display: grid;
@@ -1274,28 +1300,32 @@
   background: transparent;
   border: none;
   padding: 0;
-  gap: 12px;
-  flex: 0 1 560px;
-  max-width: 560px;
+  gap: 14px;
+  width: 100%;
+  max-width: none;
   align-content: center;
+  justify-items: center;
   text-align: center;
 }
 
 .employability-copy h3 {
   font-size: 1.55rem;
   color: #1f1b62;
+  text-align: center;
 }
 
 .employability-copy .simple-list {
   margin-top: 0;
   padding-left: 0;
   list-style: none;
+  width: min(100%, 760px);
 }
 
 .employability-copy .simple-list li {
   color: #1f1b62;
   font-size: 1.06rem;
   line-height: 1.45;
+  text-align: center;
 }
 
 .employability-copy .simple-list strong {
@@ -1305,6 +1335,16 @@
 .employability-source {
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.recruiters-head {
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+}
+
+.recruiters-head + .company-marquee {
+  margin-top: clamp(20px, 2.4vw, 36px);
 }
 
 .cards {
@@ -1354,13 +1394,14 @@
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: clamp(26px, 4vw, 60px);
-  align-items: start;
+  align-items: center;
 }
 
 .alyra-team-copy {
   display: grid;
   gap: 18px;
   max-width: 660px;
+  align-self: center;
 }
 
 .alyra-team-copy h2 {
@@ -1376,13 +1417,16 @@
 
 .alyra-team-quote-mark {
   margin: 0;
-  font-size: 4rem;
-  line-height: 0.55;
-  color: var(--brand);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(4.8rem, 6vw, 6.4rem);
+  line-height: 0.72;
+  letter-spacing: -0.04em;
+  color: #4d48ff;
   font-weight: 700;
+  text-shadow: 0 8px 20px rgba(77, 72, 255, 0.18);
 }
 
-.alyra-team-copy p {
+.alyra-team-copy p:not(.alyra-team-quote-mark) {
   margin: 0;
   font-size: clamp(1rem, 1.15vw, 1.22rem);
   line-height: 1.45;
@@ -1398,6 +1442,9 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .alyra-member-card {
@@ -1915,7 +1962,7 @@
 
 .why-block {
   display: grid;
-  gap: 20px;
+  gap: clamp(34px, 3.6vw, 54px);
 }
 
 .why-block h2 {
@@ -1975,7 +2022,7 @@
   background: linear-gradient(180deg, #f7f7fb 0%, #ecebfd 100%);
   border-radius: 32px;
   padding: clamp(34px, 4vw, 56px) clamp(20px, 4vw, 56px);
-  gap: 30px;
+  gap: clamp(48px, 5vw, 72px);
 }
 
 .free-courses-title {
@@ -1995,6 +2042,7 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
   gap: clamp(24px, 4vw, 64px);
   align-items: center;
+  margin-top: clamp(16px, 2.2vw, 32px);
 }
 
 .free-courses-copy {
@@ -2113,11 +2161,10 @@
   background: linear-gradient(180deg, #eceef7 0%, #e5e8f6 100%);
   border-radius: 120px 120px 28px 28px;
   padding: clamp(46px, 6vw, 76px) clamp(20px, 4vw, 56px) clamp(30px, 4vw, 52px);
-  gap: clamp(24px, 3vw, 40px);
+  gap: clamp(32px, 3.6vw, 52px);
 }
 
 .blog-recap-head {
-  max-width: 980px;
   margin: 0 auto;
   text-align: center;
   display: grid;
@@ -2140,7 +2187,7 @@
 
 .blog-recap-head > p:last-child {
   margin: 0 auto;
-  max-width: 840px;
+  width: min(100%, 1180px);
   font-size: clamp(1rem, 1.3vw, 1.38rem);
   line-height: 1.42;
   color: var(--text-body);
@@ -2150,6 +2197,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(18px, 2.4vw, 34px);
+  margin-top: clamp(20px, 2.6vw, 40px);
 }
 
 .blog-recap-card {
@@ -2160,7 +2208,8 @@
 
 .blog-recap-card img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
+  height: auto;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -2241,7 +2290,7 @@
 }
 
 /* Harmonize paragraph rhythm for long-form copy blocks. */
-.alyra-team-copy p,
+.alyra-team-copy p:not(.alyra-team-quote-mark),
 .financing-copy p,
 .financing-support-copy p,
 .discord-copy > p,
@@ -2312,13 +2361,16 @@
 }
 
 .company-item img {
-  width: 100%;
-  max-height: 34px;
+  width: auto;
+  height: 34px;
+  max-width: 100%;
   object-fit: contain;
 }
 
 .company-item-marquee img {
-  max-height: 48px;
+  width: auto;
+  height: 48px;
+  max-width: 100%;
 }
 
 .press-marquee {
@@ -2382,7 +2434,7 @@
 
 .parcours-intro {
   max-width: 980px;
-  margin: 12px auto 18px;
+  margin: clamp(40px, 4.4vw, 74px) auto clamp(28px, 2.6vw, 44px);
   text-align: center;
   display: grid;
   gap: 18px;
@@ -2405,7 +2457,7 @@
   border-radius: 32px;
   padding: clamp(28px, 3.4vw, 42px) clamp(16px, 2.8vw, 36px);
   display: grid;
-  gap: clamp(16px, 2.2vw, 28px);
+  gap: clamp(32px, 3.6vw, 56px);
 }
 
 .modular-learning-head {
@@ -2574,6 +2626,10 @@
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+
+.pedagogy-controls + .pedagogy-track-shell {
+  margin-top: 22px;
 }
 
 .pedagogy-arrow {
@@ -2751,7 +2807,7 @@
 }
 
 .certification-highlight {
-  gap: 26px;
+  gap: clamp(42px, 4.2vw, 66px);
 }
 
 .certification-highlight-head {
@@ -3709,6 +3765,11 @@
     transform: none;
   }
 
+  .employability-row-reverse .employability-badge-card,
+  .employability-row-reverse .employability-copy {
+    order: initial;
+  }
+
   .employability-row > * {
     margin: 0;
   }
@@ -3736,6 +3797,12 @@
 
   .orbit-center img {
     width: 72px;
+    height: auto;
+  }
+
+  .hero-orbit-logo {
+    width: 72px;
+    height: auto;
   }
 
   .catalog-layout {
@@ -4129,10 +4196,11 @@
   }
 
   .alyra-team-quote-mark {
-    font-size: 3rem;
+    font-size: 3.8rem;
+    line-height: 0.75;
   }
 
-  .alyra-team-copy p {
+  .alyra-team-copy p:not(.alyra-team-quote-mark) {
     font-size: 0.95rem;
     line-height: 1.4;
   }
@@ -4212,12 +4280,19 @@
   }
 
   .free-courses-visual {
-    min-height: 200px;
+    min-height: 170px;
   }
 
   .free-courses-visual-frame,
   .free-courses-visual img {
     border-radius: 12px;
+  }
+
+  .free-courses-visual img {
+    width: 100%;
+    height: min(54vw, 220px);
+    object-fit: cover;
+    object-position: center;
   }
 
   .discord-section,
@@ -4437,7 +4512,7 @@
   }
 
   .financing-visual {
-    min-height: 190px;
+    min-height: 170px;
   }
 
   .financing-visual-frame {
@@ -4447,6 +4522,10 @@
 
   .financing-visual img {
     border-radius: 14px;
+    width: 100%;
+    height: min(52vw, 210px);
+    object-fit: cover;
+    object-position: center;
   }
 
   .card {
@@ -4464,7 +4543,7 @@
   .modular-learning-shell {
     border-radius: 0;
     padding: 0;
-    min-height: 380px;
+    min-height: 300px;
   }
 
   .modular-learning-surface {
@@ -4474,7 +4553,7 @@
 
   .modular-learning-card {
     border-radius: 18px;
-    min-height: 350px;
+    min-height: 250px;
   }
 
   .modular-learning-card h3 {
@@ -4503,7 +4582,7 @@
   }
 
   .nav {
-    width: min(100%, calc(100% - 16px));
+    width: min(100%, calc(100% - 28px));
     padding: 8px 10px;
   }
 
@@ -4556,7 +4635,9 @@
   }
 
   .company-item-marquee img {
-    max-height: 42px;
+    width: auto;
+    height: 42px;
+    max-width: 100%;
   }
 
   .employability-copy h3 {
@@ -4568,17 +4649,17 @@
   }
 
   .employability-section {
-    gap: 8px;
-    padding: 20px 16px;
+    gap: 20px;
+    padding: 28px 16px;
   }
 
   .employability-stack {
-    row-gap: 10px;
+    row-gap: 28px;
   }
 
   .employability-row,
   .employability-row-reverse {
-    row-gap: 6px;
+    row-gap: 18px;
   }
 
   .employability-badge-card {
@@ -4586,7 +4667,7 @@
   }
 
   .employability-badge {
-    width: 170px;
+    width: 156px;
     padding: 14px;
   }
 
@@ -4600,15 +4681,36 @@
   }
 
   .employability-copy {
-    gap: 5px;
+    gap: 12px;
   }
 
   .employability-copy .simple-list {
-    gap: 3px;
+    gap: 8px;
+  }
+
+  .employability-copy h3 {
+    margin-top: 2px;
+  }
+
+  .employability-source {
+    margin-top: 6px;
   }
 
   .pedagogy-section {
-    gap: 16px;
+    gap: 28px;
+  }
+
+  .pedagogy-head {
+    gap: 14px;
+  }
+
+  .pedagogy-controls {
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+
+  .pedagogy-controls + .pedagogy-track-shell {
+    margin-top: 18px;
   }
 
   .pedagogy-column-title {
@@ -4658,6 +4760,23 @@
 
   .pedagogy-track {
     grid-auto-columns: minmax(260px, 88%);
+    gap: 20px;
+  }
+
+  .pedagogy-column {
+    gap: 20px;
+  }
+
+  .pedagogy-column-title {
+    margin-bottom: 12px;
+  }
+
+  .pedagogy-card {
+    padding: 16px 14px;
+  }
+
+  .pedagogy-progress {
+    margin-top: 6px;
   }
 
   .pedagogy-track-shell::before,

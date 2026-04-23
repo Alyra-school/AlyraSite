@@ -1,0 +1,31 @@
+export const teamData = {
+  title: "L'equipe Alyra",
+  lead:
+    "Alyra, pionniere en formation blockchain et intelligence artificielle, aujourd'hui leader dans le Web3, rend les technologies de demain accessibles a toutes et tous.",
+  paragraphs: [
+    "Fidele a son esprit d'ecole, Alyra associe experts en activite et communaute d'alumni engagee pour accompagner les talents et organisations dans leur transition numerique.",
+    "Architecte de plusieurs certifications professionnelles avant-gardistes, Alyra renforce l'employabilite de ses apprenants en alliant innovation et exigence. Integrer Alyra, c'est decider de sa trajectoire professionnelle et personnelle.",
+    "Integrer Alyra, c'est decider de sa trajectoire professionnelle et personnelle en devenant ambassadeur du progres.",
+  ],
+  members: [
+    { id: "helene", name: "Helene Bunel", role: "CEO", avatar: "/inspired/team/ph.avif" },
+    { id: "daniel", name: "Daniel Villa Monteiro", role: "Directeur pedagogique", avatar: "/inspired/team/daniel.avif" },
+    { id: "gaetan-c", name: "Gaetan Corcoral", role: "Directeur commercial et marketing", avatar: "/inspired/team/corco.avif" },
+    { id: "nolwenn", name: "Nolwenn Bigot", role: "Responsable certification", avatar: "/inspired/team/christian.avif" },
+    { id: "nadjalen", name: "Nadjalen Rousseaux", role: "Coordinatrice pedagogique", avatar: "/inspired/team/cyril.avif" },
+    { id: "audrey", name: "Audrey Frumence", role: "Ingenieure pedagogique", avatar: "/inspired/team/christian.avif" },
+    { id: "clement", name: "Clement Pepin", role: "Conseiller en formation", avatar: "/inspired/team/corco.avif" },
+    { id: "nawel", name: "Nawel Ben baba", role: "Developpement commercial et marketing", avatar: "/inspired/team/ph.avif" },
+    { id: "guillaume", name: "Guillaume Rech", role: "Growth Hacker", avatar: "/inspired/team/cyril.avif" },
+    { id: "gaetan-s", name: "Gaetan Semp", role: "Formateur Consultant/DeFi", avatar: "/inspired/team/gaetan.avif" },
+    { id: "cyril", name: "Cyril Castagnet", role: "Formateur referent developpeur blockchain", avatar: "/inspired/team/cyril.avif" },
+    { id: "ben", name: "Ben BK", role: "Formateur Developpeur", avatar: "/inspired/team/corco.avif" },
+    { id: "virgile", name: "Virgile Heruaux", role: "Redacteur", avatar: "/inspired/team/ph.avif" },
+    { id: "marwan", name: "Marwan Madani", role: "Developpement Marketing et Data", avatar: "/inspired/team/christian.avif" },
+    { id: "eloise", name: "Eloise Kanel Cupidin", role: "Adjointe administratif & financier", avatar: "/inspired/team/ph.avif" },
+    { id: "jerome", name: "Jerome Hortelano", role: "Conseiller en formation", avatar: "/inspired/team/daniel.avif" },
+    { id: "mickael", name: "Mickael Faust", role: "Auteur - Formation intelligence artificielle", avatar: "/inspired/team/daniel.avif" },
+    { id: "jeremie", name: "Jeremie Karsenty", role: "Auteur - Formation intelligence artificielle", avatar: "/inspired/team/corco.avif" },
+    { id: "pascal", name: "Pascal Tallarida", role: "Auteur - Formation Finance Decentralisee", avatar: "/inspired/team/ph.avif" },
+  ],
+};

@@ -1,0 +1,15 @@
+export { heroData } from "./hero.data";
+export { recruitersData } from "./recruiters.data";
+export { employabilityData } from "./employability.data";
+export { learningData } from "./learning.data";
+export { pedagogyData } from "./pedagogy.data";
+export { certificationData } from "./certification.data";
+export { expertsData } from "./experts.data";
+export { feedbackData } from "./feedback.data";
+export { distanceLearningData, financingSupportData } from "./financing.data";
+export { discordData } from "./discord.data";
+export { whyTechData } from "./why-tech.data";
+export { freeCoursesData } from "./free-courses.data";
+export { teamData } from "./team.data";
+export { pressData } from "./press.data";
+export { blogRecapData } from "./blog.data";
