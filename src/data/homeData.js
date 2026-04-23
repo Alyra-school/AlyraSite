@@ -203,99 +203,6 @@ export const pedagogicalIaColumns = [
   },
 ];
 
-export const tracks = [
-  {
-    title: "Bootcamp intensif",
-    label: "Temps plein",
-    text:
-      "4 jours/semaine, projets reels, mentorat quotidien et demos publiques toutes les 2 semaines.",
-  },
-  {
-    title: "Programme pro",
-    label: "Temps partiel",
-    text:
-      "Sessions soir & samedi, apprentissage hybride et cohortes reduites pour progresser vite.",
-  },
-  {
-    title: "Corporate Lab",
-    label: "Sur mesure",
-    text:
-      "Transformation d'equipes, formation interne et prototypage rapide de solutions blockchain.",
-  },
-];
-
-export const outcomes = [
-  { value: "94%", label: "taux d'insertion" },
-  { value: "120+", label: "entreprises partenaires" },
-  { value: "18", label: "pays representes" },
-  { value: "5 000+", label: "alumni" },
-];
-
-export const testimonials = [
-  {
-    name: "Lina M.",
-    role: "Product Manager, Tokenize",
-    quote:
-      "Une pedagogie ultra concrete. J'ai livre un MVP en 6 semaines avec mon equipe.",
-  },
-  {
-    name: "Armand P.",
-    role: "Developpeur, ChainWorks",
-    quote:
-      "L'ecole a demystifie Solidity. On apprend a shipper proprement, pas juste a coder.",
-  },
-  {
-    name: "Noor A.",
-    role: "Entrepreneure",
-    quote:
-      "Reseau solide et mentors engages. La cohorte est devenue mon support au quotidien.",
-  },
-];
-
-export const events = [
-  {
-    date: "09 avr",
-    title: "Demo Day Cohorte 27",
-    text: "Pitchs de projets Web3 et echanges avec les investisseurs partenaires.",
-  },
-  {
-    date: "16 avr",
-    title: "Masterclass Token Design",
-    text: "Cas concrets de tokenomics avec notre faculty data & finance decentralisee.",
-  },
-  {
-    date: "24 avr",
-    title: "Open House Remote",
-    text: "Rencontrez nos equipes et decouvrez les projets en cours.",
-  },
-];
-
-export const teamMembers = [
-  {
-    name: "Pascal Tallarida",
-    role: "Fondateur & Expert DeFi",
-    focus: "Tokenomics, modeles economiques et strategie protocoles.",
-    avatar: "/inspired/team/ph.avif",
-  },
-  {
-    name: "Lea Morel",
-    role: "Lead IA Applied",
-    focus: "Mise en production d'applications IA et evaluation des modeles.",
-    avatar: "/inspired/team/cyril.avif",
-  },
-  {
-    name: "Romain Guez",
-    role: "Head of Pedagogy",
-    focus: "Parcours professionnalisants, mentorat et progression individuelle.",
-    avatar: "/inspired/team/daniel.avif",
-  },
-  {
-    name: "Sarah Benhamou",
-    role: "Coach Carriere",
-    focus: "Positionnement metier, portfolio et preparation entretiens.",
-    avatar: "/inspired/team/corco.avif",
-  },
-];
 
 export const expertsCarousel = [
   {
@@ -348,73 +255,6 @@ export const expertsCarousel = [
   },
 ];
 
-export const communityHighlights = [
-  {
-    title: "Discord actif",
-    text: "Canaux par parcours, entraide quotidienne et veille partagee entre apprenants.",
-    metric: "24/7",
-  },
-  {
-    title: "Sessions live",
-    text: "AMA avec les intervenants, corrections collectives et revues de projets.",
-    metric: "3 / semaine",
-  },
-  {
-    title: "Ressources exclusives",
-    text: "Templates, boilerplates, base de connaissances et offres partenaires.",
-    metric: "500+",
-  },
-];
-
-export const supportBlocks = [
-  {
-    title: "Financement",
-    points: [
-      "Diagnostic de votre situation en 20 minutes.",
-      "Aide au montage des dossiers de prise en charge.",
-      "Paiement fractionne selon eligibilite.",
-    ],
-  },
-  {
-    title: "Admissions",
-    points: [
-      "Entretien de positionnement avec un conseiller.",
-      "Validation du niveau et des objectifs professionnels.",
-      "Recommandation de parcours personnalisee.",
-    ],
-  },
-  {
-    title: "Suivi carriere",
-    points: [
-      "Coaching CV et LinkedIn oriente web3/IA.",
-      "Mises en relation avec notre reseau d'entreprises.",
-      "Ateliers de preparation technique et produit.",
-    ],
-  },
-];
-
-export const financingHighlights = [
-  {
-    title: "CPF & dispositifs publics",
-    text: "Accompagnement sur les dispositifs de financement mobilisables selon votre profil.",
-  },
-  {
-    title: "Paiement echelonne",
-    text: "Reglez votre formation en plusieurs mensualites selon les options disponibles.",
-  },
-  {
-    title: "Plan entreprise",
-    text: "Montage de dossier pour une prise en charge employeur ou OPCO.",
-  },
-];
-
-export const financingPartners = [
-  { name: "Mon Compte Formation", logo: "/inspired/finance/cpf.png" },
-  { name: "Opcommerce", logo: "/inspired/finance/opcommerce.png" },
-  { name: "AFDAS", logo: "/inspired/finance/afdas.png" },
-  { name: "Transitions Pro", logo: "/inspired/finance/transitions.png" },
-  { name: "AGEFICE", logo: "/inspired/finance/agefice.jpg" },
-];
 
 export const learnerFeedback = [
   {
@@ -508,56 +348,39 @@ export const certificationBlocks = [
   },
 ];
 
-export const trainingHighlights = [
-  {
-    title: "Formation 100% a distance",
-    text: "Suivez les cours en direct ou en replay, de n'importe ou.",
-  },
-  {
-    title: "Faites financer votre formation a 100%",
-    text: "CPF, OPCO et solutions adaptees a votre situation.",
-  },
-  {
-    title: "Formations certifiantes",
-    text: "Un cadre professionnalisant pour transformer vos competences en opportunites.",
-  },
-];
-
-export const freeCourses = [
-  "Introduction a la blockchain",
-  "Crypto-economie: fondamentaux",
-  "Initiation smart contracts",
-  "IA generative: premiers cas d'usage",
-  "Automatisation no-code avec l'IA",
-];
-
-export const whyLearnCards = [
-  {
-    title: "Des domaines en pleine croissance",
-    text: "La blockchain et l'IA structurent deja les nouveaux usages business et produit.",
-  },
-  {
-    title: "Une forte demande",
-    text: "Les entreprises recherchent des profils capables de passer de la theorie a la pratique.",
-  },
-  {
-    title: "Un manque de profils qualifies",
-    text: "Se former maintenant permet de se positionner sur des metiers en tension.",
-  },
-];
-
 export const latestNews = [
   {
-    title: "IA et emplois : dossier complet 2026 - 2027",
-    text: "Un decryptage des tendances de recrutement et des competences qui montent.",
+    slug: "actifs-tokenises-rwa-secteur",
+    title: "Les actifs tokenises (RWAs), un des secteurs qui recrutent le plus",
+    text:
+      "L'immobilier et les actions arrivent sur la blockchain ! Decouvrez comment les RWA revolutionnent la finance et quelles opportunites saisir dans ce secteur en pleine croissance.",
+    tag: "Ressource",
+    readTime: "5 min de lecture",
+    image: "/inspired/home/hero-main.avif",
+    imageAlt: "Vue aerienne d'une ville avec une surcouche technologique blockchain",
+    href: "/blog/actifs-tokenises-rwa-secteur",
   },
   {
-    title: "Clap de fin pour Sora: ce qu'il faut retenir",
-    text: "Analyse des impacts produit et des opportunites pour les entreprises.",
+    slug: "ia-indispensable-cadre-france",
+    title: "L'IA est devenue indispensable en tant que cadre en France",
+    text:
+      "Emploi cadre en 2026 : la reprise est la ! Boom des competences liees a l'IA, hybridation des metiers et paradoxe des seniors... Decouvrez les vrais enjeux du recrutement.",
+    tag: "Ressource",
+    readTime: "6 min de lecture",
+    image: "/inspired/parcours/enterprise-ia.avif",
+    imageAlt: "Equipe en reunion autour d'un ecran de pilotage data et intelligence artificielle",
+    href: "/blog/ia-indispensable-cadre-france",
   },
   {
-    title: "Nouvelle certification pour le parcours Consulting IA",
-    text: "Un nouveau cadre de validation des acquis, oriente usage terrain.",
+    slug: "nouveaute-ia-world-model",
+    title: "Nouveaute IA : Qu'est-ce qu'un World Model ?",
+    text:
+      "Les World Models dotent l'IA d'une \"imagination\" pour anticiper avant d'agir. L'innovation SIGReg la rend 48x plus rapide en evitant le collapse.",
+    tag: "Ressource",
+    readTime: "6 min de lecture",
+    image: "/inspired/parcours/dev-ia.avif",
+    imageAlt: "Illustration de planete et de modeles IA connectes",
+    href: "/blog/nouveaute-ia-world-model",
   },
 ];
 

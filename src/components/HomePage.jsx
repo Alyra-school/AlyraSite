@@ -3,16 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  communityHighlights,
   expertsCarousel,
-  events,
-  financingHighlights,
-  financingPartners,
-  freeCourses,
   learnerReviewsCarousel,
   latestNews,
   modularLearningCards,
-  outcomes,
   pedagogicalBlockchainColumns,
   pedagogicalIaColumns,
   parcoursBlockchain,
@@ -20,12 +14,6 @@ import {
   parcoursIA,
   pressLogos,
   recruiterCompanies,
-  supportBlocks,
-  teamMembers,
-  testimonials,
-  tracks,
-  trainingHighlights,
-  whyLearnCards,
 } from "../data/homeData";
 
 function PedagogyIcon({ name }) {
@@ -158,6 +146,96 @@ export default function HomePage() {
     learnerReviewsCarousel.length > 1
       ? [...learnerReviewsCarousel, ...learnerReviewsCarousel, ...learnerReviewsCarousel]
       : learnerReviewsCarousel;
+  const pressTrackItems =
+    pressLogos.length > 1
+      ? [...pressLogos, ...pressLogos, ...pressLogos, ...pressLogos]
+      : pressLogos;
+  const financingSupportLogos = [
+    { name: "Mon Compte Formation", logo: "/inspired/finance/cpf.png" },
+    { name: "Atlas", logo: "/inspired/cert/atlas.png" },
+    { name: "Federation Syntec", label: "FEDERATION SYNTEC" },
+    { name: "Cinov", label: "cinov" },
+    { name: "France Travail", label: "France Travail" },
+    { name: "Transitions Pro", logo: "/inspired/finance/transitions.png" },
+    { name: "AGEFICE", logo: "/inspired/finance/agefice.jpg" },
+    { name: "AFDAS", logo: "/inspired/finance/afdas.png" },
+    { name: "Opcommerce", logo: "/inspired/finance/opcommerce.png" },
+  ];
+  const whyLearnHighlights = [
+    {
+      id: "growth",
+      title: (
+        <>
+          Des domaines en <span>pleine croissance</span>
+        </>
+      ),
+      body: "Les volumes de donnees explosent : +50% d'ici 2025 avec l'IA et le cloud hybride",
+      source: "Source : Second Observatoire des DSI",
+    },
+    {
+      id: "demand",
+      title: (
+        <>
+          Une forte <span>demande</span>
+        </>
+      ),
+      body: "Les entreprises investissent 550 milliards $ en IA en 2024, mais manquent de talents.",
+      source: "Source : Reuters",
+    },
+    {
+      id: "skills-gap",
+      title: (
+        <>
+          Un manque de <span>profils qualifies</span>
+        </>
+      ),
+      body: "La France compte 11701 emplois dans la blockchain, mais les entreprises peinent a recruter : plus de 80 % declarent manquer de profils qualifies.",
+      source: "Source : Coincub/Opiiec",
+    },
+  ];
+  const freeCoursesChecklist = [
+    {
+      id: "bitcoin",
+      lead: "Comprendre",
+      text: "le fonctionnement de Bitcoin, Ethereum et des smart contracts",
+    },
+    {
+      id: "use-cases",
+      lead: "Analyser",
+      text: "les cas d'usage reels de la blockchain",
+    },
+    {
+      id: "ai",
+      lead: "Decoder",
+      text: "les enjeux de l'IA generative dans le monde professionnel",
+    },
+    {
+      id: "opportunities",
+      lead: "Identifier",
+      text: "les opportunites d'evolution dans le Web3 et l'IA",
+    },
+  ];
+  const alyraTeamGrid = [
+    { id: "helene", name: "Helene Bunel", role: "CEO", avatar: "/inspired/team/ph.avif" },
+    { id: "daniel", name: "Daniel Villa Monteiro", role: "Directeur pedagogique", avatar: "/inspired/team/daniel.avif" },
+    { id: "gaetan-c", name: "Gaetan Corcoral", role: "Directeur commercial et marketing", avatar: "/inspired/team/corco.avif" },
+    { id: "nolwenn", name: "Nolwenn Bigot", role: "Responsable certification", avatar: "/inspired/team/christian.avif" },
+    { id: "nadjalen", name: "Nadjalen Rousseaux", role: "Coordinatrice pedagogique", avatar: "/inspired/team/cyril.avif" },
+    { id: "audrey", name: "Audrey Frumence", role: "Ingenieure pedagogique", avatar: "/inspired/team/christian.avif" },
+    { id: "clement", name: "Clement Pepin", role: "Conseiller en formation", avatar: "/inspired/team/corco.avif" },
+    { id: "nawel", name: "Nawel Ben baba", role: "Developpement commercial et marketing", avatar: "/inspired/team/ph.avif" },
+    { id: "guillaume", name: "Guillaume Rech", role: "Growth Hacker", avatar: "/inspired/team/cyril.avif" },
+    { id: "gaetan-s", name: "Gaetan Semp", role: "Formateur Consultant/DeFi", avatar: "/inspired/team/gaetan.avif" },
+    { id: "cyril", name: "Cyril Castagnet", role: "Formateur referent developpeur blockchain", avatar: "/inspired/team/cyril.avif" },
+    { id: "ben", name: "Ben BK", role: "Formateur Developpeur", avatar: "/inspired/team/corco.avif" },
+    { id: "virgile", name: "Virgile Heruaux", role: "Redacteur", avatar: "/inspired/team/ph.avif" },
+    { id: "marwan", name: "Marwan Madani", role: "Developpement Marketing et Data", avatar: "/inspired/team/christian.avif" },
+    { id: "eloise", name: "Eloise Kanel Cupidin", role: "Adjointe administratif & financier", avatar: "/inspired/team/ph.avif" },
+    { id: "jerome", name: "Jerome Hortelano", role: "Conseiller en formation", avatar: "/inspired/team/daniel.avif" },
+    { id: "mickael", name: "Mickael Faust", role: "Auteur - Formation intelligence artificielle", avatar: "/inspired/team/daniel.avif" },
+    { id: "jeremie", name: "Jeremie Karsenty", role: "Auteur - Formation intelligence artificielle", avatar: "/inspired/team/corco.avif" },
+    { id: "pascal", name: "Pascal Tallarida", role: "Auteur - Formation Finance Decentralisee", avatar: "/inspired/team/ph.avif" },
+  ];
 
   const getExpertsMetrics = useCallback((container) => {
     if (!container || expertsCarousel.length <= 1) return null;
@@ -662,7 +740,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <section className="section anchor-section">
+      <section className="section section--full anchor-section">
         <div className="section-head">
           <h2>Nos +2 500 apprenants sont demandes par</h2>
         </div>
@@ -677,7 +755,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section employability-section anchor-section">
+      <section className="section section--reduced employability-section anchor-section">
         <div className="section-head employability-head">
           <h2>
             Propulsez votre <span className="hero-accent">vie professionnelle & personnelle</span>
@@ -738,7 +816,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="programmes" className="section anchor-section">
+      <section id="programmes" className="section section--full anchor-section">
         <div className="section-head modular-learning-head">
           <h2>Un parcours complet et modulable</h2>
           <p>
@@ -825,7 +903,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section pedagogy-section anchor-section">
+      <section className="section section--full pedagogy-section anchor-section">
         <div className="section-head pedagogy-head">
           <h2>
             <span className="hero-accent">Le contenu pedagogique</span> de nos formations
@@ -884,7 +962,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section certification-highlight anchor-section">
+      <section className="section section--reduced certification-highlight anchor-section">
         <div className="section-head certification-highlight-head">
           <h2>
             Des formations concues pour vous mener a
@@ -914,7 +992,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section experts-section anchor-section">
+      <section className="section section--full experts-section anchor-section">
         <div className="experts-surface">
           <div className="section-head experts-head">
             <h2 className="experts-title">
@@ -971,7 +1049,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section feedback-section anchor-section">
+      <section className="section section--full feedback-section anchor-section">
         <div className="feedback-surface">
           <div className="section-head feedback-head">
             <h2>Les retours de nos apprenants</h2>
@@ -1024,261 +1102,324 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="parcours" className="section split anchor-section">
-        <div>
-          <h2>Choisissez votre rythme</h2>
-          <p>
-            Chaque parcours combine apprentissage synchrones, ateliers pratiques
-            et accompagnement individuel.
-          </p>
-          <div className="tracks">
-            {tracks.map((track) => (
-              <article key={track.title} className="track">
-                <div className="track-label">{track.label}</div>
-                <h3>{track.title}</h3>
-                <p>{track.text}</p>
+      <section className="section section--reduced financing-section anchor-section">
+        <div className="financing-layout">
+          <div className="financing-copy">
+            <h2>
+              Formation <span>100% a distance</span>
+            </h2>
+            <p>
+              Tous nos parcours de formation sont 100% en ligne, afin que vous puissiez les suivre d'ou vous voulez
+              dans le monde.
+            </p>
+            <ul className="financing-points">
+              <li>
+                <span className="financing-point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 7h5V2" />
+                    <path d="M17 17h-5v5" />
+                    <path d="M17 7a7 7 0 0 0-11 2" />
+                    <path d="M7 17a7 7 0 0 0 11-2" />
+                  </svg>
+                </span>
+                <strong>75% des cours sont en live</strong>
+              </li>
+              <li>
+                <span className="financing-point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 7h5V2" />
+                    <path d="M17 17h-5v5" />
+                    <path d="M17 7a7 7 0 0 0-11 2" />
+                    <path d="M7 17a7 7 0 0 0 11-2" />
+                  </svg>
+                </span>
+                <strong>Replays disponibles en illimite</strong>
+              </li>
+              <li>
+                <span className="financing-point-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 7h5V2" />
+                    <path d="M17 17h-5v5" />
+                    <path d="M17 7a7 7 0 0 0-11 2" />
+                    <path d="M7 17a7 7 0 0 0 11-2" />
+                  </svg>
+                </span>
+                <strong>Projet reel pour mettre en pratique vos competences</strong>
+              </li>
+            </ul>
+            <Link href="/rendez-vous" className="primary financing-cta-btn">
+              Je prends RDV
+            </Link>
+          </div>
+          <div className="financing-visual" aria-hidden="true">
+            <div className="financing-visual-frame"></div>
+            <img src="/inspired/home/hero-secondary.avif" alt="" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--reduced financing-support-section anchor-section">
+        <div className="financing-support-layout">
+          <div className="financing-logos-panel">
+            <div className="financing-logos-grid">
+              {financingSupportLogos.map((item) => (
+                <article key={item.name} className="financing-logo-item" aria-label={item.name}>
+                  {item.logo ? (
+                    <img src={item.logo} alt={`Logo ${item.name}`} loading="lazy" decoding="async" />
+                  ) : (
+                    <span>{item.label}</span>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="financing-support-copy">
+            <h2>
+              Faites <span>financer votre formation a 100%</span>
+            </h2>
+            <p>
+              <strong>+15 organismes de financement</strong> sont a votre disposition : Financement CPF, conventions
+              SYNTEC & CINOV, OPCOAtlas, et bien d'autres...
+            </p>
+            <p>
+              Que vous soyez salarie, entrepreneur, en reconversion ou en recherche d'emploi, votre formation peut
+              etre financee a 100 %.
+            </p>
+
+            <div className="financing-payment-line">
+              <p>
+                Ou payez en <b>2x</b> <b>3x</b> ou <b>4x</b> avec <span>Alma</span>
+              </p>
+              <div className="financing-card-brands" aria-hidden="true">
+                <em>VISA</em>
+                <em>CB</em>
+                <em>Mastercard</em>
+              </div>
+            </div>
+
+            <div className="financing-support-actions">
+              <Link href="/rendez-vous" className="primary financing-action-main">
+                Je trouve mon financement en 1 clic
+              </Link>
+              <Link href="/rendez-vous" className="secondary financing-action-secondary">
+                Je prends RDV
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--reduced discord-section anchor-section">
+        <div className="discord-block">
+          <div className="discord-visual" aria-hidden="true">
+            <div className="discord-orbit">
+              <div className="discord-core">
+                <span>🎮</span>
+              </div>
+              <div className="discord-ring discord-ring-1"></div>
+              <div className="discord-ring discord-ring-2"></div>
+              <div className="discord-ring discord-ring-3"></div>
+            </div>
+
+            <div className="discord-stat discord-stat-top">
+              <strong>+2500 membres</strong>
+              <span>sur le serveur</span>
+            </div>
+            <div className="discord-stat discord-stat-bottom">
+              <strong>+200 partenaires</strong>
+            </div>
+
+            <span className="discord-dot discord-dot-1"></span>
+            <span className="discord-dot discord-dot-2"></span>
+            <span className="discord-dot discord-dot-3"></span>
+            <span className="discord-dot discord-dot-4"></span>
+            <span className="discord-dot discord-dot-5"></span>
+          </div>
+
+          <div className="discord-copy">
+            <h2>
+              Rejoignez nos +2500 membres sur notre <span>Discord !</span>
+            </h2>
+            <p>
+              Rejoignez plus de 2500 apprenants et apprenantes Alyra au sein du serveur Discord, soyez entoure pour
+              progresser au sein de l'ecosysteme.
+            </p>
+            <div className="discord-features">
+              <article>
+                <span className="discord-feature-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 7h5V2" />
+                    <path d="M17 17h-5v5" />
+                    <path d="M17 7a7 7 0 0 0-11 2" />
+                    <path d="M7 17a7 7 0 0 0 11-2" />
+                  </svg>
+                </span>
+                <h3>Un reseau de professionnels</h3>
+                <p>Des formateurs et experts presents pour repondre a vos questions</p>
+              </article>
+              <article>
+                <span className="discord-feature-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 7h5V2" />
+                    <path d="M17 17h-5v5" />
+                    <path d="M17 7a7 7 0 0 0-11 2" />
+                    <path d="M7 17a7 7 0 0 0 11-2" />
+                  </svg>
+                </span>
+                <h3>Un reseau d'alumni</h3>
+                <p>Une communaute crypto et IA active et dynamique en France</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--reduced why-tech-section anchor-section">
+        <div className="why-block">
+          <h2>
+            Pourquoi se former aux <span>nouvelles technologies ?</span>
+          </h2>
+          <div className="why-cards-grid">
+            {whyLearnHighlights.map((item) => (
+              <article key={item.id} className="why-card">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                <footer>{item.source}</footer>
               </article>
             ))}
           </div>
         </div>
-        <div className="side-panel">
-          <h3>Notre methode</h3>
-          <ul>
-            <li>Apprendre en construisant des dApps reelles.</li>
-            <li>Mentorat par des builders actifs.</li>
-            <li>Objectifs clairs a chaque sprint.</li>
-            <li>Demo day pour valoriser vos projets.</li>
-          </ul>
-          <div className="panel-stats">
-            {outcomes.map((item) => (
-              <div key={item.label}>
-                <h4>{item.value}</h4>
-                <p>{item.label}</p>
-              </div>
+      </section>
+
+      <section className="section section--reduced free-courses-section anchor-section">
+        <h2 className="free-courses-title">
+          Participez a nos <span>5 cours gratuits</span> sur la Crypto et l'IA
+        </h2>
+        <div className="free-courses-layout">
+          <div className="free-courses-copy">
+            <h3>
+              Formation <span>certifiantes</span>
+            </h3>
+            <p>
+              <strong>
+                Initiez-vous gratuitement aux fondamentaux de la blockchain, des crypto-actifs et de l'intelligence
+                artificielle
+              </strong>{" "}
+              a travers 5 modules accessibles a tous.
+            </p>
+            <p className="free-courses-subtitle">Vous apprendrez a :</p>
+            <ul className="free-courses-list">
+              {freeCoursesChecklist.map((item) => (
+                <li key={item.id}>
+                  <span className="free-courses-check" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="m7.6 12.3 3 3 5.9-6.3" />
+                    </svg>
+                  </span>
+                  <p>
+                    <strong>{item.lead}</strong> {item.text}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <div className="free-courses-actions">
+              <Link href="/rendez-vous" className="primary free-courses-main-btn">
+                Accedez des maintenant a nos cours gratuits
+              </Link>
+              <Link href="/rendez-vous" className="secondary free-courses-secondary-btn">
+                Je prends RDV
+              </Link>
+            </div>
+          </div>
+          <div className="free-courses-visual" aria-hidden="true">
+            <div className="free-courses-visual-frame"></div>
+            <img src="/inspired/home/hero-main.avif" alt="" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--full alyra-team-section anchor-section">
+        <div className="alyra-team-layout">
+          <div className="alyra-team-copy">
+            <h2>
+              L'equipe <span>Alyra</span>
+            </h2>
+            <p className="alyra-team-quote-mark">“</p>
+            <p className="alyra-team-lead">
+              Alyra, pionniere en formation blockchain et intelligence artificielle, aujourd'hui leader dans le Web3,
+              rend les technologies de demain accessibles a toutes et tous.
+            </p>
+            <p>
+              Fidele a son esprit d'ecole, Alyra associe experts en activite et communaute d'alumni engagee pour
+              accompagner les talents et organisations dans leur transition numerique.
+            </p>
+            <p>
+              Architecte de plusieurs certifications professionnelles avant-gardistes, Alyra renforce l'employabilite
+              de ses apprenants en alliant innovation et exigence. Integrer Alyra, c'est decider de sa trajectoire
+              professionnelle et personnelle.
+            </p>
+            <p>
+              Integrer Alyra, c'est decider de sa trajectoire professionnelle et personnelle en devenant ambassadeur du
+              progres.
+            </p>
+          </div>
+
+          <div className="alyra-team-grid" role="list" aria-label="Equipe Alyra">
+            {alyraTeamGrid.map((member) => (
+              <article key={member.id} className="alyra-member-card" role="listitem">
+                <img src={member.avatar} alt={member.name} loading="lazy" decoding="async" />
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="resultats" className="section gradient anchor-section">
+      <section className="section section--full anchor-section">
         <div className="section-head">
-          <h2>Resultats qui parlent</h2>
-          <p>
-            Nos alumni rejoignent des scale-ups, lancent leurs startups et
-            construisent des protocoles open-source.
-          </p>
+          <h2>
+            Ils parlent de <span>nous</span>
+          </h2>
         </div>
-        <div className="testimonial-grid">
-          {testimonials.map((item) => (
-            <article key={item.name} className="testimonial">
-              <p>"{item.quote}"</p>
-              <div>
-                <strong>{item.name}</strong>
-                <span>{item.role}</span>
-              </div>
-            </article>
-          ))}
+        <div className="press-marquee" aria-label="Medias qui parlent d'Alyra">
+          <div className="press-track">
+            {pressTrackItems.map((media, index) => (
+              <article key={`${media.name}-${index}`} className="press-logo-item">
+                <img src={media.logo} alt={`Logo ${media.name}`} loading="lazy" decoding="async" />
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="section anchor-section">
-        <div className="section-head">
-          <h2>Equipe pedagogique</h2>
-          <p>
-            Formez-vous avec des professionnels actifs sur des projets blockchain
-            et IA en production.
-          </p>
-        </div>
-        <div className="team-grid">
-          {teamMembers.map((member) => (
-            <article key={member.name} className="team-card">
-              <img
-                src={member.avatar}
-                alt={member.name}
-                className="team-avatar"
-                loading="lazy"
-                decoding="async"
-              />
-              <h3>{member.name}</h3>
-              <span>{member.role}</span>
-              <p>{member.focus}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section community-section">
-        <div className="section-head">
-          <h2>Communaute Discord</h2>
-          <p>
-            Une communaute active pour apprendre plus vite, partager vos blocages
-            et accelerer vos projets.
-          </p>
-        </div>
-        <div className="cards">
-          {communityHighlights.map((item) => (
-            <article key={item.title} className="card">
-              <div className="card-meta">
-                <span>{item.metric}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section anchor-section">
-        <div className="section-head">
-          <h2>Accompagnement de bout en bout</h2>
-          <p>
-            De l'admission au retour a l'emploi: un cadre clair pour avancer
-            sereinement.
-          </p>
-        </div>
-        <div className="cards">
-          {supportBlocks.map((block) => (
-            <article key={block.title} className="card">
-              <h3>{block.title}</h3>
-              <ul className="simple-list">
-                {block.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section financing-section anchor-section">
-        <div className="section-head">
-          <h2>Financement de votre formation</h2>
-          <p>
-            Plusieurs options existent pour rejoindre Alyra sans freiner votre
-            projet professionnel.
-          </p>
-        </div>
-        <div className="cards">
-          {financingHighlights.map((item) => (
-            <article key={item.title} className="card">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-        <div className="company-wall financing-wall">
-          {financingPartners.map((partner) => (
-            <article key={partner.name} className="company-item">
-              <img src={partner.logo} alt={`Logo ${partner.name}`} loading="lazy" decoding="async" />
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section anchor-section">
-        <div className="section-head">
-          <h2>Participez a nos 5 cours gratuits sur la Crypto et l'IA</h2>
-        </div>
-        <div className="cards">
-          {freeCourses.map((course) => (
-            <article key={course} className="card">
-              <h3>{course}</h3>
-              <p>Un format court pour decouvrir les fondamentaux avant de rejoindre un parcours long.</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="ressources" className="section anchor-section">
-        <div className="section-head">
-          <h2>Moments a venir</h2>
-          <p>
-            Participez a nos evenements ouverts, ateliers live et sessions
-            d'information.
-          </p>
-        </div>
-        <div className="events">
-          {events.map((event) => (
-            <article key={event.title} className="event">
-              <div className="event-date">{event.date}</div>
-              <div>
-                <h3>{event.title}</h3>
-                <p>{event.text}</p>
-              </div>
-              <button type="button" className="ghost">
-                Reserver
-              </button>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section anchor-section">
-        <div className="section-head">
-          <h2>Pourquoi se former aux nouvelles technologies ?</h2>
-        </div>
-        <div className="cards">
-          {whyLearnCards.map((item) => (
-            <article key={item.title} className="card">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section anchor-section">
-        <div className="section-head">
-          <h2>Temps forts de la formation Alyra</h2>
-        </div>
-        <div className="cards">
-          {trainingHighlights.map((item) => (
-            <article key={item.title} className="card">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section anchor-section">
-        <div className="section-head">
+      <section className="section section--full blog-recap-section anchor-section">
+        <div className="blog-recap-head">
+          <p className="blog-recap-kicker">Blog</p>
           <h2>Nos dernieres actualites</h2>
+          <p>
+            Ne ratez rien de ce qui se passe dans le monde de la blockchain et de l'IA en suivant nos dernieres
+            actualites.
+          </p>
         </div>
-        <div className="cards">
+        <div className="blog-recap-grid">
           {latestNews.map((post) => (
-            <article key={post.title} className="card">
+            <article key={post.slug} className="blog-recap-card">
+              <img src={post.image} alt={post.imageAlt} loading="lazy" decoding="async" />
+              <div className="blog-recap-meta">
+                <span>{post.tag}</span>
+                <small>{post.readTime}</small>
+              </div>
               <h3>{post.title}</h3>
               <p>{post.text}</p>
+              <Link href={post.href} className="blog-recap-link">
+                Lire l'article <span aria-hidden="true">›</span>
+              </Link>
             </article>
           ))}
         </div>
-      </section>
-
-      <section className="section anchor-section">
-        <div className="section-head">
-          <h2>Ils parlent de nous</h2>
-        </div>
-        <div className="company-wall media-wall">
-          {pressLogos.map((media) => (
-            <article key={media.name} className="company-item media-item">
-              <img src={media.logo} alt={`Logo ${media.name}`} loading="lazy" decoding="async" />
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section cta">
-        <div>
-          <h2>Pret a passer au niveau Web3 ?</h2>
-          <p>
-            Recevez le programme detaille, les conditions d'admission et les
-            options de financement.
-          </p>
-        </div>
-        <button type="button" className="primary">
-          Demander la brochure
-        </button>
       </section>
 
     </main>
