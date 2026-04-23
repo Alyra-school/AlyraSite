@@ -41,7 +41,18 @@ export default function LearnerFeedbackSection() {
     update(container);
   }, [normalizeLoop, update]);
 
-  useDragScroll(trackRef, handleTrackScroll);
+  const dragScrollOptions = useMemo(
+    () => ({
+      onScroll: handleTrackScroll,
+      itemSelector: ".feedback-card",
+      enableSwipeSnap: true,
+      swipeThreshold: 20,
+      mobileOnlySnap: true,
+    }),
+    [handleTrackScroll],
+  );
+
+  useDragScroll(trackRef, dragScrollOptions);
 
   useEffect(() => {
     if (feedbackData.reviews.length <= 1) return undefined;

@@ -34,7 +34,18 @@ export default function PedagogySection() {
     showProgress: true,
   });
 
-  useDragScroll(trackRef, update);
+  const dragScrollOptions = useMemo(
+    () => ({
+      onScroll: update,
+      itemSelector: ".pedagogy-column",
+      enableSwipeSnap: true,
+      swipeThreshold: 18,
+      mobileOnlySnap: true,
+    }),
+    [update],
+  );
+
+  useDragScroll(trackRef, dragScrollOptions);
 
   const columns = useMemo(() => pedagogyData.columns, []);
 

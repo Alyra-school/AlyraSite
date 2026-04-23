@@ -38,7 +38,18 @@ export default function ExpertsSection() {
     update(container);
   }, [normalizeLoop, update]);
 
-  useDragScroll(trackRef, handleTrackScroll);
+  const dragScrollOptions = useMemo(
+    () => ({
+      onScroll: handleTrackScroll,
+      itemSelector: ".expert-card",
+      enableSwipeSnap: true,
+      swipeThreshold: 20,
+      mobileOnlySnap: true,
+    }),
+    [handleTrackScroll],
+  );
+
+  useDragScroll(trackRef, dragScrollOptions);
 
   useEffect(() => {
     if (expertsData.experts.length <= 1) return undefined;

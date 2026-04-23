@@ -1,20 +1,82 @@
 import { useEffect } from "react";
 
-export function useDragScroll(trackRef, onScroll) {
+export function useDragScroll(trackRef, optionsOrOnScroll) {
   useEffect(() => {
     const container = trackRef.current;
     if (!container) return undefined;
+
+    const options =
+      typeof optionsOrOnScroll === "function" || optionsOrOnScroll == null
+        ? { onScroll: optionsOrOnScroll }
+        : optionsOrOnScroll;
+
+    const {
+      onScroll,
+      itemSelector = null,
+      enableSwipeSnap = true,
+      swipeThreshold = 22,
+      mobileOnlySnap = true,
+    } = options;
 
     let activePointerId = null;
     let dragIntent = "idle";
     let pointerStartX = 0;
     let pointerStartY = 0;
     let pointerLastX = 0;
+    let scrollStartLeft = 0;
     let didDrag = false;
     const DRAG_THRESHOLD = 6;
 
     const updateScroll = () => {
       if (onScroll) onScroll(container);
+    };
+
+    const getItemOffsets = () => {
+      if (!itemSelector) return [];
+      const items = Array.from(container.querySelectorAll(itemSelector));
+      if (!items.length) return [];
+      const containerLeft = container.getBoundingClientRect().left;
+      return items.map((item) => item.getBoundingClientRect().left - containerLeft + container.scrollLeft);
+    };
+
+    const getNearestIndex = (offsets, value) => {
+      if (!offsets.length) return -1;
+      let nearest = 0;
+      let minDelta = Number.POSITIVE_INFINITY;
+      for (let i = 0; i < offsets.length; i += 1) {
+        const delta = Math.abs(offsets[i] - value);
+        if (delta < minDelta) {
+          minDelta = delta;
+          nearest = i;
+        }
+      }
+      return nearest;
+    };
+
+    const shouldSnap = () => {
+      if (!enableSwipeSnap || !itemSelector) return false;
+      if (!mobileOnlySnap) return true;
+      return window.matchMedia("(max-width: 900px)").matches;
+    };
+
+    const snapToCard = () => {
+      if (!shouldSnap()) return;
+      const offsets = getItemOffsets();
+      if (!offsets.length) return;
+
+      const startIndex = getNearestIndex(offsets, scrollStartLeft);
+      if (startIndex < 0) return;
+
+      const endLeft = container.scrollLeft;
+      const dragDelta = endLeft - scrollStartLeft;
+      let targetIndex = getNearestIndex(offsets, endLeft);
+
+      if (Math.abs(dragDelta) >= swipeThreshold) {
+        targetIndex = startIndex + (dragDelta > 0 ? 1 : -1);
+      }
+
+      targetIndex = Math.max(0, Math.min(offsets.length - 1, targetIndex));
+      container.scrollTo({ left: offsets[targetIndex], behavior: "smooth" });
     };
 
     const handlePointerDown = (event) => {
@@ -25,6 +87,7 @@ export function useDragScroll(trackRef, onScroll) {
       pointerStartX = event.clientX;
       pointerStartY = event.clientY;
       pointerLastX = event.clientX;
+      scrollStartLeft = container.scrollLeft;
       if (container.setPointerCapture) {
         container.setPointerCapture(event.pointerId);
       }
@@ -66,6 +129,7 @@ export function useDragScroll(trackRef, onScroll) {
       if (activePointerId !== event.pointerId) return;
       if (dragIntent === "horizontal") {
         container.classList.remove("is-dragging");
+        snapToCard();
         updateScroll();
       }
       activePointerId = null;
@@ -110,5 +174,5 @@ export function useDragScroll(trackRef, onScroll) {
       container.removeEventListener("click", handleClickCapture, true);
       container.removeEventListener("scroll", updateScroll);
     };
-  }, [trackRef, onScroll]);
+  }, [trackRef, optionsOrOnScroll]);
 }
