@@ -6,13 +6,29 @@
   background-color: #f6f5fb;
   --font-sans: "Manrope", system-ui, sans-serif;
   --font-display: "Sora", system-ui, sans-serif;
-  --ink: #08060d;
+  --ink: #1f1b62;
   --muted: #4b4f63;
   --accent: #aa3bff;
-  --accent-2: #211b59;
+  --accent-2: #26225f;
   --surface: #ffffff;
   --surface-dark: #1b1640;
-  --stroke: rgba(33, 27, 89, 0.14);
+  --surface-soft: #f3f4fb;
+  --surface-soft-2: #eef1fb;
+  --stroke: rgba(38, 34, 95, 0.14);
+  --stroke-soft: rgba(38, 34, 95, 0.1);
+  --text-strong: #26225f;
+  --text-body: #3f4167;
+  --text-muted: #606483;
+  --brand: #4d48f0;
+  --brand-soft: #e8e7ff;
+  --trust: #00b67a;
+  --fs-display-xl: clamp(2.2rem, 4.2vw, 4.4rem);
+  --fs-display-lg: clamp(2rem, 3.6vw, 3.6rem);
+  --fs-display-md: clamp(1.6rem, 2.3vw, 2.5rem);
+  --fs-title: clamp(1.25rem, 1.5vw, 1.8rem);
+  --fs-body-lg: clamp(1.05rem, 1.15vw, 1.28rem);
+  --fs-body: clamp(0.95rem, 1vw, 1.06rem);
+  --fs-body-sm: clamp(0.88rem, 0.92vw, 0.98rem);
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
@@ -31,10 +47,11 @@ body {
       fixed,
     linear-gradient(
         120deg,
-        rgba(33, 27, 89, 0.12),
-        rgba(170, 59, 255, 0.16)
+        rgba(38, 34, 95, 0.1),
+        rgba(77, 72, 240, 0.12)
       )
       fixed;
+  color: var(--text-body);
 }
 
 .sr-only {

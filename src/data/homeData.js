@@ -59,6 +59,150 @@ export const parcoursEntreprise = [
   },
 ];
 
+export const modularLearningCards = [
+  {
+    title: "100% en ligne",
+    image: "/inspired/team/christian.avif",
+    alt: "Professionnel suivant une formation en ligne",
+  },
+  {
+    title: "Suivi personnalise",
+    image: "/inspired/team/cyril.avif",
+    alt: "Accompagnement individuel en formation",
+  },
+  {
+    title: "Horaires flexibles",
+    variant: "clock",
+    alt: "Illustration d'horaires de formation adaptables",
+  },
+];
+
+export const pedagogicalBlockchainColumns = [
+  {
+    key: "consulting-blockchain",
+    title: "Consulting Blockchain",
+    items: [
+      {
+        icon: "target",
+        title: "Apprendre a analyser la valeur d'un projet Web3 :",
+        text:
+          "Apprenez a evaluer la valeur et le potentiel d'un projet blockchain pour mieux conseiller vos clients ou lancer vos propres initiatives.",
+      },
+      {
+        icon: "search",
+        title: "Evaluer les cas d'usage blockchain :",
+        text:
+          "Apprenez a identifier la valeur ajoutee reelle d'une solution blockchain face a d'autres technologies, en analysant les besoins metiers et les limites techniques de chaque projet.",
+      },
+      {
+        icon: "puzzle",
+        title: "Piloter un projet blockchain de A a Z :",
+        text:
+          "Accompagnez une equipe dans la conception d'une solution technique, realisez des transactions, analysez l'activite on-chain, et presentez un prototype structure a forte valeur ajoutee.",
+      },
+    ],
+  },
+  {
+    key: "defi",
+    title: "Finance decentralisee",
+    items: [
+      {
+        icon: "bars",
+        title: "Securiser vos strategies DeFi :",
+        text:
+          "Interagissez en toute securite avec les applications decentralisees tout en garantissant leur conformite fiscale et reglementaire.",
+      },
+      {
+        icon: "brain",
+        title: "Construire des protocoles DeFi adaptes :",
+        text:
+          "Definissez un modele economique adapte aux besoins d'une entreprise ou d'une communaute, en evaluant les risques, la performance et la viabilite des protocoles.",
+      },
+      {
+        icon: "scale",
+        title: "Piloter des projets DeFi de bout en bout :",
+        text:
+          "Accompagnez le developpement d'une solution decentralisee en coordonnant les equipes et en optimisant chaque etape cle.",
+      },
+    ],
+  },
+  {
+    key: "dev-blockchain",
+    title: "Developpement Blockchain",
+    items: [
+      {
+        icon: "cubes",
+        title: "Formaliser un projet Web3 :",
+        text:
+          "Apprenez a rediger un cahier des charges clair et structure pour une application decentralisee, en definissant ses objectifs, ses fonctionnalites cles et ses modalites de mise en oeuvre.",
+      },
+      {
+        icon: "wrench",
+        title: "Developper des smart contracts robustes :",
+        text:
+          "Maitrisez les langages de programmation adaptes a la blockchain (comme Solidity) pour coder, tester et securiser des contrats intelligents integrant des jetons (fongibles ou NFT).",
+      },
+      {
+        icon: "sync",
+        title: "Garantir qualite et resilience :",
+        text:
+          "Mettez en place des tests automatises, une gestion des versions efficace et une integration continue pour assurer la stabilite, la securite et l'evolutivite de votre application decentralisee.",
+      },
+    ],
+  },
+];
+
+export const pedagogicalIaColumns = [
+  {
+    key: "consulting-ia",
+    title: "Consulting IA",
+    items: [
+      {
+        icon: "brain",
+        title: "Maitriser les fondamentaux de l'Intelligence Artificielle :",
+        text:
+          "Comprendre les concepts cles, les mecanismes techniques et les cas d'usage pour poser des bases solides et eclairees.",
+      },
+      {
+        icon: "gear",
+        title: "Developper une expertise pratique des outils IA :",
+        text:
+          "Savoir utiliser concretement les outils d'IA generative (texte, image, video...) pour optimiser sa production et gagner en efficacite professionnelle.",
+      },
+      {
+        icon: "globe",
+        title: "Apprehender les enjeux ethiques, juridiques et strategiques :",
+        text:
+          "Analyser les impacts de l'IA pour adopter une posture responsable et accompagner des projets en conformite avec les reglementations.",
+      },
+    ],
+  },
+  {
+    key: "dev-ia",
+    title: "Developpement IA",
+    items: [
+      {
+        icon: "target",
+        title: "Entrainer et optimiser des modeles d'IA :",
+        text:
+          "Apprenez a entrainer des modeles performants en machine learning et deep learning, en ajustant les fonctions de cout pour reduire les erreurs selon des indicateurs precis.",
+      },
+      {
+        icon: "data",
+        title: "Preparer et transformer les donnees efficacement :",
+        text:
+          "Maitrisez le traitement des donnees, grace a des techniques de preprocessing adaptees aux modeles, pour garantir des entrainements fiables et exploitables.",
+      },
+      {
+        icon: "robot",
+        title: "Deployer des modeles IA en production :",
+        text:
+          "Developpez vos competences en MLOps pour mettre en production vos modeles et assurer des predictions accessibles, performantes et adaptees aux besoins.",
+      },
+    ],
+  },
+];
+
 export const tracks = [
   {
     title: "Bootcamp intensif",
@@ -153,6 +297,57 @@ export const teamMembers = [
   },
 ];
 
+export const expertsCarousel = [
+  {
+    name: "Gaetan Semp",
+    role: "Formateur Blockchain",
+    bio:
+      "Specialiste d'Ethereum et de l'ecosysteme Web3. Il accompagne des centaines de profils dans leur apprentissage de la blockchain.",
+    image: "/inspired/team/gaetan.avif",
+    linkedin: "https://www.linkedin.com",
+  },
+  {
+    name: "Daniel Villa Monteiro",
+    role: "Formateur IA & Innovation",
+    bio:
+      "Avec 20 ans d'experience dans l'enseignement des nouvelles technologies, il accompagne la mise en pratique de l'IA dans des contextes metiers reels.",
+    image: "/inspired/team/daniel.avif",
+    linkedin: "https://www.linkedin.com",
+  },
+  {
+    name: "Pascal Tallarida",
+    role: "Expert DeFi",
+    bio:
+      "Fondateur d'Alyra et expert DeFi. Il structure des parcours professionnalisants en tokenomics, protocoles decentralises et strategie produit.",
+    image: "/inspired/team/ph.avif",
+    linkedin: "https://www.linkedin.com",
+  },
+  {
+    name: "Christian Corda",
+    role: "Consultant Blockchain",
+    bio:
+      "Consultant et coach sur les cas d'usage blockchain en entreprise. Il aide les equipes a passer de la vision au prototype deployable.",
+    image: "/inspired/team/christian.avif",
+    linkedin: "https://www.linkedin.com",
+  },
+  {
+    name: "Cyril Castagnet",
+    role: "Lead Pedagogique IA",
+    bio:
+      "Il anime les modules IA generative et MLOps avec une approche orientee projets, resultats mesurables et mise en production.",
+    image: "/inspired/team/cyril.avif",
+    linkedin: "https://www.linkedin.com",
+  },
+  {
+    name: "Corco Benhamou",
+    role: "Coach Carriere",
+    bio:
+      "Il prepare les apprenants a la realite du marche avec un accompagnement CV, portfolio, posture professionnelle et strategie de candidatures.",
+    image: "/inspired/team/corco.avif",
+    linkedin: "https://www.linkedin.com",
+  },
+];
+
 export const communityHighlights = [
   {
     title: "Discord actif",
@@ -239,6 +434,49 @@ export const learnerFeedback = [
     role: "Alumni - DeFi",
     quote:
       "La communaute Discord et les ateliers live m'ont permis de ne jamais rester bloquee seule sur mes livrables.",
+  },
+];
+
+export const learnerReviewsCarousel = [
+  {
+    author: "Elodie",
+    title: "Bien que la formation soit 100 % en ligne, on a un suivi de pres.",
+    text:
+      "Chez Alyra, j'ai trouve bien qu'une ecole, j'ai trouve une famille. Bien que la formation soit 100 % en ligne, on a un suivi de pres. J'ai enchainee deux formations et je ne regrette pas.",
+    rating: 5,
+    reviewCountLabel: "262 avis",
+  },
+  {
+    author: "Guillaume",
+    title: "Encadrement top, contenu de formation actualise regulierement.",
+    text:
+      "Encadrement top, contenu de formation actualise regulierement. Aide a la mise en relation. Ne pas s'attendre a integrer l'ecosysteme rapidement en terme d'emploi en tant que novice mais cette ecole est un tremplin.",
+    rating: 5,
+    reviewCountLabel: "262 avis",
+  },
+  {
+    author: "Gaetan Bitho MOTOLI",
+    title: "Soigneusement pensee avec des intervenants et experts tries sur le volet!",
+    text:
+      "Certification en poche ! Merci Alyra ! Le deroulement de la formation que j'ai suivi chez Alyra a ete soigneusement pense avec des intervenants et experts tries sur le volet ! Le tout pour nous faire vivre une experience memorable, on obtient une certification professionnelle reconnue par l'etat au bout, je recommande les yeux fermes !",
+    rating: 5,
+    reviewCountLabel: "262 avis",
+  },
+  {
+    author: "Antoine",
+    title: "Formation serieuse et de grande qualite.",
+    text:
+      "Formation serieuse et de grande qualite. J'ai eu l'opportunite de suivre la formation \"Consulting Blockchain\", et l'experience a largement depasse mes attentes. La qualite des intervenants, l'ambiance chaleureuse, et surtout la clarte de la progression pedagogique m'ont permis d'evoluer sereinement.",
+    rating: 5,
+    reviewCountLabel: "262 avis",
+  },
+  {
+    author: "Benoit",
+    title: "Une super experience reconduite...",
+    text:
+      "Une super experience reconduite a travers deja deux formations ! Bravo Alyra ! Un bel outil une belle communaute, riche de competences rares !",
+    rating: 5,
+    reviewCountLabel: "262 avis",
   },
 ];
 
