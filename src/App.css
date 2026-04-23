@@ -2276,8 +2276,9 @@
 }
 
 .feedback-track {
+  --feedback-gap: 22px;
   display: grid;
-  gap: 22px;
+  gap: var(--feedback-gap);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -2286,7 +2287,7 @@
   cursor: grab;
   user-select: none;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(280px, 24%);
+  grid-auto-columns: minmax(320px, calc((100% - (3 * var(--feedback-gap))) / 4));
   padding-inline: clamp(16px, 3vw, 56px);
   scroll-padding-inline: clamp(16px, 3vw, 56px);
   box-sizing: border-box;
