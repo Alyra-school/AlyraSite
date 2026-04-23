@@ -138,6 +138,12 @@ export default function HomePage() {
   const [feedbackFadeState, setFeedbackFadeState] = useState({ left: false, right: true });
 
   const pedagogyColumns = [...pedagogicalBlockchainColumns, ...pedagogicalIaColumns];
+  const splitPedagogyTitle = useCallback((title) => {
+    const words = title.trim().split(/\s+/);
+    if (words.length < 2) return [title, ""];
+    const splitIndex = Math.ceil(words.length / 2);
+    return [words.slice(0, splitIndex).join(" "), words.slice(splitIndex).join(" ")];
+  }, []);
   const expertsTrackItems =
     expertsCarousel.length > 1
       ? [...expertsCarousel, ...expertsCarousel, ...expertsCarousel]
@@ -817,32 +823,34 @@ export default function HomePage() {
       </section>
 
       <section id="programmes" className="section section--full anchor-section">
-        <div className="section-head modular-learning-head">
-          <h2>Un parcours complet et modulable</h2>
-          <p>
-            Choisissez entre <span className="hero-accent">autonomie, coaching et lives</span> pour progresser
-            a votre rythme, <span className="hero-accent">jusqu'a 144h de formation.</span>
-          </p>
-        </div>
+        <div className="modular-learning-surface">
+          <div className="section-head modular-learning-head">
+            <h2>Un parcours complet et modulable</h2>
+            <p>
+              Choisissez entre <span className="hero-accent">autonomie, coaching et lives</span> pour progresser
+              a votre rythme, <span className="hero-accent">jusqu'a 144h de formation.</span>
+            </p>
+          </div>
 
-        <div className="modular-learning-grid">
-          {modularLearningCards.map((item) => (
-            <article key={item.title} className="modular-learning-shell">
-              <div className={`modular-learning-card ${item.variant === "clock" ? "is-clock" : ""}`}>
-                {item.image ? (
-                  <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
-                ) : (
-                  <div className="modular-learning-clock" aria-hidden="true">
-                    <span className="clock-digit clock-digit-2">2</span>
-                    <span className="clock-digit clock-digit-3">3</span>
-                    <span className="clock-digit clock-digit-4">4</span>
-                  </div>
-                )}
-                <div className="modular-learning-overlay" aria-hidden="true" />
-                <h3>{item.title}</h3>
-              </div>
-            </article>
-          ))}
+          <div className="modular-learning-grid">
+            {modularLearningCards.map((item) => (
+              <article key={item.title} className="modular-learning-shell">
+                <div className={`modular-learning-card ${item.variant === "clock" ? "is-clock" : ""}`}>
+                  {item.image ? (
+                    <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
+                  ) : (
+                    <div className="modular-learning-clock" aria-hidden="true">
+                      <span className="clock-digit clock-digit-2">2</span>
+                      <span className="clock-digit clock-digit-3">3</span>
+                      <span className="clock-digit clock-digit-4">4</span>
+                    </div>
+                  )}
+                  <div className="modular-learning-overlay" aria-hidden="true" />
+                  <h3>{item.title}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
         <div className="parcours-intro">
@@ -935,20 +943,26 @@ export default function HomePage() {
           }`}
         >
           <div className="pedagogy-track" ref={pedagogyTrackRef}>
-            {pedagogyColumns.map((column) => (
-              <article key={column.key} className="pedagogy-column">
-                <h3 className="pedagogy-column-title">{column.title}</h3>
-                {column.items.map((item) => (
-                  <article key={item.title} className="pedagogy-card">
-                    <span className="pedagogy-icon" aria-hidden="true">
-                      <PedagogyIcon name={item.icon} />
-                    </span>
-                    <h4>{item.title}</h4>
-                    <p>{item.text}</p>
-                  </article>
-                ))}
-              </article>
-            ))}
+            {pedagogyColumns.map((column) => {
+              const [lineOne, lineTwo] = splitPedagogyTitle(column.title);
+              return (
+                <article key={column.key} className="pedagogy-column">
+                  <h3 className="pedagogy-column-title" aria-label={column.title}>
+                    <span>{lineOne}</span>
+                    <span>{lineTwo}</span>
+                  </h3>
+                  {column.items.map((item) => (
+                    <article key={item.title} className="pedagogy-card">
+                      <span className="pedagogy-icon" aria-hidden="true">
+                        <PedagogyIcon name={item.icon} />
+                      </span>
+                      <h4>{item.title}</h4>
+                      <p>{item.text}</p>
+                    </article>
+                  ))}
+                </article>
+              );
+            })}
           </div>
         </div>
 
