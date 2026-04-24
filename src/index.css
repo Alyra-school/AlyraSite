@@ -1,11 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap");
-
 :root {
-  font-family: "Manrope", system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   color: #08060d;
   background-color: #f6f5fb;
-  --font-sans: "Manrope", system-ui, sans-serif;
-  --font-display: "Sora", system-ui, sans-serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --ink: #1f1b62;
   --muted: #4b4f63;
   --accent: #aa3bff;
@@ -29,6 +27,7 @@
   --fs-body-lg: clamp(1.05rem, 1.15vw, 1.28rem);
   --fs-body: clamp(0.95rem, 1vw, 1.06rem);
   --fs-body-sm: clamp(0.88rem, 0.92vw, 0.98rem);
+  --layout-wide: 1360px;
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
