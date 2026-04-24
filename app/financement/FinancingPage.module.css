@@ -1,0 +1,573 @@
+.main {
+  gap: clamp(72px, 8vw, 112px);
+}
+
+.hero {
+  display: grid;
+  gap: clamp(28px, 3vw, 36px);
+  justify-items: center;
+  padding-bottom: clamp(46px, 6vw, 84px);
+}
+
+.heroTopCta {
+  margin-top: 8px;
+  width: min(100%, 440px);
+  min-height: 116px;
+  border-radius: 14px;
+  border: 1px solid rgba(77, 72, 240, 0.28);
+  background: #fff;
+  box-shadow: 8px 8px 0 #4d48f0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 14px 14px 16px;
+  text-decoration: none;
+}
+
+.heroTopCtaVisual {
+  width: 62px;
+  height: 62px;
+  border-radius: 14px;
+  background: linear-gradient(155deg, #f7e9ff 0%, #dfe4ff 100%);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+}
+
+.heroTopCtaCopy {
+  display: grid;
+  gap: 6px;
+}
+
+.heroTopCtaCopy strong {
+  color: var(--brand);
+  font-size: 1.75rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.heroTopCtaCopy p {
+  color: var(--ink);
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.heroTopCtaArrow {
+  color: var(--ink);
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 700;
+  padding-right: 2px;
+}
+
+.heroHeadCentered {
+  text-align: center;
+  align-items: center;
+}
+
+.heroKicker {
+  display: inline-block;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.heroHeadCentered h1 {
+  max-width: 920px;
+  font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+  line-height: 1.08;
+}
+
+.heroHeadCentered p:last-child {
+  max-width: 940px;
+  font-size: clamp(1.08rem, 1.6vw, 1.18rem);
+  line-height: 1.45;
+}
+
+.heroSwitch {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 8px;
+  border-radius: 13px;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.heroSwitchTab {
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.2;
+  transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+.heroSwitchTabActive {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+.optionsSection {
+  display: grid;
+  gap: clamp(22px, 2.6vw, 30px);
+}
+
+.profilePanel {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(77, 72, 240, 0.22);
+  background: linear-gradient(180deg, #f5f3ff 0%, #efeffc 100%);
+  padding: clamp(30px, 3.4vw, 52px);
+}
+
+.profilePanelHead {
+  display: grid;
+  gap: 16px;
+  text-align: center;
+}
+
+.profilePanelHead h2 {
+  color: var(--ink);
+  font-size: clamp(2rem, 3.5vw, 3.7rem);
+  line-height: 1.08;
+  font-family: var(--font-display);
+}
+
+.profilePanelHead h2 span {
+  color: var(--brand);
+}
+
+.profilePanelHead p {
+  margin: 0 auto;
+  max-width: 980px;
+  color: var(--text-body);
+  font-size: clamp(1.02rem, 1.24vw, 1.2rem);
+  line-height: 1.5;
+}
+
+.profileHeadline {
+  color: var(--ink);
+  font-size: clamp(2.1rem, 3.4vw, 3.9rem);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.profilePanelHead h3 {
+  margin-top: clamp(14px, 1.5vw, 20px);
+  color: var(--ink);
+  font-size: clamp(1.7rem, 2.4vw, 2.6rem);
+  line-height: 1.15;
+}
+
+.profileChecklist {
+  margin: 8px auto 4px;
+  width: min(100%, 880px);
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.profileChecklist li {
+  background: rgba(240, 239, 252, 0.95);
+  border: 1px solid rgba(77, 72, 240, 0.16);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--ink);
+  text-align: left;
+  font-size: clamp(0.95rem, 1.05vw, 1.04rem);
+  line-height: 1.35;
+  position: relative;
+  padding-left: 42px;
+}
+
+.profileChecklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1f1f24;
+  font-weight: 700;
+}
+
+.profileCards {
+  margin-top: clamp(24px, 2.8vw, 38px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 24px);
+}
+
+.profileCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profileCardMedia {
+  border-radius: 12px;
+  border: 1px solid rgba(77, 72, 240, 0.25);
+  background: #fff;
+  box-shadow: 8px 10px 0 #4d48f0;
+  overflow: hidden;
+  min-height: clamp(180px, 18vw, 240px);
+}
+
+.profileCardMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+.profileCardLogoLabel {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(180px, 18vw, 240px);
+  display: grid;
+  place-items: center;
+  background: #ff4f21;
+  color: #fff;
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.logoagefiph {
+  background: #ffffff;
+  color: #7a1d8a;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  text-transform: lowercase;
+}
+
+.logoSyntec {
+  background: #ffffff;
+  color: #2f2f6f;
+  place-items: center;
+  gap: 8px;
+  align-content: center;
+  padding: 14px;
+}
+
+.logoSyntec span:nth-child(1) {
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+  font-weight: 700;
+  color: #744287;
+}
+
+.logoSyntec span:nth-child(2) {
+  font-size: clamp(2.1rem, 2.8vw, 3rem);
+  line-height: 1;
+  color: #1f1f24;
+}
+
+.logoSyntec span:nth-child(3) {
+  font-size: clamp(1.7rem, 2.2vw, 2.3rem);
+  line-height: 1;
+  color: #245468;
+}
+
+.logoopcoep {
+  background: #ffffff;
+  color: #0f4d9b;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  padding: 18px;
+}
+
+.logoopcoep span:first-child {
+  font-size: clamp(2rem, 2.8vw, 2.8rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.logoopcoep span:last-child {
+  max-width: 280px;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.25;
+  text-align: center;
+  color: #1b5aab;
+}
+
+.logofrancetravail {
+  background: radial-gradient(circle at 22% 28%, #eef2ff 0%, #ffffff 56%, #edf0ff 100%);
+  color: #1f4f92;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+  padding: 20px 14px;
+}
+
+.logofrancetravail span:first-child {
+  font-size: clamp(1.75rem, 2.3vw, 2.35rem);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.logofrancetravail span:last-child {
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.logopariscode {
+  background: linear-gradient(135deg, #ffcf55 0%, #ffcf55 100%);
+  color: #151515;
+  align-content: center;
+  justify-items: center;
+  gap: 4px;
+}
+
+.logopariscode span:first-child {
+  font-size: clamp(2.3rem, 3vw, 3.2rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.logopariscode span:last-child {
+  font-size: clamp(1.7rem, 2.2vw, 2.2rem);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.logofifpl {
+  background: #ffffff;
+  color: #1e2a5a;
+  align-content: center;
+  justify-items: center;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr;
+  gap: 8px;
+}
+
+.logofifpl span:first-child {
+  color: #f1a319;
+  font-size: clamp(3rem, 4vw, 4.4rem);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.logofifpl span:last-child {
+  color: #1296db;
+  font-size: clamp(3rem, 4vw, 4.4rem);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.profileCard h4 {
+  color: var(--ink);
+  font-size: clamp(1.3rem, 1.7vw, 1.9rem);
+  line-height: 1.2;
+}
+
+.profileCard p {
+  color: var(--text-body);
+  font-size: clamp(0.96rem, 1.08vw, 1.05rem);
+  line-height: 1.45;
+  flex: 1 1 auto;
+}
+
+.profileLearnMore {
+  margin-top: 10px;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: 10px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 1.03rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.profileLearnMore:hover {
+  background: #3f39dd;
+  transform: translateY(-1px);
+}
+
+.optionsLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.panel {
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-md);
+  background: linear-gradient(155deg, #ffffff 0%, #f4f3ff 100%);
+  padding: clamp(20px, 2vw, 28px);
+}
+
+.panelKicker {
+  color: var(--brand);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+}
+
+.panel h3 {
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+
+.panel ul {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.panel li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--text-body);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.panel li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.56em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.ctaCard {
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-md);
+  background: linear-gradient(165deg, #f7f6ff 0%, #eeecff 100%);
+  padding: clamp(20px, 2vw, 28px);
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.ctaCard h3 {
+  color: var(--ink);
+  font-size: clamp(1.08rem, 1.3vw, 1.3rem);
+  line-height: 1.25;
+}
+
+.ctaCard p {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.ctaActions {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 1040px) {
+  .profileCards {
+    grid-template-columns: 1fr;
+  }
+
+  .optionsLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    justify-items: stretch;
+    gap: 24px;
+  }
+
+  .heroTopCta {
+    width: 100%;
+    box-shadow: 5px 5px 0 #4d48f0;
+  }
+
+  .heroTopCtaCopy strong {
+    font-size: 1.06rem;
+  }
+
+  .heroTopCtaCopy p {
+    font-size: 1.52rem;
+  }
+
+  .heroTopCtaArrow {
+    font-size: 1.7rem;
+  }
+
+  .heroHeadCentered {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .heroHeadCentered p:last-child {
+    font-size: 1rem;
+  }
+
+  .optionsLayout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .profilePanel {
+    padding: 22px 14px;
+  }
+
+  .profilePanelHead {
+    text-align: left;
+    gap: 12px;
+  }
+
+  .profilePanelHead p {
+    margin: 0;
+  }
+
+  .profileChecklist {
+    margin: 8px 0 2px;
+    width: 100%;
+  }
+
+  .profileCards {
+    margin-top: 18px;
+    gap: 18px;
+  }
+
+  .heroSwitch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 0;
+    padding: 6px;
+  }
+
+  .heroSwitchTab {
+    font-size: 0.95rem;
+    padding: 10px 14px;
+  }
+
+}

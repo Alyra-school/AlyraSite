@@ -743,6 +743,64 @@
   top: 7px;
 }
 
+.program-hero-bullets {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin: 0 0 24px;
+}
+
+.program-hero-bullets li {
+  padding-left: 18px;
+  position: relative;
+  color: var(--text-body);
+}
+
+.program-hero-bullets li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+}
+
+.program-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.program-form-id {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.program-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.program-logo-item {
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  background: var(--surface);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.program-logo-item img {
+  max-height: 48px;
+  width: auto;
+}
+
 .card-top p {
   color: var(--muted);
   font-size: 0.9rem;
@@ -3929,6 +3987,10 @@
 }
 
 @media (max-width: 1200px) {
+  .program-logo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .catalog-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4583,6 +4645,10 @@
     grid-template-columns: 1fr;
   }
 
+  .program-logo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .nav {
     width: min(100%, calc(100% - 28px));
     padding: 8px 10px;
@@ -4858,6 +4924,10 @@
 
   .employability-copy h3 {
     margin-bottom: 0;
+  }
+
+  .program-logo-grid {
+    grid-template-columns: 1fr;
   }
 
   .footer-main {
