@@ -424,7 +424,7 @@ export default function FinancingPage() {
                 <Link href="/rendez-vous" className="primary">
                   Je prends RDV
                 </Link>
-                <Link href="/programmes" className="ghost">
+                <Link href="/formations" className="ghost">
                   Voir les parcours
                 </Link>
               </div>

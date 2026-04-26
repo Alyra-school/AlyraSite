@@ -13,8 +13,8 @@ export default function NotFoundPage({
           <p>{message}</p>
         </div>
         <div className="hero-actions">
-          <Link href="/programmes" className="primary">
-            Voir les programmes
+          <Link href="/formations" className="primary">
+            Voir les formations
           </Link>
           <Link href="/" className="ghost">
             Retour a l'accueil

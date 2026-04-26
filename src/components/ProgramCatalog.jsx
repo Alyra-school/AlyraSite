@@ -37,9 +37,9 @@ export default function ProgramCatalog({ programsList, isLoading = false, error 
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
       <section className="hero programs-hero">
-        <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Programmes" }]} />
+        <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Nos formations" }]} />
         <div className="section-head">
-          <h1>Catalogue des programmes</h1>
+          <h1>Catalogue des formations</h1>
           <p>
             Formations blockchain et intelligence artificielle, avec formats
             varies et admissions tout au long de l'annee.

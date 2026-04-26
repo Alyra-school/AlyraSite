@@ -1,9 +1,26 @@
 import Link from "next/link";
 import Breadcrumbs from "./Breadcrumbs";
+import { recruiterCompanies } from "../data/homeData";
 
 function formatPrice(price) {
   if (Number.isFinite(price)) return `${price.toLocaleString("fr-FR")} EUR`;
   return "Sur devis";
+}
+
+function renderCtaLink(cta, className) {
+  if (!cta?.href) return null;
+  if (cta.isExternal) {
+    return (
+      <a href={cta.href} className={className} target="_blank" rel="noreferrer">
+        {cta.label}
+      </a>
+    );
+  }
+  return (
+    <Link href={cta.href} className={className}>
+      {cta.label}
+    </Link>
+  );
 }
 
 export default function ProgramDetailPage({
@@ -26,35 +43,56 @@ export default function ProgramDetailPage({
   const testimonials = detailContent?.testimonials ?? [];
   const faqs = detailContent?.faqs ?? [];
   const relatedProgramsFromDb = detailContent?.relatedPrograms ?? [];
+  const defaultKpis = [
+    {
+      position: 1,
+      value: "50K€/an",
+      label: "Rémunération",
+      description: "54% de l'ensemble de nos alumni gagnent plus de 50K€/an",
+    },
+    {
+      position: 2,
+      value: "87%",
+      label: "Retour à l'emploi",
+      description: "De retour à l'emploi sous 6 mois",
+    },
+    {
+      position: 3,
+      value: "+2500",
+      label: "Communauté",
+      description: "Alumni forment la communauté Alyra",
+    },
+  ];
 
   const applyCta = ctas.find((item) => item.key === "apply") ?? null;
   const webinarCta = ctas.find((item) => item.key === "webinar") ?? null;
+  const heroCompanies = proofLogos.length > 0
+    ? proofLogos.map((item) => ({ name: item.label, logo: item.imageUrl }))
+    : recruiterCompanies;
+
+  const heroTitleOverrides = {
+    "dev-blockchain": "Développement blockchain : concevoir, sécuriser, déployer",
+    "expert-blockchain": "Consulting blockchain : analyser, structurer, piloter",
+  };
+  const heroTitle = heroTitleOverrides[program.slug] ?? program.title;
+
+  const trustedScoreText = "Excellent 4.9 sur 5 Trustpilot";
+  const googleScoreText = "4.9/5 Google";
 
   const learningSectionItems = learningItems.length > 0 ? learningItems.map((item) => item.text) : legacyLearningPath;
   const expertsSectionItems = experts.length > 0 ? experts : legacyProfessors;
   const relatedPrograms = relatedProgramsFromDb.length > 0 ? relatedProgramsFromDb : similarPrograms;
+  const kpiItems = kpis.length > 0 ? kpis : defaultKpis;
 
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
       <section className="hero hero-program">
         <div className="program-page">
-          <Breadcrumbs
-            items={[
-              { label: "Accueil", href: "/" },
-              { label: "Programmes", href: "/programmes" },
-              { label: program.title },
-            ]}
-          />
-
-          <Link href="/programmes" className="ghost back-btn">
-            Retour au catalogue
-          </Link>
-
-          <div className="program-hero">
-            <div>
+          <div className="program-hero anchor-section" id="resume">
+            <div className="program-hero-main">
               <span className="program-tag">{program.tags.join(" / ")}</span>
-              <h1>{program.title}</h1>
-              <p>{program.subtitle}</p>
+              <h1>{heroTitle}</h1>
+              <p className="program-subtitle">{program.subtitle}</p>
               <div className="program-meta">
                 <div>
                   <strong>Date</strong>
@@ -69,37 +107,65 @@ export default function ProgramDetailPage({
                   <span>{formatPrice(program.price)}</span>
                 </div>
               </div>
+
               {heroBullets.length > 0 ? (
                 <ul className="program-hero-bullets">
-                  {heroBullets.map((item) => (
-                    <li key={item}>{item}</li>
+                  {heroBullets.map((item, index) => (
+                    <li key={`${program.id}-hero-bullet-${index}`}>{item}</li>
                   ))}
                 </ul>
               ) : null}
+
               <div className="program-hero-actions">
-                {webinarCta ? (
-                  <a
-                    href={webinarCta.href}
-                    className="ghost"
-                    target={webinarCta.isExternal ? "_blank" : undefined}
-                    rel={webinarCta.isExternal ? "noreferrer" : undefined}
-                  >
-                    {webinarCta.label}
-                  </a>
-                ) : null}
+                {renderCtaLink(webinarCta, "primary program-cta-main")}
                 {applyCta ? (
-                  <Link href={applyCta.href} className="primary">
-                    {applyCta.label}
-                  </Link>
+                  renderCtaLink(applyCta, "program-cta-secondary")
                 ) : (
-                  <Link href="/rendez-vous" className="primary">
+                  <Link href="/rendez-vous" className="program-cta-secondary">
                     Je candidate
                   </Link>
                 )}
               </div>
+
+              <div className="program-hero-ratings" aria-label="Avis de satisfaction">
+                <p>
+                  <strong>Excellent</strong> <span>4.9 sur 5</span> <span className="program-rating-brand trustpilot">Trustpilot</span>
+                </p>
+                <p>
+                  <span className="program-rating-stars" aria-hidden="true">★★★★★</span>{" "}
+                  <strong>4.9/5</strong> <span className="program-rating-brand">Google</span>
+                </p>
+                <span className="sr-only">{trustedScoreText} et {googleScoreText}</span>
+              </div>
+
+              <div className="program-breadcrumbs-bottom">
+                <Breadcrumbs
+                  items={[
+                    { label: "Accueil", href: "/" },
+                    { label: "Nos formations", href: "/formations" },
+                    { label: program.title },
+                  ]}
+                />
+              </div>
             </div>
+
             <div className="program-panel">
-              <h3>Descriptif</h3>
+              <div className="program-hero-visual">
+                <span className="program-hero-shape" aria-hidden="true" />
+                {program.image ? (
+                  <img
+                    src={program.image}
+                    alt={program.title}
+                    className="program-panel-image"
+                    loading="eager"
+                    decoding="async"
+                  />
+                ) : null}
+                <span className="program-hero-dot dot-a" aria-hidden="true" />
+                <span className="program-hero-dot dot-b" aria-hidden="true" />
+                <span className="program-hero-dot dot-c" aria-hidden="true" />
+              </div>
+              <span className="program-panel-label">Descriptif</span>
               {isContentLoading ? (
                 <p>Chargement du descriptif...</p>
               ) : (
@@ -116,49 +182,101 @@ export default function ProgramDetailPage({
             </div>
           </div>
 
-          {proofLogos.length > 0 ? (
-            <section className="section">
-              <div className="section-head">
-                <h2>Nos apprenants sont demandes par</h2>
-              </div>
-              <div className="program-logo-grid">
-                {proofLogos.map((item) => (
-                  <article key={`${item.category}-${item.key}`} className="program-logo-item">
-                    <img src={item.imageUrl} alt={item.label} width="180" height="72" loading="lazy" decoding="async" />
-                  </article>
-                ))}
+          {heroCompanies.length > 0 ? (
+            <section className="program-hero-companies" aria-label="Entreprises qui recrutent nos apprenants">
+              <h2><span className="hero-accent">Nos apprenants formés en blockchain</span> sont demandés par :</h2>
+              <div className="company-marquee">
+                <div className="company-track">
+                  {[...heroCompanies, ...heroCompanies].map((company, index) => (
+                    <article key={`program-hero-company-${company.name}-${index}`} className="company-item company-item-marquee">
+                      <img src={company.logo} alt={`Logo ${company.name}`} width="196" height="48" loading="lazy" decoding="async" />
+                    </article>
+                  ))}
+                </div>
               </div>
             </section>
           ) : null}
 
-          {kpis.length > 0 ? (
-            <section className="section">
-              <div className="section-head">
-                <h2>Resultats qui parlent</h2>
+          <section className="program-sales-nav" aria-label="Navigation rapide de la formation">
+            <div className="program-sales-nav-inner">
+              <div className="program-sales-nav-left">
+                <div className="program-sales-nav-top">
+                  <h2>Formation {program.title}</h2>
+                  <p>
+                    <strong>Excellent</strong>
+                    <span>4.9 sur 5</span>
+                    <span className="program-rating-brand trustpilot">Trustpilot</span>
+                  </p>
+                </div>
+                <nav className="program-sales-links" aria-label="Ancres de la page">
+                  <a href="#resume" className="program-sales-link">Résumé</a>
+                  <a href="#programme" className="program-sales-link">Programme</a>
+                  <a href="#tarifs" className="program-sales-link">Tarifs</a>
+                  <Link href="/financement" className="program-sales-link">Financements</Link>
+                  <a href="#experts" className="program-sales-link">Experts</a>
+                  <a href="#certification" className="program-sales-link">Certification</a>
+                </nav>
               </div>
-              <div className="cards">
-                {kpis.map((item) => (
-                  <article key={item.position} className="card">
-                    <div className="card-top">
-                      <p>{item.label}</p>
-                      <h3>{item.value}</h3>
-                    </div>
-                    <p>{item.description}</p>
-                    {item.source ? <small>Source: {item.source}</small> : null}
-                  </article>
-                ))}
+              <div className="program-sales-cta">
+                <a href="#programme-brochure" className="program-cta-secondary">Télécharger le programme</a>
+                <Link href="/rendez-vous" className="primary">Prendre rendez-vous</Link>
+              </div>
+            </div>
+          </section>
+
+          {kpiItems.length > 0 ? (
+            <section className="section program-section anchor-section" id="programme">
+              <div className="program-kpi-showcase">
+                <div className="section-head program-kpi-head">
+                  <h2>
+                    Alyra, votre passerelle vers une activité qui allie{" "}
+                    <span className="hero-accent">passion, expertise et rémunération</span>
+                  </h2>
+                </div>
+
+                <div className="program-kpi-layout">
+                  <figure className="program-kpi-visual" aria-hidden="true">
+                    <span className="program-kpi-visual-shape" />
+                    <img
+                      src="/inspired/team/christian.avif"
+                      alt=""
+                      className="program-kpi-visual-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="program-kpi-dot dot-1" />
+                    <span className="program-kpi-dot dot-2" />
+                    <span className="program-kpi-dot dot-3" />
+                    <span className="program-kpi-dot dot-4" />
+                  </figure>
+
+                  <div className="program-kpi-stack">
+                    {kpiItems.map((item, index) => (
+                      <article
+                        key={`${program.id}-kpi-${item.position}`}
+                        className={`program-kpi-panel ${index === 1 ? "is-neutral" : "is-featured"}`}
+                      >
+                        <h3>{item.value}</h3>
+                        <p>{item.description ?? item.label}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
               </div>
             </section>
           ) : null}
 
           {learningSectionItems.length > 0 ? (
-            <section className="section">
-              <div className="section-head">
-                <h2>Vous allez apprendre a</h2>
+            <section className="section program-section anchor-section" id="programme-brochure">
+              <div className="section-head program-learning-head">
+                <h2>
+                  Une formation qui vous apporte une vision a 360° de l'ecosysteme blockchain
+                </h2>
+                <p>Vous allez apprendre a...</p>
               </div>
-              <div className="cards">
-                {learningSectionItems.map((item) => (
-                  <article key={item} className="card">
+              <div className="program-learning-showcase-grid">
+                {learningSectionItems.map((item, index) => (
+                  <article key={`${program.id}-learn-${index}`} className="program-learning-showcase-card">
                     <p>{item}</p>
                   </article>
                 ))}
@@ -167,83 +285,190 @@ export default function ProgramDetailPage({
           ) : null}
 
           {brochurePoints.length > 0 ? (
-            <section className="section">
-              <div className="section-head">
-                <h2>Telecharger le programme</h2>
-              </div>
-              <article className="card">
-                <ul className="simple-list">
-                  {brochurePoints.map((item) => (
-                    <li key={item.position}>{item.text}</li>
-                  ))}
-                </ul>
-                <div>
-                  <Link className="primary" href="/rendez-vous">
-                    Recevoir le programme
-                  </Link>
+            <section className="section program-section anchor-section program-brochure-showcase" id="tarifs">
+              <div className="program-brochure-shell">
+                <div className="program-brochure-head">
+                  <h2>Télécharger le programme de formation</h2>
+                  <p>
+                    Vous saurez bientôt développer une application décentralisée (Dapp) de A à Z, du front au back :
+                  </p>
                 </div>
-              </article>
+
+                <div className="program-brochure-content">
+                  <ul className="program-brochure-benefits">
+                    {brochurePoints.map((item) => (
+                      <li key={`${program.id}-brochure-${item.position}`}>{item.text}</li>
+                    ))}
+                  </ul>
+
+                  <div className="program-brochure-form-wrap">
+                    <img
+                      src={program.image}
+                      alt=""
+                      className="program-brochure-visual"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <form className="program-brochure-form" aria-label="Recevoir la brochure">
+                      <div className="program-brochure-form-grid">
+                        <label>
+                          Prénom<span>*</span>
+                          <input type="text" name="firstName" autoComplete="given-name" />
+                        </label>
+                        <label>
+                          Nom<span>*</span>
+                          <input type="text" name="lastName" autoComplete="family-name" />
+                        </label>
+                        <label>
+                          Numéro de téléphone<span>*</span>
+                          <input type="tel" name="phone" autoComplete="tel" />
+                        </label>
+                        <label>
+                          E-mail<span>*</span>
+                          <input type="email" name="email" autoComplete="email" />
+                        </label>
+                      </div>
+
+                      <p className="program-brochure-privacy">
+                        Alyra l'école Blockchain & IA s'engage à protéger et à respecter votre vie privée.
+                      </p>
+                      <label className="program-brochure-checkbox">
+                        <input type="checkbox" name="privacy" />
+                        <span>J'accepte la politique de confidentialité.</span>
+                      </label>
+                      <label className="program-brochure-checkbox">
+                        <input type="checkbox" name="communications" />
+                        <span>J'accepte de recevoir d'autres communications de Alyra l'école Blockchain & IA.</span>
+                      </label>
+
+                      <div className="program-brochure-action">
+                        <Link className="primary" href="/rendez-vous">
+                          Obtenir la brochure
+                        </Link>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </section>
           ) : null}
 
           {modalities.length > 0 ? (
-            <section className="section">
-              <div className="section-head">
-                <h2>Trois modalites pedagogiques</h2>
+            <section className="section program-section anchor-section" id="tarifs">
+              <div className="section-head program-modalities-head">
+                <h2>
+                  <span>Trois modalites</span> pedagogiques
+                </h2>
+                <p>Des modalités différentes pour s'adapter à vos besoins et à votre emploi du temps</p>
               </div>
-              <div className="cards">
-                {modalities.map((item) => (
-                  <article key={item.key} className="card">
-                    <h3>{item.title}</h3>
-                    {item.subtitle ? <p>{item.subtitle}</p> : null}
-                    <div className="card-meta">
-                      {item.durationLabel ? <span>{item.durationLabel}</span> : null}
-                      {item.priceLabel ? <span>{item.priceLabel}</span> : null}
+              <div className="program-modalities-grid">
+                {modalities.map((item) => {
+                  const toneClass =
+                    item.key === "essentiel"
+                      ? "is-essentiel"
+                      : item.key === "premium"
+                        ? "is-premium"
+                        : "is-session";
+                  const topFeatures = item.features?.slice(0, 6) ?? [];
+                  const extraFeatures = item.features?.slice(6) ?? [];
+
+                  return (
+                  <article
+                    key={`${program.id}-modality-${item.key}`}
+                    className={`program-modality-card ${toneClass}`}
+                  >
+                    <div className="program-modality-top">
+                      <p className="program-modality-brand">ALYRA</p>
+                      <h3>
+                        <span>{item.title}</span>
+                      </h3>
+
+                      <div className="program-modality-duration">
+                        <span aria-hidden="true">🗓</span>
+                        <strong>{item.durationLabel ?? "Sur mesure"}</strong>
+                      </div>
+
+                      {item.supportLabel ? <p className="program-modality-subtitle">{item.supportLabel}</p> : null}
                     </div>
-                    {item.supportLabel ? <p>{item.supportLabel}</p> : null}
-                    {item.certificationLabel ? (
-                      <p>
-                        {item.certificationLabel}
-                        {item.certificationCode ? ` - ${item.certificationCode}` : ""}
-                      </p>
-                    ) : null}
-                    {item.features?.length > 0 ? (
-                      <ul className="simple-list">
-                        {item.features.map((feature) => (
-                          <li key={`${item.key}-${feature.position}`}>{feature.text}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                    {item.ctaHref ? (
-                      <Link className="text-button" href={item.ctaHref}>
-                        {item.ctaLabel ?? "Voir la modalite"}
-                      </Link>
-                    ) : null}
+
+                    <div className="program-modality-body">
+                      {topFeatures.length > 0 ? (
+                        <ul className="program-modality-list">
+                          {topFeatures.map((feature) => (
+                            <li key={`${program.id}-${item.key}-${feature.position}`}>{feature.text}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+
+                      {extraFeatures.length > 0 ? (
+                        <ul className="program-modality-list is-secondary">
+                          {extraFeatures.map((feature) => (
+                            <li key={`${program.id}-${item.key}-${feature.position}`}>{feature.text}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+
+                      {item.certificationLabel ? (
+                        <div className="program-modality-certification">
+                          <strong>{item.certificationLabel}</strong>
+                          {item.certificationCode ? <span>{item.certificationCode}</span> : null}
+                        </div>
+                      ) : null}
+                    </div>
+
+                    <div className="program-modality-price">
+                      <strong>{item.priceLabel ?? "Tarif sur devis"}</strong>
+                    </div>
+
+                    <div className="program-modality-cta">
+                      {item.ctaHref ? (
+                        <Link className="primary" href={item.ctaHref}>
+                          {item.ctaLabel ?? "Télécharger le programme"}
+                        </Link>
+                      ) : (
+                        <Link className="primary" href="/rendez-vous">
+                          Télécharger le programme
+                        </Link>
+                      )}
+                    </div>
                   </article>
-                ))}
+                  );
+                })}
               </div>
             </section>
           ) : null}
 
           {expertsSectionItems.length > 0 ? (
-            <section className="section">
+            <section className="section program-section anchor-section" id="experts">
               <div className="section-head">
-                <h2>Experts</h2>
+                <span className="program-eyebrow">Intervenants</span>
+                <h2>Nos experts</h2>
                 <p>Une equipe mixte: pedagogie, expertise terrain et accompagnement projet.</p>
               </div>
-              <div className="cards">
-                {expertsSectionItems.map((expert) => (
-                  <article key={expert.id ?? expert.name} className="card">
-                    <h3>{expert.name}</h3>
-                    <div className="card-meta">
-                      <span>{expert.role}</span>
-                    </div>
-                    <p>{expert.bio}</p>
-                    {expert.linkedinUrl ? (
-                      <a className="text-button" href={expert.linkedinUrl} target="_blank" rel="noreferrer">
-                        LinkedIn
-                      </a>
+              <div className="program-experts-grid">
+                {expertsSectionItems.map((expert, index) => (
+                  <article key={`${program.id}-expert-${expert.id ?? expert.name ?? index}`} className="card program-expert-card">
+                    {expert.imageUrl ? (
+                      <img
+                        src={expert.imageUrl}
+                        alt={expert.name ?? "Expert"}
+                        className="program-expert-image"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     ) : null}
+                    <div className="program-expert-body">
+                      <h3>{expert.name}</h3>
+                      <div className="card-meta">
+                        <span>{expert.role}</span>
+                      </div>
+                      <p>{expert.bio}</p>
+                      {expert.linkedinUrl ? (
+                        <a className="text-button" href={expert.linkedinUrl} target="_blank" rel="noreferrer">
+                          LinkedIn
+                        </a>
+                      ) : null}
+                    </div>
                   </article>
                 ))}
               </div>
@@ -251,20 +476,21 @@ export default function ProgramDetailPage({
           ) : null}
 
           {testimonials.length > 0 ? (
-            <section className="section">
+            <section className="section program-section">
               <div className="section-head">
+                <span className="program-eyebrow">Avis</span>
                 <h2>Les retours de nos apprenants</h2>
               </div>
-              <div className="cards">
+              <div className="program-testimonials-grid">
                 {testimonials.map((item) => (
-                  <article key={item.key} className="card">
+                  <article key={`${program.id}-testimonial-${item.key}`} className="card program-testimonial-card">
                     <div className="card-meta">
                       <span>{item.rating}/5</span>
                       {item.sourceLabel ? <span>{item.sourceLabel}</span> : null}
                     </div>
                     <h3>{item.title}</h3>
                     <p>{item.body}</p>
-                    <p>{item.author}</p>
+                    <p className="program-testimonial-author">{item.author}</p>
                   </article>
                 ))}
               </div>
@@ -272,13 +498,14 @@ export default function ProgramDetailPage({
           ) : null}
 
           {faqs.length > 0 ? (
-            <section className="section">
+            <section className="section program-section">
               <div className="section-head">
-                <h2>FAQs</h2>
+                <span className="program-eyebrow">FAQ</span>
+                <h2>Questions frequentes</h2>
               </div>
-              <div className="cards">
+              <div className="program-faq-grid">
                 {faqs.map((item) => (
-                  <article key={item.key} className="card">
+                  <article key={`${program.id}-faq-${item.key}`} className="card">
                     <h3>{item.question}</h3>
                     <p>{item.answer}</p>
                   </article>
@@ -288,20 +515,30 @@ export default function ProgramDetailPage({
           ) : null}
 
           {relatedPrograms.length > 0 ? (
-            <section className="section">
+            <section className="section program-section">
               <div className="section-head">
+                <span className="program-eyebrow">Catalogue</span>
                 <h2>Decouvrez nos autres formations</h2>
               </div>
-              <div className="cards">
+              <div className="program-related-grid">
                 {relatedPrograms.map((item) => (
-                  <article key={item.id} className="card">
+                  <article key={`${program.id}-related-${item.id}`} className="card program-related-card">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="program-related-image"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : null}
                     <h3>{item.labelOverride ?? item.title}</h3>
                     <p>{item.subtitle}</p>
                     <div className="card-meta">
                       <span>{item.duration}</span>
                       <span>{formatPrice(item.price)}</span>
                     </div>
-                    <Link className="text-button" href={`/programmes/${item.slug}`}>
+                    <Link className="text-button" href={`/formations/${item.slug}`}>
                       Voir cette formation
                     </Link>
                   </article>
@@ -311,7 +548,7 @@ export default function ProgramDetailPage({
           ) : null}
 
           {detailContent?.certificationTitle || detailContent?.certificationDescription ? (
-            <section className="section">
+            <section className="section program-section anchor-section" id="certification">
               <div className="section-head">
                 <h2>Certification associee</h2>
               </div>

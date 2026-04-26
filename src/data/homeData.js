@@ -418,9 +418,9 @@ export const footerColumns = [
   {
     title: "Formations",
     links: [
-      { label: "Catalogue", href: "/programmes" },
-      { label: "Formations Blockchain", href: "/programmes?track=blockchain" },
-      { label: "Formations IA", href: "/programmes?track=ia" },
+      { label: "Catalogue", href: "/formations" },
+      { label: "Formations Blockchain", href: "/formations?track=blockchain" },
+      { label: "Formations IA", href: "/formations?track=ia" },
     ],
   },
   {

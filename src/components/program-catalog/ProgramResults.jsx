@@ -4,7 +4,7 @@ export default function ProgramResults({ programs, isLoading, error }) {
   if (isLoading) {
     return (
       <p className="results-count" aria-live="polite">
-        Chargement des programmes...
+        Chargement des formations...
       </p>
     );
   }
@@ -17,14 +17,14 @@ export default function ProgramResults({ programs, isLoading, error }) {
         </p>
       )}
       <p className="results-count" aria-live="polite">
-        {programs.length} programmes trouves
+        {programs.length} formations trouvees
       </p>
       <div className="catalog-grid">
         {programs.map((program) => (
           <Link
             key={program.id}
             className="catalog-card catalog-card-link"
-            href={`/programmes/${program.slug}`}
+            href={`/formations/${program.slug}`}
             aria-label={`Ouvrir la formation ${program.title}`}
           >
             <img
@@ -53,7 +53,7 @@ export default function ProgramResults({ programs, isLoading, error }) {
         ))}
       </div>
       {programs.length === 0 && (
-        <p className="results-count">Aucun programme ne correspond a ces filtres.</p>
+        <p className="results-count">Aucune formation ne correspond a ces filtres.</p>
       )}
     </>
   );

@@ -1,32 +1,5 @@
-import { Suspense } from "react";
-import ProgramCatalog from "../../src/components/ProgramCatalog";
-import { getPrograms } from "../../src/lib/programData";
-import { pageMetadata } from "../../src/lib/seo";
+import { permanentRedirect } from "next/navigation";
 
-export const revalidate = 300;
-
-export const metadata = pageMetadata({
-  title: "Catalogue des Formations",
-  description:
-    "Consultez toutes nos formations blockchain et IA, avec filtres par duree, date et specialisation.",
-  path: "/programmes",
-});
-
-export default async function ProgrammesPage() {
-  const programs = await getPrograms();
-  return (
-    <Suspense
-      fallback={
-        <main className="main-content">
-          <section className="hero programs-hero">
-            <div className="section-head">
-              <h1>Chargement du catalogue...</h1>
-            </div>
-          </section>
-        </main>
-      }
-    >
-      <ProgramCatalog programsList={programs} isLoading={false} error={null} />
-    </Suspense>
-  );
+export default function ProgrammesRedirectPage() {
+  permanentRedirect("/formations");
 }

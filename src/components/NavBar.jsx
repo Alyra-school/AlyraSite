@@ -28,7 +28,7 @@ export default function NavBar({ programs = [] }) {
       .at(0);
   }, [programs]);
 
-  const isProgramsArea = pathname === "/programmes" || pathname.startsWith("/programmes/");
+  const isProgramsArea = pathname === "/formations" || pathname.startsWith("/formations/");
 
   const closeMenus = () => {
     setIsMobileMenuOpen(false);
@@ -131,29 +131,29 @@ export default function NavBar({ programs = [] }) {
                   return;
                 }
                 closeMenus();
-                router.push("/programmes");
+                router.push("/formations");
               }}
             >
-              Programmes
+              Nos formations
             </button>
 
             <div className="nav-dropdown">
               <Link
-                href="/programmes"
+                href="/formations"
                 className="nav-dropdown-item"
                 onClick={closeMenus}
               >
                 <span>Toutes nos formations</span>
               </Link>
               <Link
-                href="/programmes?track=blockchain"
+                href="/formations?track=blockchain"
                 className="nav-dropdown-item"
                 onClick={closeMenus}
               >
                 <span>Nos Formations Blockchain</span>
               </Link>
               <Link
-                href="/programmes?track=ia"
+                href="/formations?track=ia"
                 className="nav-dropdown-item"
                 onClick={closeMenus}
               >
@@ -161,7 +161,7 @@ export default function NavBar({ programs = [] }) {
               </Link>
               {featuredLongProgram ? (
                 <Link
-                  href={`/programmes/${featuredLongProgram.slug}`}
+                  href={`/formations/${featuredLongProgram.slug}`}
                   className="nav-dropdown-item"
                   onClick={closeMenus}
                 >

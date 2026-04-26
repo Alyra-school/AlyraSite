@@ -7,7 +7,7 @@ export default async function sitemap() {
   const now = new Date();
   const staticRoutes = [
     "/",
-    "/programmes",
+    "/formations",
     "/financement",
     "/vos-besoins",
     "/blog",
@@ -17,7 +17,7 @@ export default async function sitemap() {
   ];
 
   const programs = await getPrograms();
-  const dynamicRoutes = programs.map((item) => `/programmes/${item.slug}`);
+  const dynamicRoutes = programs.map((item) => `/formations/${item.slug}`);
 
   return [...staticRoutes, ...dynamicRoutes].map((route) => ({
     url: `${siteUrl}${route}`,

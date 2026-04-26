@@ -31,7 +31,7 @@ const testPrograms = [
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
-  usePathname: () => "/programmes",
+  usePathname: () => "/formations",
   useSearchParams: () => new URLSearchParams(""),
 }));
 
@@ -52,7 +52,7 @@ describe("accessibility", () => {
   it("ProgramCatalog should not have obvious a11y violations", async () => {
     const { container } = render(<ProgramCatalog programsList={testPrograms} />);
 
-    expect(screen.getByRole("heading", { name: /catalogue des programmes/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /catalogue des formations/i })).toBeInTheDocument();
 
     const results = await axe(container, axeConfig);
     expect(results.violations).toHaveLength(0);
