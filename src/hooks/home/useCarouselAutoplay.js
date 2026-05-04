@@ -7,6 +7,7 @@ export function useCarouselAutoplay({
   trackRef,
   pauseOnHover = true,
   pauseOnPointer = true,
+  isPaused = false,
 }) {
   const pausedRef = useRef(false);
 
@@ -56,11 +57,13 @@ export function useCarouselAutoplay({
     if (!enabled) return undefined;
     const id = window.setInterval(() => {
       if (pausedRef.current) return;
+      if (isPaused) return;
+      if (document.visibilityState === "hidden") return;
       onTick();
     }, delay);
 
     return () => window.clearInterval(id);
-  }, [delay, enabled, onTick]);
+  }, [delay, enabled, onTick, isPaused]);
 
   return { pausedRef };
 }

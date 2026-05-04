@@ -16,8 +16,21 @@ const MODALITY_FEATURES_SELECT = "modality_key, position, text";
 const PROGRAM_EXPERTS_SELECT = "expert_id, position";
 const EXPERTS_SELECT = "id, slug, name, role, bio, linkedin_url, image_url";
 const TESTIMONIALS_SELECT = "testimonial_key, position, author, title, body, rating, source_label";
+const ALUMNI_SPOTLIGHTS_SELECT =
+  "alumni_key, position, name, before_label, after_label, after_logo_url, image_url, title, body, linkedin_url";
+const AUDIENCE_JOBS_SELECT = "position, label";
+const EXPERT_HIGHLIGHTS_SELECT = "expert_id, position, text";
 const FAQS_SELECT = "faq_key, position, question, answer";
 const RELATED_PROGRAMS_SELECT = "related_program_id, position, label_override";
+const CERT_META_SELECT =
+  "headline_prefix, headline_accent, badge_image_url, badge_alt, intro_label, intro_title, intro_description, intro_reference, trustpilot_score, trustpilot_label";
+const CERT_PREREQ_CARDS_SELECT = "position, icon_key, text";
+const CERT_PREREQ_TOOLS_SELECT = "position, icon_key, label";
+const CERT_PREREQ_BULLETS_SELECT = "position, text";
+const CERT_COMPETENCIES_SELECT = "position, title, description";
+const CERT_OBJECTIVES_SELECT = "position, text";
+const CERT_EVALUATIONS_SELECT = "position, title, description";
+const CERT_VALIDATION_SELECT = "position, text";
 
 function mapProgram(row) {
   return {
@@ -105,8 +118,19 @@ export async function getProgramPageByProgramId(programId) {
     modalityFeaturesResult,
     programExpertsResult,
     testimonialsResult,
+    alumniSpotlightsResult,
+    audienceJobsResult,
+    expertHighlightsResult,
     faqsResult,
     relatedProgramsResult,
+    certMetaResult,
+    certPrereqCardsResult,
+    certPrereqToolsResult,
+    certPrereqBulletsResult,
+    certCompetenciesResult,
+    certObjectivesResult,
+    certEvaluationsResult,
+    certValidationResult,
   ] = await Promise.all([
     supabase.from("program_pages").select(PROGRAM_PAGE_SELECT).eq("program_id", programId).maybeSingle(),
     supabase
@@ -155,10 +179,61 @@ export async function getProgramPageByProgramId(programId) {
       .select(TESTIMONIALS_SELECT)
       .eq("program_id", programId)
       .order("position", { ascending: true }),
+    supabase
+      .from("program_page_alumni_spotlights")
+      .select(ALUMNI_SPOTLIGHTS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_audience_jobs")
+      .select(AUDIENCE_JOBS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_expert_highlights")
+      .select(EXPERT_HIGHLIGHTS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
     supabase.from("program_page_faqs").select(FAQS_SELECT).eq("program_id", programId).order("position", { ascending: true }),
     supabase
       .from("program_page_related_programs")
       .select(RELATED_PROGRAMS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase.from("program_page_certification_meta").select(CERT_META_SELECT).eq("program_id", programId).maybeSingle(),
+    supabase
+      .from("program_page_certification_prereq_cards")
+      .select(CERT_PREREQ_CARDS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_certification_prereq_tools")
+      .select(CERT_PREREQ_TOOLS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_certification_prereq_bullets")
+      .select(CERT_PREREQ_BULLETS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_certification_competencies")
+      .select(CERT_COMPETENCIES_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_certification_objectives")
+      .select(CERT_OBJECTIVES_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_certification_evaluations")
+      .select(CERT_EVALUATIONS_SELECT)
+      .eq("program_id", programId)
+      .order("position", { ascending: true }),
+    supabase
+      .from("program_page_certification_validation_rules")
+      .select(CERT_VALIDATION_SELECT)
       .eq("program_id", programId)
       .order("position", { ascending: true }),
   ]);
@@ -179,8 +254,19 @@ export async function getProgramPageByProgramId(programId) {
     ["modalityFeatures", modalityFeaturesResult.error],
     ["programExperts", programExpertsResult.error],
     ["testimonials", testimonialsResult.error],
+    ["alumniSpotlights", alumniSpotlightsResult.error],
+    ["audienceJobs", audienceJobsResult.error],
+    ["expertHighlights", expertHighlightsResult.error],
     ["faqs", faqsResult.error],
     ["relatedPrograms", relatedProgramsResult.error],
+    ["certificationMeta", certMetaResult.error],
+    ["certificationPrereqCards", certPrereqCardsResult.error],
+    ["certificationPrereqTools", certPrereqToolsResult.error],
+    ["certificationPrereqBullets", certPrereqBulletsResult.error],
+    ["certificationCompetencies", certCompetenciesResult.error],
+    ["certificationObjectives", certObjectivesResult.error],
+    ["certificationEvaluations", certEvaluationsResult.error],
+    ["certificationValidationRules", certValidationResult.error],
   ];
 
   blockResults.forEach(([name, error]) => {
@@ -249,6 +335,13 @@ export async function getProgramPageByProgramId(programId) {
   }));
 
   const expertLinks = programExpertsResult.data ?? [];
+  const expertHighlightsMap = (expertHighlightsResult.data ?? []).reduce((acc, item) => {
+    const list = acc.get(item.expert_id) ?? [];
+    list.push({ position: item.position, text: item.text });
+    acc.set(item.expert_id, list);
+    return acc;
+  }, new Map());
+
   let experts = [];
   if (expertLinks.length > 0) {
     const expertIds = expertLinks.map((item) => item.expert_id);
@@ -274,6 +367,7 @@ export async function getProgramPageByProgramId(programId) {
             bio: expert.bio,
             linkedinUrl: expert.linkedin_url,
             imageUrl: expert.image_url,
+            highlights: (expertHighlightsMap.get(expert.id) ?? []).sort((a, b) => a.position - b.position),
           };
         })
         .filter(Boolean);
@@ -290,12 +384,79 @@ export async function getProgramPageByProgramId(programId) {
     sourceLabel: item.source_label,
   }));
 
+  const alumniSpotlights = (alumniSpotlightsResult.data ?? []).map((item) => ({
+    key: item.alumni_key,
+    position: item.position,
+    name: item.name,
+    beforeLabel: item.before_label,
+    afterLabel: item.after_label,
+    afterLogoUrl: item.after_logo_url,
+    imageUrl: item.image_url,
+    title: item.title,
+    body: item.body,
+    linkedinUrl: item.linkedin_url,
+  }));
+
+  const audienceJobs = (audienceJobsResult.data ?? []).map((item) => ({
+    position: item.position,
+    label: item.label,
+  }));
+
   const faqs = (faqsResult.data ?? []).map((item) => ({
     key: item.faq_key,
     position: item.position,
     question: item.question,
     answer: item.answer,
   }));
+
+  const certification = {
+    meta: certMetaResult.data
+      ? {
+          headlinePrefix: certMetaResult.data.headline_prefix,
+          headlineAccent: certMetaResult.data.headline_accent,
+          badgeImageUrl: certMetaResult.data.badge_image_url,
+          badgeAlt: certMetaResult.data.badge_alt,
+          introLabel: certMetaResult.data.intro_label,
+          introTitle: certMetaResult.data.intro_title,
+          introDescription: certMetaResult.data.intro_description,
+          introReference: certMetaResult.data.intro_reference,
+          trustpilotScore: certMetaResult.data.trustpilot_score,
+          trustpilotLabel: certMetaResult.data.trustpilot_label,
+        }
+      : null,
+    prereqCards: (certPrereqCardsResult.data ?? []).map((item) => ({
+      position: item.position,
+      iconKey: item.icon_key,
+      text: item.text,
+    })),
+    prereqTools: (certPrereqToolsResult.data ?? []).map((item) => ({
+      position: item.position,
+      iconKey: item.icon_key,
+      label: item.label,
+    })),
+    prereqBullets: (certPrereqBulletsResult.data ?? []).map((item) => ({
+      position: item.position,
+      text: item.text,
+    })),
+    competencies: (certCompetenciesResult.data ?? []).map((item) => ({
+      position: item.position,
+      title: item.title,
+      description: item.description,
+    })),
+    objectives: (certObjectivesResult.data ?? []).map((item) => ({
+      position: item.position,
+      text: item.text,
+    })),
+    evaluations: (certEvaluationsResult.data ?? []).map((item) => ({
+      position: item.position,
+      title: item.title,
+      description: item.description,
+    })),
+    validationRules: (certValidationResult.data ?? []).map((item) => ({
+      position: item.position,
+      text: item.text,
+    })),
+  };
 
   const relatedLinks = relatedProgramsResult.data ?? [];
   let relatedPrograms = [];
@@ -336,6 +497,9 @@ export async function getProgramPageByProgramId(programId) {
     modalities,
     experts,
     testimonials,
+    alumniSpotlights,
+    audienceJobs,
+    certification,
     faqs,
     relatedPrograms,
   };

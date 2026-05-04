@@ -54,6 +54,14 @@ export default async function ProgramPage({ params }) {
       price: String(program.price),
       priceCurrency: "EUR",
     },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.alyra.fr/" },
+        { "@type": "ListItem", position: 2, name: "Nos formations", item: "https://www.alyra.fr/formations" },
+        { "@type": "ListItem", position: 3, name: program.title, item: `https://www.alyra.fr/formations/${program.slug}` },
+      ],
+    },
   };
 
   return (
