@@ -31,6 +31,15 @@ const CERT_COMPETENCIES_SELECT = "position, title, description";
 const CERT_OBJECTIVES_SELECT = "position, text";
 const CERT_EVALUATIONS_SELECT = "position, title, description";
 const CERT_VALIDATION_SELECT = "position, text";
+const OPTIONAL_PROGRAM_PAGE_TABLES = new Set(["program_page_audience_jobs", "program_page_expert_highlights"]);
+
+function isMissingOptionalTableError(error, tableName) {
+  if (!error || !tableName || !OPTIONAL_PROGRAM_PAGE_TABLES.has(tableName)) return false;
+  const message = String(error.message || "");
+  const code = String(error.code || "");
+  if (code === "PGRST205") return true;
+  return message.includes(`Could not find the table 'public.${tableName}'`);
+}
 
 function mapProgram(row) {
   return {
@@ -244,33 +253,34 @@ export async function getProgramPageByProgramId(programId) {
   }
 
   const blockResults = [
-    ["heroBullets", heroBulletsResult.error],
-    ["ctas", ctasResult.error],
-    ["proofLogos", proofLogosResult.error],
-    ["kpis", kpisResult.error],
-    ["learningItems", learningItemsResult.error],
-    ["brochurePoints", brochurePointsResult.error],
-    ["modalities", modalitiesResult.error],
-    ["modalityFeatures", modalityFeaturesResult.error],
-    ["programExperts", programExpertsResult.error],
-    ["testimonials", testimonialsResult.error],
-    ["alumniSpotlights", alumniSpotlightsResult.error],
-    ["audienceJobs", audienceJobsResult.error],
-    ["expertHighlights", expertHighlightsResult.error],
-    ["faqs", faqsResult.error],
-    ["relatedPrograms", relatedProgramsResult.error],
-    ["certificationMeta", certMetaResult.error],
-    ["certificationPrereqCards", certPrereqCardsResult.error],
-    ["certificationPrereqTools", certPrereqToolsResult.error],
-    ["certificationPrereqBullets", certPrereqBulletsResult.error],
-    ["certificationCompetencies", certCompetenciesResult.error],
-    ["certificationObjectives", certObjectivesResult.error],
-    ["certificationEvaluations", certEvaluationsResult.error],
-    ["certificationValidationRules", certValidationResult.error],
+    ["heroBullets", heroBulletsResult.error, "program_page_hero_bullets"],
+    ["ctas", ctasResult.error, "program_page_ctas"],
+    ["proofLogos", proofLogosResult.error, "program_page_proof_logos"],
+    ["kpis", kpisResult.error, "program_page_kpis"],
+    ["learningItems", learningItemsResult.error, "program_page_learning_items"],
+    ["brochurePoints", brochurePointsResult.error, "program_page_brochure_points"],
+    ["modalities", modalitiesResult.error, "program_page_modalities"],
+    ["modalityFeatures", modalityFeaturesResult.error, "program_page_modality_features"],
+    ["programExperts", programExpertsResult.error, "program_page_experts"],
+    ["testimonials", testimonialsResult.error, "program_page_testimonials"],
+    ["alumniSpotlights", alumniSpotlightsResult.error, "program_page_alumni_spotlights"],
+    ["audienceJobs", audienceJobsResult.error, "program_page_audience_jobs"],
+    ["expertHighlights", expertHighlightsResult.error, "program_page_expert_highlights"],
+    ["faqs", faqsResult.error, "program_page_faqs"],
+    ["relatedPrograms", relatedProgramsResult.error, "program_page_related_programs"],
+    ["certificationMeta", certMetaResult.error, "program_page_certification_meta"],
+    ["certificationPrereqCards", certPrereqCardsResult.error, "program_page_certification_prereq_cards"],
+    ["certificationPrereqTools", certPrereqToolsResult.error, "program_page_certification_prereq_tools"],
+    ["certificationPrereqBullets", certPrereqBulletsResult.error, "program_page_certification_prereq_bullets"],
+    ["certificationCompetencies", certCompetenciesResult.error, "program_page_certification_competencies"],
+    ["certificationObjectives", certObjectivesResult.error, "program_page_certification_objectives"],
+    ["certificationEvaluations", certEvaluationsResult.error, "program_page_certification_evaluations"],
+    ["certificationValidationRules", certValidationResult.error, "program_page_certification_validation_rules"],
   ];
 
-  blockResults.forEach(([name, error]) => {
+  blockResults.forEach(([name, error, tableName]) => {
     if (error) {
+      if (isMissingOptionalTableError(error, tableName)) return;
       console.error(`[programData.getProgramPageByProgramId] ${name} error:`, error.message);
     }
   });

@@ -96,30 +96,32 @@ export default function ProgramCertificationSection({ programTitle, certificatio
         </div>
       </div>
 
-      <div className="program-certification-evaluation">
-        <h3><span>Modalités d’évaluation</span> des compétences</h3>
-        <p className="program-certification-evaluation-subtitle">
-          La certification est obtenue par tout(e) candidat(e) maîtrisant l'ensemble des compétences.
-        </p>
-        <div className="program-certification-evaluation-cards">
-          {certification.evaluations.map((item) => (
-            <article key={`evaluation-${item.position}`}>
-              <h4>{item.title}</h4>
-              <p>{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div className="program-certification-validation">
-        <h3>Conditions à respecter pour <span>valider cette formation</span></h3>
-        <div>
-          <span>{iconMap.check}</span>
-          <ul>
-            {certification.validationRules.map((item) => (
-              <li key={`validation-${item.position}`}>{item.text}</li>
+      <div className="program-certification-final-grid">
+        <div className="program-certification-evaluation">
+          <h3><span>Modalités d’évaluation</span> des compétences</h3>
+          <p className="program-certification-evaluation-subtitle">
+            La certification est obtenue par tout(e) candidat(e) maîtrisant l'ensemble des compétences.
+          </p>
+          <div className="program-certification-evaluation-cards">
+            {certification.evaluations.map((item) => (
+              <article key={`evaluation-${item.position}`}>
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+              </article>
             ))}
-          </ul>
+          </div>
+        </div>
+
+        <div className="program-certification-validation">
+          <h3>Conditions à respecter pour <span>valider cette formation</span></h3>
+          <div>
+            <span>{iconMap.check}</span>
+            <ul>
+              {certification.validationRules.map((item) => (
+                <li key={`validation-${item.position}`}>{item.text}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

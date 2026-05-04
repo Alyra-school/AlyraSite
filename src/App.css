@@ -1235,8 +1235,10 @@
 }
 
 .program-section .section-head h2 {
-  font-size: clamp(1.7rem, 3.2vw, 2.55rem);
+  font-size: var(--formation-h2);
   line-height: 1.08;
+  font-weight: var(--formation-title-weight);
+  letter-spacing: -0.01em;
 }
 
 .program-logo-grid {
@@ -6545,7 +6547,8 @@
 .program-alumni-spotlight {
   width: 100vw;
   margin-inline: calc(50% - 50vw);
-  padding-block: clamp(82px, 8vw, 128px);
+  margin-top: clamp(-30px, -2.6vw, -14px);
+  padding-block: clamp(16px, 1.8vw, 32px) clamp(68px, 6vw, 106px);
   overflow: hidden;
   background:
     radial-gradient(circle at 50% 42%, rgba(72, 63, 255, 0.13), transparent 36%),
@@ -6553,8 +6556,9 @@
 }
 
 .program-alumni-surface {
-  display: grid;
-  gap: 26px;
+  display: block;
+  width: min(100%, 1200px);
+  margin-inline: auto;
 }
 
 .program-alumni-head {
@@ -6562,28 +6566,31 @@
   z-index: 3;
   width: min(100% - 40px, 920px);
   margin-inline: auto;
+  display: grid;
+  gap: 8px;
   text-align: center;
 }
 
 .program-alumni-head h2 {
   margin: 0;
   color: var(--text-strong);
-  font-size: clamp(2.35rem, 3.4vw, 3.75rem);
+  font-size: var(--formation-h2);
   line-height: 1.08;
-  font-weight: 900;
+  font-weight: var(--formation-title-weight);
 }
 
 .program-alumni-head p {
-  margin: 18px 0 0;
+  margin: 0;
   color: var(--text-strong);
-  font-weight: 800;
+  font-size: var(--formation-subtitle);
+  font-weight: var(--formation-subtitle-weight);
 }
 
 .program-alumni-controls {
-  justify-self: center;
   position: relative;
   z-index: 3;
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 0;
   border-radius: 999px;
@@ -6591,6 +6598,7 @@
   border: 1px solid rgba(28, 26, 88, 0.08);
   box-shadow: 0 14px 34px rgba(39, 37, 94, 0.12);
   overflow: hidden;
+  margin: 22px auto 0;
 }
 
 .program-alumni-controls button {
@@ -6611,7 +6619,7 @@
 
 .program-alumni-track-shell {
   position: relative;
-  margin-top: 34px;
+  margin-top: 22px;
 }
 
 .program-alumni-track-shell::before,
@@ -6724,7 +6732,7 @@
   background: rgba(255, 255, 255, 0.96);
   box-shadow: 0 12px 28px rgba(30, 28, 91, 0.08);
   color: var(--text-strong);
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -6753,9 +6761,9 @@
   gap: 8px;
   margin: 0;
   color: var(--text-strong);
-  font-size: clamp(1.45rem, 1.8vw, 2rem);
+  font-size: var(--formation-h3);
   line-height: 1.08;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .program-alumni-body h3 a {
@@ -6767,12 +6775,13 @@
   background: var(--text-strong);
   color: #ffffff;
   font-size: 0.72rem;
-  font-weight: 900;
+  font-weight: 700;
   text-decoration: none;
 }
 
 .program-alumni-role {
   margin: 0;
+  font-size: var(--formation-body);
   font-weight: 700;
 }
 
@@ -6780,14 +6789,15 @@
   margin: 0;
   max-width: 34ch;
   color: #2f2b68;
-  font-size: 0.92rem;
-  line-height: 1.45;
+  font-size: var(--formation-body-sm);
+  line-height: 1.5;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-alumni-cta {
   display: flex;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 24px;
 }
 
 .program-audience-section {
@@ -6798,10 +6808,11 @@
 .program-audience-section > h2 {
   margin: 0 0 clamp(48px, 6vw, 88px);
   color: var(--text-strong);
-  font-size: clamp(2.2rem, 3.4vw, 3.75rem);
+  font-size: var(--formation-h2);
   line-height: 1.08;
   text-align: center;
-  font-weight: 900;
+  font-weight: var(--formation-title-weight);
+  letter-spacing: -0.01em;
 }
 
 .program-audience-layout {
@@ -6819,12 +6830,12 @@
   gap: 22px;
   color: #211e61;
   text-align: center;
-  font-size: 1rem;
+  font-size: var(--formation-body);
 }
 
 .program-audience-sectors p {
   margin: 0;
-  font-weight: 700;
+  font-weight: var(--formation-subtitle-weight);
 }
 
 .program-audience-sector-pills {
@@ -6883,16 +6894,18 @@
 .program-audience-career-card h3 {
   margin: 0 0 10px;
   color: var(--text-strong);
-  font-size: clamp(1.8rem, 2.45vw, 3rem);
+  font-size: var(--formation-h3);
   line-height: 1.12;
-  font-weight: 900;
+  font-weight: var(--formation-title-weight);
 }
 
 .program-audience-career-card ul {
   margin: 0;
   padding-left: 20px;
   color: #211e61;
+  font-size: var(--formation-body);
   line-height: 1.55;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-referents-section {
@@ -6903,10 +6916,11 @@
 .program-referents-section > h2 {
   margin: 0 0 clamp(44px, 5vw, 74px);
   color: var(--text-strong);
-  font-size: clamp(2.15rem, 3.2vw, 3.45rem);
+  font-size: var(--formation-h2);
   text-align: center;
   line-height: 1.08;
-  font-weight: 900;
+  font-weight: var(--formation-title-weight);
+  letter-spacing: -0.01em;
 }
 
 .program-referents-section > h2 span {
@@ -6963,20 +6977,24 @@
 .program-referent-hero h3 {
   margin: 0;
   color: var(--text-strong);
-  font-size: 1.25rem;
+  font-size: var(--formation-h3);
   line-height: 1.1;
+  font-weight: 700;
 }
 
 .program-referent-hero p {
   margin: 4px 0 0;
   color: #211e61;
-  font-size: 0.95rem;
+  font-size: var(--formation-body-sm);
+  font-weight: var(--formation-subtitle-weight);
 }
 
 .program-referent-bio {
   margin: 0;
   color: #211e61;
+  font-size: var(--formation-body);
   line-height: 1.55;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-referent-highlights {
@@ -7000,10 +7018,12 @@
   left: 0;
   top: -1px;
   color: var(--brand);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .program-experts-carousel-section {
+  width: min(100%, 1120px);
+  margin-inline: auto;
   display: grid;
   justify-items: center;
   gap: 20px;
@@ -7012,9 +7032,9 @@
 
 .program-experts-carousel-head h2 {
   margin: 0;
-  font-size: clamp(2rem, 3.3vw, 3rem);
+  font-size: var(--formation-h2);
   line-height: 1.08;
-  font-weight: 900;
+  font-weight: var(--formation-title-weight);
   color: #221f63;
   text-align: center;
 }
@@ -7059,6 +7079,7 @@
 .program-experts-carousel-track-shell {
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 .program-experts-carousel-track-shell::before,
@@ -7070,30 +7091,55 @@
   width: clamp(20px, 3vw, 38px);
   z-index: 2;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* No side fade for experts carousel (requested). */
+.program-experts-carousel-track-shell::before,
+.program-experts-carousel-track-shell::after {
+  display: none;
 }
 
 .program-experts-carousel-track-shell::before {
   left: 0;
-  background: linear-gradient(to right, #f4f3ff 12%, rgba(244, 243, 255, 0));
+  background: linear-gradient(to right, #efeffa 12%, rgba(239, 239, 250, 0));
 }
 
 .program-experts-carousel-track-shell::after {
   right: 0;
-  background: linear-gradient(to left, #f4f3ff 12%, rgba(244, 243, 255, 0));
+  background: linear-gradient(to left, #efeffa 12%, rgba(239, 239, 250, 0));
+}
+
+.program-experts-carousel-track-shell.has-left-fade::before,
+.program-experts-carousel-track-shell.has-right-fade::after {
+  opacity: 1;
 }
 
 .program-experts-carousel-track {
+  --program-experts-edge-padding: clamp(12px, 2.2vw, 26px);
+  --program-experts-gap: clamp(16px, 2vw, 28px);
   display: flex;
-  gap: clamp(16px, 2vw, 28px);
+  gap: var(--program-experts-gap);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-snap-type: x mandatory;
-  padding: 18px clamp(8px, 1vw, 14px) 10px;
+  padding: 18px var(--program-experts-edge-padding) 10px;
+  scroll-padding-inline: var(--program-experts-edge-padding);
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+  user-select: none;
 }
 
 .program-experts-carousel-track::-webkit-scrollbar {
   display: none;
+}
+
+.program-experts-carousel-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
 }
 
 .program-expert-carousel-card {
@@ -7181,8 +7227,8 @@
 .program-testimonials-carousel-head h2 {
   margin: 0;
   color: #211f63;
-  font-size: clamp(2rem, 3.2vw, 3.25rem);
-  font-weight: 900;
+  font-size: var(--formation-h2);
+  font-weight: var(--formation-title-weight);
   line-height: 1.08;
 }
 
@@ -7266,6 +7312,8 @@
   width: clamp(20px, 3.2vw, 44px);
   z-index: 2;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .program-testimonials-carousel-track-shell::before {
@@ -7278,18 +7326,35 @@
   background: linear-gradient(to left, #f7f8fd 12%, rgba(247, 248, 253, 0));
 }
 
+.program-testimonials-carousel-track-shell.has-left-fade::before,
+.program-testimonials-carousel-track-shell.has-right-fade::after {
+  opacity: 1;
+}
+
 .program-testimonials-carousel-track {
+  --program-testimonials-edge-padding: clamp(12px, 2vw, 28px);
+  --program-testimonials-gap: clamp(14px, 1.8vw, 22px);
   display: flex;
-  gap: clamp(14px, 1.8vw, 22px);
+  gap: var(--program-testimonials-gap);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-snap-type: x mandatory;
-  padding: 8px clamp(10px, 1vw, 16px) 18px;
+  padding: 8px var(--program-testimonials-edge-padding) 18px;
+  scroll-padding-inline: var(--program-testimonials-edge-padding);
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+  user-select: none;
 }
 
 .program-testimonials-carousel-track::-webkit-scrollbar {
   display: none;
+}
+
+.program-testimonials-carousel-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
 }
 
 .program-testimonial-carousel-card {
@@ -7328,14 +7393,17 @@
 .program-testimonial-carousel-card h3 {
   margin: 0;
   color: #26245f;
-  font-size: clamp(1.2rem, 1.7vw, 1.8rem);
+  font-size: var(--formation-h3);
   line-height: 1.16;
+  font-weight: 700;
 }
 
 .program-testimonial-carousel-card p {
   margin: 0;
   color: #323468;
-  line-height: 1.45;
+  font-size: var(--formation-body-sm);
+  line-height: 1.5;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-testimonial-carousel-card a {
@@ -7352,10 +7420,11 @@
 
 .program-testimonials-carousel-cta {
   margin-top: 18px;
-  display: inline-flex;
+  display: flex;
+  width: 100%;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  justify-self: center;
 }
 
 .program-certification-section {
@@ -7377,9 +7446,10 @@
 .program-certification-hero h2 {
   margin: 0;
   color: #232160;
-  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  font-size: var(--formation-h2);
   line-height: 1.08;
-  font-weight: 900;
+  font-weight: var(--formation-title-weight);
+  letter-spacing: -0.01em;
 }
 
 .program-certification-hero h2 span {
@@ -7456,20 +7526,24 @@
 
 .program-certification-intro-label {
   margin: 0;
-  font-weight: 800;
+  font-size: var(--formation-subtitle);
+  font-weight: var(--formation-subtitle-weight);
 }
 
 .program-certification-intro-copy h3 {
   margin: 0;
-  font-size: clamp(2rem, 3vw, 3.3rem);
+  font-size: var(--formation-h2);
   line-height: 1.08;
   color: #211f63;
+  font-weight: var(--formation-title-weight);
 }
 
 .program-certification-intro-copy p {
   margin: 0;
   color: #2a2a65;
-  line-height: 1.45;
+  font-size: var(--formation-body);
+  line-height: 1.55;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-certification-trustpilot {
@@ -7489,9 +7563,10 @@
   margin: 0 0 24px;
   text-align: center;
   color: #222062;
-  font-size: clamp(2rem, 3.1vw, 3.15rem);
+  font-size: var(--formation-h2);
   line-height: 1.08;
-  font-weight: 900;
+  font-weight: var(--formation-title-weight);
+  letter-spacing: -0.01em;
 }
 
 .program-certification-prereqs h3 span,
@@ -7533,7 +7608,9 @@
 
 .program-certification-prereq-cards article p {
   margin: 0;
-  line-height: 1.45;
+  font-size: var(--formation-body);
+  line-height: 1.5;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-certification-prereq-tools {
@@ -7558,7 +7635,8 @@
 .program-certification-prereq-tools p {
   margin: 0;
   color: #26245f;
-  font-weight: 700;
+  font-size: var(--formation-body);
+  font-weight: var(--formation-subtitle-weight);
 }
 
 .program-certification-prereq-bullets {
@@ -7573,7 +7651,9 @@
   position: relative;
   padding-left: 28px;
   color: #26245f;
-  line-height: 1.45;
+  font-size: var(--formation-body);
+  line-height: 1.55;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-certification-prereq-bullets li::before {
@@ -7582,7 +7662,7 @@
   left: 0;
   top: -1px;
   color: #4a46f5;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .program-certification-competencies-panel,
@@ -7601,13 +7681,16 @@
 .program-certification-competencies-panel article h4 {
   margin: 0 0 6px;
   color: #fff;
-  font-size: 1.45rem;
+  font-size: var(--formation-h3);
+  font-weight: 700;
 }
 
 .program-certification-competencies-panel article p {
   margin: 0;
   color: rgba(255, 255, 255, 0.94);
-  line-height: 1.45;
+  font-size: var(--formation-body);
+  line-height: 1.55;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-certification-objectives-panel {
@@ -7629,19 +7712,24 @@
 .program-certification-objectives-panel p {
   margin: 0;
   color: rgba(255, 255, 255, 0.96);
-  line-height: 1.45;
+  font-size: var(--formation-body);
+  line-height: 1.55;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-certification-evaluation-subtitle {
   margin: 0 0 20px;
   text-align: center;
   color: #2a2864;
-  font-weight: 700;
+  font-size: var(--formation-subtitle);
+  font-weight: var(--formation-subtitle-weight);
 }
 
 .program-certification-evaluation-cards {
   display: grid;
   gap: 14px;
+  width: min(100%, 560px);
+  margin-inline: auto;
 }
 
 .program-certification-evaluation-cards article {
@@ -7657,13 +7745,16 @@
   border-radius: 10px;
   background: #252164;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: var(--formation-h3);
+  font-weight: 700;
 }
 
 .program-certification-evaluation-cards p {
   margin: 0;
   color: #2d2b66;
-  line-height: 1.45;
+  font-size: var(--formation-body);
+  line-height: 1.55;
+  font-weight: var(--formation-body-weight);
 }
 
 .program-certification-validation > div {
@@ -7674,6 +7765,8 @@
   display: grid;
   justify-items: center;
   gap: 16px;
+  width: min(100%, 560px);
+  margin-inline: auto;
 }
 
 .program-certification-validation > div > span {
@@ -7685,7 +7778,7 @@
   background: #252164;
   color: #fff;
   font-size: 2.2rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .program-certification-validation ul {
@@ -7695,6 +7788,18 @@
   gap: 8px;
   color: #2b2964;
   font-weight: 700;
+}
+
+.program-certification-final-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(30px, 4vw, 58px);
+  align-items: start;
+}
+
+.program-certification-final-grid .program-certification-evaluation h3,
+.program-certification-final-grid .program-certification-validation h3 {
+  margin-bottom: 18px;
 }
 
 @media (max-width: 1100px) {
@@ -7746,6 +7851,10 @@
 
   .program-certification-prereq-tools {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .program-certification-final-grid {
+    grid-template-columns: 1fr;
   }
 
   .program-modality-top {

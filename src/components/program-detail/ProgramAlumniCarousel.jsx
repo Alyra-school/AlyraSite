@@ -1,73 +1,48 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { useCarouselAutoplay } from "../../hooks/home/useCarouselAutoplay";
 import { useDragScroll } from "../../hooks/home/useDragScroll";
+import { useInfiniteLoopCarousel } from "../../hooks/home/useInfiniteLoopCarousel";
+import { useCarouselFadeAndProgress } from "../../hooks/home/useCarouselFadeAndProgress";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
 export default function ProgramAlumniCarousel({ items }) {
   const trackRef = useRef(null);
-  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
   const trackItems = useMemo(() => (items.length > 1 ? [...items, ...items, ...items] : items), [items]);
 
-  const getLoopMetrics = useCallback((container = trackRef.current) => {
-    if (!container || items.length <= 1) return 0;
-    const cards = container.querySelectorAll(".program-alumni-card");
-    if (cards.length < items.length * 3) return null;
-    const style = window.getComputedStyle(container);
-    const paddingLeft = Number.parseFloat(style.paddingLeft || "0") || 0;
-    const getOffset = (index) => cards[index].offsetLeft - paddingLeft;
+  const { getLogicalOffset, normalizeLoop, setInitialPosition, scrollByStep } = useInfiniteLoopCarousel({
+    trackRef,
+    itemSelector: ".program-alumni-card",
+    itemCount: items.length,
+    enabled: items.length > 1,
+  });
 
-    const copyStart0 = getOffset(0);
-    const copyStart1 = getOffset(items.length);
-    const copyStart2 = getOffset(items.length * 2);
-    const step = Math.max(1, getOffset(items.length + 1) - copyStart1);
-    const segmentWidth = Math.max(1, copyStart2 - copyStart1);
-
-    return { copyStart0, copyStart1, copyStart2, step, segmentWidth };
-  }, [items.length]);
-
-  const normalizeLoop = useCallback((container = trackRef.current) => {
-    if (!container || items.length <= 1) return;
-    const metrics = getLoopMetrics(container);
-    if (!metrics) return;
-
-    const min = (metrics.copyStart0 + metrics.copyStart1) / 2;
-    const max = (metrics.copyStart1 + metrics.copyStart2) / 2;
-
-    if (container.scrollLeft < min) {
-      container.scrollLeft += metrics.segmentWidth;
-    } else if (container.scrollLeft >= max) {
-      container.scrollLeft -= metrics.segmentWidth;
-    }
-  }, [getLoopMetrics, items.length]);
-
-  const setInitialPosition = useCallback((container = trackRef.current) => {
-    if (!container || items.length <= 1) return;
-    const metrics = getLoopMetrics(container);
-    if (!metrics) return;
-    container.scrollLeft = metrics.copyStart1;
-  }, [getLoopMetrics, items.length]);
-
-  const getScrollStep = useCallback((container = trackRef.current) => {
-    const metrics = getLoopMetrics(container);
-    if (metrics) return metrics.step;
-    return Math.max(1, container.clientWidth * 0.85);
-  }, [getLoopMetrics]);
+  const { fadeState, update } = useCarouselFadeAndProgress({
+    trackRef,
+    mode: "loop",
+    getLogicalOffset,
+  });
 
   const handleTrackScroll = useCallback((container) => {
     normalizeLoop(container);
-  }, [normalizeLoop]);
+    update(container);
+  }, [normalizeLoop, update]);
 
   const scrollAlumniByStep = useCallback((direction) => {
     const container = trackRef.current;
     if (!container) return;
-    normalizeLoop();
-    container.scrollBy({ left: direction * getScrollStep(container), behavior: "smooth" });
+
+    // Keep the viewport in the middle copy before moving to avoid visible loop jumps.
+    normalizeLoop(container);
+    scrollByStep(direction);
+
+    // Re-normalize after smooth scroll settles.
     window.setTimeout(() => {
-      normalizeLoop();
-    }, 520);
-  }, [getScrollStep, normalizeLoop]);
+      normalizeLoop(container);
+      update(container);
+    }, 420);
+  }, [normalizeLoop, scrollByStep, update]);
 
   const dragScrollOptions = useMemo(
     () => ({
@@ -87,39 +62,17 @@ export default function ProgramAlumniCarousel({ items }) {
     const container = trackRef.current;
     if (!container) return undefined;
 
-    let timeoutId = 0;
-    let rafId = 0;
-
-    const initialize = () => {
-      setInitialPosition(container);
-    };
-
-    rafId = window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(initialize);
-    });
-    timeoutId = window.setTimeout(initialize, 650);
-
-    const handleImageLoad = () => {
-      initialize();
-    };
-    container.querySelectorAll("img").forEach((image) => {
-      if (!image.complete) image.addEventListener("load", handleImageLoad, { once: true });
-    });
-
-    const handleResize = () => {
-      initialize();
-    };
+    requestAnimationFrame(() => setInitialPosition(container));
+    const handleScroll = () => normalizeLoop(container);
+    const handleResize = () => normalizeLoop(container);
+    container.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
 
     return () => {
-      window.cancelAnimationFrame(rafId);
-      window.clearTimeout(timeoutId);
-      container.querySelectorAll("img").forEach((image) => {
-        image.removeEventListener("load", handleImageLoad);
-      });
+      container.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, [items.length, setInitialPosition]);
+  }, [items.length, normalizeLoop, setInitialPosition]);
 
   useCarouselAutoplay({
     enabled: items.length > 1 && !prefersReducedMotion,
@@ -128,7 +81,6 @@ export default function ProgramAlumniCarousel({ items }) {
     trackRef,
     pauseOnHover: true,
     pauseOnPointer: true,
-    isPaused: isAutoplayPaused,
   });
 
   if (items.length === 0) return null;
@@ -149,17 +101,11 @@ export default function ProgramAlumniCarousel({ items }) {
           <button type="button" aria-label="Alumni suivant" onClick={() => scrollAlumniByStep(1)}>
             →
           </button>
-          <span aria-hidden="true" />
-          <button
-            type="button"
-            aria-label={isAutoplayPaused ? "Relancer le défilement automatique" : "Mettre en pause le défilement automatique"}
-            onClick={() => setIsAutoplayPaused((value) => !value)}
-          >
-            {isAutoplayPaused ? "▶" : "⏸"}
-          </button>
         </div>
 
-        <div className={`program-alumni-track-shell ${items.length > 1 ? "has-left-fade has-right-fade" : ""}`}>
+        <div
+          className={`program-alumni-track-shell ${fadeState.left ? "has-left-fade" : ""} ${fadeState.right ? "has-right-fade" : ""}`.trim()}
+        >
           <div className="program-alumni-track" ref={trackRef}>
             {trackItems.map((alumni, index) => (
               <article
@@ -196,8 +142,8 @@ export default function ProgramAlumniCarousel({ items }) {
                       </a>
                     ) : null}
                   </h3>
-                  <p className="program-alumni-role">{alumni.title}</p>
-                  <p>{alumni.body}</p>
+                  <p className="program-alumni-role">{alumni.title || "Alumni Alyra"}</p>
+                  <p>{alumni.body || "Parcours de reconversion et montée en compétences dans l’écosystème Web3."}</p>
                 </div>
               </article>
             ))}
