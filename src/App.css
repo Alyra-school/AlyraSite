@@ -1052,10 +1052,18 @@
   margin-inline: 0;
 }
 
+.program-sales-nav-slot {
+  display: contents;
+}
+
 .program-sales-nav-top {
   display: flex;
   align-items: center;
   gap: 24px;
+}
+
+.program-sales-mobile-menu {
+  display: none;
 }
 
 .program-sales-nav-top h2 {
@@ -1772,8 +1780,31 @@
 }
 
 @media (max-width: 760px) {
+  .page {
+    width: 100%;
+    padding-inline: 12px;
+    box-sizing: border-box;
+  }
+
+  .nav {
+    width: calc(100% - 24px);
+  }
+
   .hero-program {
     border-radius: 24px;
+  }
+
+  .hero-program .program-page,
+  .program-hero,
+  .program-hero-main,
+  .program-panel {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .program-hero {
+    grid-template-columns: 1fr !important;
+    gap: 18px;
   }
 
   .program-section .section-head h2 {
@@ -1781,25 +1812,114 @@
   }
 
   .program-sales-nav {
-    padding: 12px 12px 10px;
+    padding: 8px 10px;
     border-radius: 12px;
     top: calc(var(--nav-height, 80px) + 14px);
   }
 
+  .program-sales-nav {
+    position: sticky;
+    width: 100%;
+    margin-inline: 0;
+    align-self: stretch;
+    z-index: 45;
+    overflow: visible;
+  }
+
+  .program-sales-nav-inner {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .program-sales-nav-left {
+    width: 100%;
+    display: block;
+    gap: 0;
+  }
+
   .program-sales-nav-top h2 {
-    font-size: 1.1rem;
+    font-size: 1.06rem;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .program-sales-nav-top p {
-    font-size: 0.9rem;
+    display: none;
+  }
+
+  .program-sales-nav-top {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .program-sales-mobile-menu {
+    display: block;
+    position: relative;
+    margin: 0;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+  }
+
+  .program-sales-mobile-menu summary {
+    list-style: none;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid #d9dbec;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1f1b62;
+    font-size: 1.05rem;
+    user-select: none;
+    margin: 0;
+  }
+
+  .program-sales-mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .program-sales-mobile-menu[open] summary {
+    border-color: #4d48ff;
+    color: #4d48ff;
+  }
+
+  .program-sales-mobile-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 60;
+    margin-top: 0;
+    width: min(84vw, 320px);
+    margin-left: auto;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #d9dbec;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 14px 26px rgba(24, 22, 74, 0.14);
   }
 
   .program-sales-links {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    width: 100%;
-    padding-bottom: 4px;
-    gap: 14px;
+    display: none;
+  }
+
+  .program-sales-links-mobile {
+    display: grid;
+    gap: 8px;
   }
 
   .program-sales-link {
@@ -1808,13 +1928,20 @@
   }
 
   .program-sales-cta {
-    width: 100%;
-    flex-direction: column;
+    display: none;
   }
 
-  .program-sales-cta .primary,
-  .program-sales-cta .program-cta-secondary {
+  .program-sales-cta-mobile {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .program-sales-cta-mobile .primary,
+  .program-sales-cta-mobile .program-cta-secondary {
     width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 
   .hero-program .anchor-section {
@@ -5799,7 +5926,10 @@
   }
 
   .nav {
-    width: min(100%, calc(100% - 28px));
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: none;
     padding: 8px 10px;
   }
 
@@ -6302,6 +6432,20 @@
 }
 
 @media (max-width: 760px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .nav {
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+    box-sizing: border-box;
+  }
+
   .program-modality-brand {
     font-size: 1.7rem;
   }
@@ -6325,4 +6469,71 @@
   .program-modality-price strong {
     font-size: 1.9rem;
   }
+}
+
+/* Mobile hard-fixes for formation pages (keep at end for cascade priority) */
+@media (max-width: 760px) {
+  .page {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding-inline: 12px !important;
+  }
+
+  .hero.hero-program {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding-inline: 14px !important;
+    overflow: visible !important;
+  }
+
+  .hero-program .program-page {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .program-hero {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .program-hero-main,
+  .program-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .program-panel {
+    margin-top: 16px;
+  }
+
+  .program-sales-nav {
+    position: sticky !important;
+    top: calc(var(--nav-height, 80px) + 18px) !important;
+    z-index: 38 !important;
+    padding: 9px 10px !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(205, 207, 230, 0.95) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    box-shadow: 0 10px 20px rgba(34, 31, 95, 0.08) !important;
+  }
+
+  .program-sales-nav-slot {
+    display: block;
+    position: relative;
+  }
+
+  .program-sales-nav.is-stuck {
+    position: fixed !important;
+    top: calc(var(--nav-height, 80px) + 18px) !important;
+    right: auto !important;
+    z-index: 46 !important;
+  }
+
 }
