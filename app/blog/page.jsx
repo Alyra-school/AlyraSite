@@ -1,14 +1,17 @@
-import StaticPage from "../../src/components/StaticPage";
-import { staticPagesData } from "../../src/data/staticPagesData";
+import BlogIndexPage from "../../src/components/blog/BlogIndexPage";
+import { getBlogArticles, getBlogTags } from "../../src/lib/blogData";
 import { pageMetadata } from "../../src/lib/seo";
 
+export const revalidate = 300;
+
 export const metadata = pageMetadata({
-  title: "Blog",
+  title: "Blog d'Alyra",
   description:
-    "Articles et analyses sur les tendances blockchain, intelligence artificielle, produit et engineering.",
+    "Les meilleures ressources factuelles concernant le marche de l'emploi blockchain, IA et Web3.",
   path: "/blog",
 });
 
-export default function Page() {
-  return <StaticPage page={staticPagesData.blog} />;
+export default async function Page() {
+  const [articles, tags] = await Promise.all([getBlogArticles(), getBlogTags()]);
+  return <BlogIndexPage articles={articles} tags={tags} />;
 }

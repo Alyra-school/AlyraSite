@@ -1,4 +1,5 @@
 export default function ProgramCertificationSection({ programTitle, certification }) {
+  const meta = certification?.meta ?? {};
   const iconMap = {
     lock: "🖱️",
     degree: "△",
@@ -14,14 +15,14 @@ export default function ProgramCertificationSection({ programTitle, certificatio
       <div className="program-certification-hero">
         <div>
           <h2>
-            {certification.meta.headlinePrefix}{" "}
-            <span>{certification.meta.headlineAccent}</span>
+            {meta.headlinePrefix ?? "La certification enregistrée par"}{" "}
+            <span>{meta.headlineAccent ?? "France Compétence"}</span>
           </h2>
         </div>
-        {certification.meta.badgeImageUrl ? (
+        {meta.badgeImageUrl ? (
           <img
-            src={certification.meta.badgeImageUrl}
-            alt={certification.meta.badgeAlt ?? "Badge certification"}
+            src={meta.badgeImageUrl}
+            alt={meta.badgeAlt ?? "Badge certification"}
             loading="lazy"
             decoding="async"
             width="210"
@@ -39,12 +40,12 @@ export default function ProgramCertificationSection({ programTitle, certificatio
           <span className="dot dot-3" />
         </figure>
         <div className="program-certification-intro-copy">
-          {certification.meta.introLabel ? <p className="program-certification-intro-label">{certification.meta.introLabel}</p> : null}
-          <h3>{certification.meta.introTitle || `Certification ${programTitle}`}</h3>
-          {certification.meta.introDescription ? <p>{certification.meta.introDescription}</p> : null}
-          {certification.meta.introReference ? <p>{certification.meta.introReference}</p> : null}
+          {meta.introLabel ? <p className="program-certification-intro-label">{meta.introLabel}</p> : null}
+          <h3>{meta.introTitle || `Certification ${programTitle}`}</h3>
+          {meta.introDescription ? <p>{meta.introDescription}</p> : null}
+          {meta.introReference ? <p>{meta.introReference}</p> : null}
           <p className="program-certification-trustpilot">
-            <strong>Excellent</strong> {certification.meta.trustpilotScore ?? "4.9 sur 5"}{" "}
+            <strong>Excellent</strong> {meta.trustpilotScore ?? "4.9 sur 5"}{" "}
             <span>★ Trustpilot</span>
           </p>
         </div>

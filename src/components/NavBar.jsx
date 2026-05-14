@@ -7,9 +7,7 @@ import { parseDurationWeeks } from "../utils/programUtils";
 
 const staticPages = [
   { label: "Financement", href: "/financement" },
-  { label: "Vos besoins", href: "/vos-besoins" },
   { label: "Blog", href: "/blog" },
-  { label: "Qui sommes nous", href: "/qui-sommes-nous" },
   { label: "Nos Anciens", href: "/nos-anciens" },
 ];
 const MOBILE_BREAKPOINT = 1200;
@@ -21,6 +19,8 @@ export default function NavBar({ programs = [] }) {
   const mobileNavBaseHeightRef = useRef(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
+  const [isNeedsOpen, setIsNeedsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   const featuredLongProgram = useMemo(() => {
     return [...programs]
@@ -29,10 +29,14 @@ export default function NavBar({ programs = [] }) {
   }, [programs]);
 
   const isProgramsArea = pathname === "/formations" || pathname.startsWith("/formations/");
+  const isNeedsArea = pathname === "/vos-besoins";
+  const isAboutArea = pathname === "/qui-sommes-nous";
 
   const closeMenus = () => {
     setIsMobileMenuOpen(false);
     setIsProgramsOpen(false);
+    setIsNeedsOpen(false);
+    setIsAboutOpen(false);
   };
 
   useEffect(() => {
@@ -40,6 +44,8 @@ export default function NavBar({ programs = [] }) {
       if (window.innerWidth > MOBILE_BREAKPOINT) {
         setIsMobileMenuOpen(false);
         setIsProgramsOpen(false);
+        setIsNeedsOpen(false);
+        setIsAboutOpen(false);
       }
     };
 
@@ -159,6 +165,20 @@ export default function NavBar({ programs = [] }) {
               >
                 <span>Nos Formations IA</span>
               </Link>
+              <Link
+                href="/formations?type=gratuite"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
+              >
+                <span>Nos formations gratuites</span>
+              </Link>
+              <Link
+                href="/formations?type=entreprise"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
+              >
+                <span>Nos formations entreprises</span>
+              </Link>
               {featuredLongProgram ? (
                 <Link
                   href={`/formations/${featuredLongProgram.slug}`}
@@ -174,6 +194,102 @@ export default function NavBar({ programs = [] }) {
                   <small>Notre formation pour vous</small>
                 </span>
               )}
+            </div>
+          </div>
+
+          <div className={`nav-programs ${isNeedsOpen ? "open" : ""}`}>
+            <button
+              type="button"
+              className={`nav-link nav-trigger ${isNeedsArea ? "active" : ""}`}
+              aria-haspopup="true"
+              aria-expanded={isNeedsOpen}
+              onClick={() => {
+                if (window.innerWidth <= MOBILE_BREAKPOINT) {
+                  setIsNeedsOpen((current) => !current);
+                }
+              }}
+            >
+              Vos besoins
+            </button>
+
+            <div className="nav-dropdown">
+              <a
+                href="https://alyrablockchain.typeform.com/besoin?typeform-source=www.alyra.fr"
+                className="nav-dropdown-item"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenus}
+              >
+                <span>Vos besoins en formation</span>
+              </a>
+              <a
+                href="https://alyrablockchain.typeform.com/to/pqwoyOoe?typeform-source=www.alyra.fr"
+                className="nav-dropdown-item"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenus}
+              >
+                <span>Test de connaissances blockchain</span>
+              </a>
+              <a
+                href="https://alyrablockchain.typeform.com/to/ZNCiOSlw?typeform-source=www.alyra.fr"
+                className="nav-dropdown-item"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenus}
+              >
+                <span>Test de connaissances IA</span>
+              </a>
+            </div>
+          </div>
+
+          <div className={`nav-programs ${isAboutOpen ? "open" : ""}`}>
+            <button
+              type="button"
+              className={`nav-link nav-trigger ${isAboutArea ? "active" : ""}`}
+              aria-haspopup="true"
+              aria-expanded={isAboutOpen}
+              onClick={() => {
+                if (window.innerWidth <= MOBILE_BREAKPOINT) {
+                  setIsAboutOpen((current) => !current);
+                  return;
+                }
+                closeMenus();
+                router.push("/qui-sommes-nous");
+              }}
+            >
+              Qui sommes-nous
+            </button>
+
+            <div className="nav-dropdown">
+              <Link
+                href="/qui-sommes-nous#notre-ecole-blockchain-ia"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
+              >
+                <span>Notre ecole blockchain et IA</span>
+              </Link>
+              <Link
+                href="/qui-sommes-nous#les-chiffres-de-lecole"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
+              >
+                <span>Les chiffres de l'ecole</span>
+              </Link>
+              <Link
+                href="/qui-sommes-nous#notre-equipe"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
+              >
+                <span>Notre equipe</span>
+              </Link>
+              <Link
+                href="/qui-sommes-nous#nos-experts"
+                className="nav-dropdown-item"
+                onClick={closeMenus}
+              >
+                <span>Nos experts</span>
+              </Link>
             </div>
           </div>
 

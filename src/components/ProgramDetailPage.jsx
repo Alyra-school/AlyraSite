@@ -1,6 +1,5 @@
 "use client";
 
-import { recruiterCompanies } from "../data/homeData";
 import ProgramAlumniCarousel from "./program-detail/ProgramAlumniCarousel";
 import ProgramExpertsCarousel from "./program-detail/ProgramExpertsCarousel";
 import ProgramTestimonialsCarousel from "./program-detail/ProgramTestimonialsCarousel";
@@ -18,10 +17,6 @@ import ProgramFaqSection from "./program-detail/ProgramFaqSection";
 import ProgramRelatedSection from "./program-detail/ProgramRelatedSection";
 import ProgramHeroCompaniesSection from "./program-detail/ProgramHeroCompaniesSection";
 import {
-  DEFAULT_ALUMNI_SPOTLIGHTS,
-  DEFAULT_AUDIENCE_JOBS,
-  DEFAULT_CERTIFICATION,
-  DEFAULT_KPIS,
   GOOGLE_SCORE_TEXT,
   HERO_TITLE_OVERRIDES,
   PROGRAM_FINANCING_LOGOS,
@@ -34,6 +29,7 @@ export default function ProgramDetailPage({
   detailContent,
   isContentLoading,
 }) {
+  const SUPABASE_ONLY_MODE = true;
   const legacyProfessors = detailContent?.professors ?? [];
   const legacyLearningPath = detailContent?.learningPath ?? [];
 
@@ -55,15 +51,16 @@ export default function ProgramDetailPage({
   const webinarCta = ctas.find((item) => item.key === "webinar") ?? null;
   const heroCompanies = proofLogos.length > 0
     ? proofLogos.map((item) => ({ name: item.label, logo: item.imageUrl }))
-    : recruiterCompanies;
+    : [];
   const heroTitle = HERO_TITLE_OVERRIDES[program.slug] ?? program.title;
 
-  const learningSectionItems = learningItems.length > 0 ? learningItems.map((item) => item.text) : legacyLearningPath;
-  const expertsSectionItems = experts.length > 0 ? experts : legacyProfessors;
+  const learningSectionItems =
+    learningItems.length > 0 ? learningItems.map((item) => item.text) : (SUPABASE_ONLY_MODE ? [] : legacyLearningPath);
+  const expertsSectionItems = experts.length > 0 ? experts : (SUPABASE_ONLY_MODE ? [] : legacyProfessors);
   const relatedPrograms = relatedProgramsFromDb.length > 0 ? relatedProgramsFromDb : similarPrograms;
-  const kpiItems = kpis.length > 0 ? kpis : DEFAULT_KPIS;
-  const alumniSpotlightItems = alumniSpotlights.length > 0 ? alumniSpotlights : DEFAULT_ALUMNI_SPOTLIGHTS;
-  const audienceJobItems = audienceJobs.length > 0 ? audienceJobs : DEFAULT_AUDIENCE_JOBS;
+  const kpiItems = kpis.length > 0 ? kpis : [];
+  const alumniSpotlightItems = alumniSpotlights.length > 0 ? alumniSpotlights : [];
+  const audienceJobItems = audienceJobs.length > 0 ? audienceJobs : [];
   const referentItems = expertsSectionItems
     .filter((expert) => expert && typeof expert === "object")
     .slice(0, 2)
@@ -72,27 +69,21 @@ export default function ProgramDetailPage({
       highlights:
         expert.highlights?.length > 0
           ? expert.highlights
-          : [
+          : (SUPABASE_ONLY_MODE ? [] : [
               { position: 1, text: index === 0 ? "Formateur / auteur chez Alyra" : "Blockchain Fullstack Developer" },
               { position: 2, text: index === 0 ? "Expert terrain et accompagnement projet" : "Créateur de contenus Web3" },
               { position: 3, text: index === 0 ? "Spécialiste blockchain et architecture" : "Mentor technique blockchain" },
-            ],
+            ]),
     }));
   const certification = {
-    meta: certificationContent.meta ?? DEFAULT_CERTIFICATION.meta,
-    prereqCards: certificationContent.prereqCards?.length > 0 ? certificationContent.prereqCards : DEFAULT_CERTIFICATION.prereqCards,
-    prereqTools: certificationContent.prereqTools?.length > 0 ? certificationContent.prereqTools : DEFAULT_CERTIFICATION.prereqTools,
-    prereqBullets:
-      certificationContent.prereqBullets?.length > 0 ? certificationContent.prereqBullets : DEFAULT_CERTIFICATION.prereqBullets,
-    competencies:
-      certificationContent.competencies?.length > 0 ? certificationContent.competencies : DEFAULT_CERTIFICATION.competencies,
-    objectives: certificationContent.objectives?.length > 0 ? certificationContent.objectives : DEFAULT_CERTIFICATION.objectives,
-    evaluations:
-      certificationContent.evaluations?.length > 0 ? certificationContent.evaluations : DEFAULT_CERTIFICATION.evaluations,
-    validationRules:
-      certificationContent.validationRules?.length > 0
-        ? certificationContent.validationRules
-        : DEFAULT_CERTIFICATION.validationRules,
+    meta: certificationContent.meta ?? null,
+    prereqCards: certificationContent.prereqCards?.length > 0 ? certificationContent.prereqCards : [],
+    prereqTools: certificationContent.prereqTools?.length > 0 ? certificationContent.prereqTools : [],
+    prereqBullets: certificationContent.prereqBullets?.length > 0 ? certificationContent.prereqBullets : [],
+    competencies: certificationContent.competencies?.length > 0 ? certificationContent.competencies : [],
+    objectives: certificationContent.objectives?.length > 0 ? certificationContent.objectives : [],
+    evaluations: certificationContent.evaluations?.length > 0 ? certificationContent.evaluations : [],
+    validationRules: certificationContent.validationRules?.length > 0 ? certificationContent.validationRules : [],
   };
 
   return (
