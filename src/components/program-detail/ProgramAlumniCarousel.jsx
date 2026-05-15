@@ -93,7 +93,7 @@ export default function ProgramAlumniCarousel({ items }) {
           <p>L’impact de l’expérience Alyra</p>
         </div>
 
-        <div className="program-alumni-controls" aria-label="Navigation du carrousel alumni">
+        <nav className="program-alumni-controls" aria-label="Navigation du carrousel alumni">
           <button type="button" aria-label="Alumni précédent" onClick={() => scrollAlumniByStep(-1)}>
             ←
           </button>
@@ -101,7 +101,7 @@ export default function ProgramAlumniCarousel({ items }) {
           <button type="button" aria-label="Alumni suivant" onClick={() => scrollAlumniByStep(1)}>
             →
           </button>
-        </div>
+        </nav>
 
         <div
           className={`program-alumni-track-shell ${fadeState.left ? "has-left-fade" : ""} ${fadeState.right ? "has-right-fade" : ""}`.trim()}

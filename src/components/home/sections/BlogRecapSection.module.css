@@ -1,1 +1,154 @@
-.root { display: block; }
+.root {
+  display: block;
+}
+
+.head {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.kicker {
+  margin: 0 0 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #25225f;
+}
+
+.head h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.45rem);
+  font-weight: 800;
+  color: #25225f;
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 1rem auto 0;
+  max-width: 70ch;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: #373b60;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid #d8d8f2;
+  box-shadow: 0 10px 24px rgba(37, 34, 95, 0.08);
+}
+
+.cardMediaLink {
+  display: block;
+  margin-bottom: 0.9rem;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  border: 1px solid #d3d4ed;
+  background: #fff;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  color: #3a3f69;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #4e48ff, #27218f);
+}
+
+.meta small {
+  font-size: 0.97rem;
+  font-weight: 600;
+}
+
+.title {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.35rem, 1.8vw, 1.95rem);
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.title a {
+  color: #23205d;
+  text-decoration: none;
+}
+
+.title a:hover {
+  color: #4441ea;
+}
+
+.text {
+  margin: 0 0 1rem;
+  color: #3d426b;
+  font-size: 1.06rem;
+  line-height: 1.55;
+}
+
+.readLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #25225f;
+}
+
+.readLink:hover {
+  color: #4441ea;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .head {
+    margin-bottom: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .card {
+    padding: 0.85rem;
+  }
+}

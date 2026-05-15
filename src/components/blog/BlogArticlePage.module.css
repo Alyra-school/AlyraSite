@@ -1,0 +1,167 @@
+.page {
+  width: min(1360px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  gap: 1.45rem;
+  padding-top: 1.8rem;
+  text-align: center;
+}
+
+.head {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.head h1 {
+  margin: 0;
+}
+
+.dateAuthor {
+  display: grid;
+  gap: 0.3rem;
+  justify-items: center;
+}
+
+.meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tags span,
+.reading {
+  border: 1px solid rgba(34, 33, 89, 0.2);
+  border-radius: 999px;
+  padding: 0.36rem 0.75rem;
+  background: rgba(212, 203, 255, 0.42);
+  font-weight: 700;
+}
+
+.cover {
+  width: min(860px, 100%);
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 1px solid rgba(68, 76, 255, 0.4);
+  display: block;
+  max-height: 440px;
+  object-fit: cover;
+}
+
+.contentWrap {
+  width: min(1360px, calc(100% - 48px));
+  margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.aside {
+  display: grid;
+  gap: 1rem;
+  position: sticky;
+  top: 132px;
+}
+
+.card {
+  border: 1px solid rgba(34, 33, 89, 0.12);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.card h2 {
+  margin: 0 0 0.7rem;
+  font-size: 1.55rem;
+}
+
+.card p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.form {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.form input {
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(34, 33, 89, 0.18);
+  background: #fff;
+  padding: 0 0.85rem;
+  font: inherit;
+}
+
+.form button {
+  min-height: 46px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(120deg, #4a3bff, #2c257a);
+  cursor: pointer;
+}
+
+.content {
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.content h2,
+.content h3,
+.content h4 {
+  margin: 0 0 0.9rem;
+}
+
+.content p,
+.content ul,
+.content ol,
+.content figure {
+  margin: 0 0 1.25rem;
+}
+
+.content img {
+  width: min(100%, 760px);
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .contentWrap {
+    grid-template-columns: 1fr;
+  }
+
+  .aside {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .page,
+  .contentWrap {
+    width: calc(100% - 24px);
+  }
+
+  .aside {
+    grid-template-columns: 1fr;
+  }
+}

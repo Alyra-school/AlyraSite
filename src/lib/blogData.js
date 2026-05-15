@@ -1,9 +1,20 @@
-import { latestNews } from "../data/homeData";
+import { getBlogArticlesFallback } from "../data/fallback/blogArticlesFallback";
 import { getSupabaseServerClient } from "./supabaseServer";
+import { normalizeBlogArticle } from "./content/blogMapper";
+import { SUPABASE_ONLY_MODE } from "./runtimeConfig";
+const loggedBlogDataErrors = new Set();
 
 const BLOG_ARTICLES_SELECT =
   "id, slug, title, summary, excerpt, content_html, featured_image_url, featured_image_alt, author_name, published_at, reading_time_minutes, tags, is_published, created_at, updated_at";
-const SUPABASE_ONLY_MODE = true;
+
+function logBlogDataErrorOnce(scope, error) {
+  const message = String(error?.message || error || "Unknown error");
+  if (message.toLowerCase().includes("fetch failed")) return;
+  const key = `${scope}:${message}`;
+  if (loggedBlogDataErrors.has(key)) return;
+  loggedBlogDataErrors.add(key);
+  console.warn(`[blogData.${scope}] ${message}`);
+}
 
 function normalizeSlug(value) {
   return String(value || "")
@@ -17,54 +28,21 @@ function normalizeSlug(value) {
 }
 
 function mapArticle(row) {
-  const publishedAt = row.published_at ? new Date(row.published_at) : null;
-  return {
-    id: row.id,
-    slug: row.slug,
-    title: row.title,
-    summary: row.summary ?? null,
-    excerpt: row.excerpt,
+  return normalizeBlogArticle({
+    ...row,
     contentHtml: row.content_html,
     imageUrl: row.featured_image_url,
     imageAlt: row.featured_image_alt || row.title,
     author: row.author_name,
-    publishedAt,
-    publishedDateLabel: publishedAt
-      ? new Intl.DateTimeFormat("fr-FR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        }).format(publishedAt)
-      : "",
     readingTimeMinutes: row.reading_time_minutes,
-    readingTimeLabel: row.reading_time_minutes ? `${row.reading_time_minutes} min de lecture` : "",
-    tags: Array.isArray(row.tags) ? row.tags : [],
     isPublished: Boolean(row.is_published),
     createdAt: row.created_at ? new Date(row.created_at) : null,
     updatedAt: row.updated_at ? new Date(row.updated_at) : null,
-  };
+  });
 }
 
 function fallbackArticles() {
-  return latestNews.map((item, index) => ({
-    id: `fallback-${item.slug}`,
-    slug: item.slug,
-    title: item.title,
-    summary: item.text,
-    excerpt: item.text,
-    contentHtml: `<p>${item.text}</p><p>Contenu complet en cours d'integration.</p>`,
-    imageUrl: item.image,
-    imageAlt: item.imageAlt || item.title,
-    author: "Equipe Alyra",
-    publishedAt: null,
-    publishedDateLabel: "",
-    readingTimeMinutes: Number.parseInt(item.readTime, 10) || 5,
-    readingTimeLabel: item.readTime,
-    tags: [item.tag || "Ressource", index % 2 ? "Blockchain & Web3" : "Intelligence Artificielle"],
-    isPublished: true,
-    createdAt: null,
-    updatedAt: null,
-  }));
+  return getBlogArticlesFallback();
 }
 
 export async function getBlogArticles() {
@@ -84,7 +62,7 @@ export async function getBlogArticles() {
     if (code === "PGRST205" || message.includes("Could not find the table 'public.blog_articles'")) {
       return SUPABASE_ONLY_MODE ? [] : fallbackArticles();
     }
-    console.error("[blogData.getBlogArticles] Supabase error:", error.message);
+    logBlogDataErrorOnce("getBlogArticles", error);
     return SUPABASE_ONLY_MODE ? [] : fallbackArticles();
   }
 
@@ -112,7 +90,7 @@ export async function getBlogArticleBySlug(slug) {
     if (code === "PGRST205" || message.includes("Could not find the table 'public.blog_articles'")) {
       return SUPABASE_ONLY_MODE ? null : fallbackArticles().find((item) => item.slug === slug) ?? null;
     }
-    console.error("[blogData.getBlogArticleBySlug] Supabase error:", error.message);
+    logBlogDataErrorOnce("getBlogArticleBySlug", error);
     return null;
   }
 
@@ -123,7 +101,7 @@ export async function getBlogArticleBySlug(slug) {
       .eq("is_published", true);
 
     if (candidatesError) {
-      console.error("[blogData.getBlogArticleBySlug] candidate match error:", candidatesError.message);
+      logBlogDataErrorOnce("getBlogArticleBySlug.candidateMatch", candidatesError);
     } else if (Array.isArray(candidates)) {
       const matched = candidates.find((item) => normalizeSlug(item.slug) === normalizedRequestedSlug);
       if (matched) return mapArticle(matched);

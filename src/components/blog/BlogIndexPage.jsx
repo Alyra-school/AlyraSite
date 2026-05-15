@@ -2,7 +2,9 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Breadcrumbs from "../Breadcrumbs";
+import styles from "./BlogIndexPage.module.css";
 
 export default function BlogIndexPage({ articles, tags }) {
   const [selectedTag, setSelectedTag] = useState("Tout");
@@ -16,7 +18,7 @@ export default function BlogIndexPage({ articles, tags }) {
     <main className="main-content" id="main-content" tabIndex="-1">
       <header className="hero blog-hero">
         <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
-        <div className="blog-hero-head">
+        <div className={styles.heroHead}>
           <p>Depuis 2019</p>
           <h1>Blog d'Alyra</h1>
           <p>
@@ -24,14 +26,13 @@ export default function BlogIndexPage({ articles, tags }) {
             et la recherche d'emploi dans ce secteur
           </p>
         </div>
-        <div className="blog-filters" role="tablist" aria-label="Filtrer les articles par categorie">
+        <div className={styles.filters} role="group" aria-label="Filtrer les articles par categorie">
           {tags.map((tag) => (
             <button
               key={tag}
               type="button"
-              role="tab"
-              aria-selected={selectedTag === tag}
-              className={selectedTag === tag ? "is-active" : ""}
+              aria-pressed={selectedTag === tag}
+              className={selectedTag === tag ? styles.active : ""}
               onClick={() => setSelectedTag(tag)}
             >
               {tag}
@@ -40,21 +41,31 @@ export default function BlogIndexPage({ articles, tags }) {
         </div>
       </header>
 
-      <section className="section blog-listing-section">
-        <div className="blog-listing-grid">
+      <section className={`section ${styles.listingSection}`}>
+        <div className={styles.grid}>
           {visibleArticles.map((article) => (
-            <article key={article.slug} className="blog-listing-card">
-              <Link href={`/blog/${article.slug}`} className="blog-listing-card-link" aria-label={`Lire l'article ${article.title}`}>
-                <img src={article.imageUrl} alt={article.imageAlt} loading="lazy" decoding="async" />
-                <div className="blog-listing-card-body">
-                  <div className="blog-listing-meta">
-                    <span>{article.tags[0] || "Ressource"}</span>
-                    <small>{article.readingTimeLabel || "5 min de lecture"}</small>
+            <article key={article.slug} className={styles.card}>
+              <Link href={`/blog/${article.slug}`} className={styles.cardLink} aria-label={`Lire l'article ${article.title}`}>
+                {article.imageUrl ? (
+                  <Image
+                    className={styles.cover}
+                    src={article.imageUrl}
+                    alt={article.imageAlt}
+                    width={560}
+                    height={560}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    unoptimized
+                  />
+                ) : null}
+                <div className={styles.body}>
+                  <div className={styles.meta}>
+                    <span className={styles.tag}>{article.tags[0] || "Ressource"}</span>
+                    <small className={styles.reading}>{article.readingTimeLabel || "5 min de lecture"}</small>
                   </div>
                   <h2>{article.title}</h2>
-                  <p className="blog-listing-date">{article.publishedDateLabel}</p>
-                  <p>{article.excerpt}</p>
-                  <span className="blog-listing-link">
+                  <p className={styles.date}>{article.publishedDateLabel}</p>
+                  <p className={styles.excerpt}>{article.excerpt}</p>
+                  <span className={styles.link}>
                     Lire l'article <span aria-hidden="true">›</span>
                   </span>
                 </div>

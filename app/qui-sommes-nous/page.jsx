@@ -1,5 +1,5 @@
-import StaticPage from "../../src/components/StaticPage";
-import { staticPagesData } from "../../src/data/staticPagesData";
+import AboutPage from "../../src/components/static-pages/AboutPage";
+import { getStaticPageContent } from "../../src/lib/content/staticPageMapper";
 import { pageMetadata } from "../../src/lib/seo";
 
 export const metadata = pageMetadata({
@@ -10,5 +10,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <StaticPage page={staticPagesData["qui-sommes-nous"]} />;
+  return <AboutPage page={getStaticPageContent("qui-sommes-nous")} />;
 }

@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProgramBrochureSection({ programId, programImage, brochurePoints }) {
   if (!brochurePoints.length) return null;
 
   return (
-    <section className="section program-section anchor-section program-brochure-showcase" id="tarifs">
+    <section className="section program-section anchor-section program-brochure-showcase" id="programme-brochure">
       <div className="program-brochure-shell">
         <div className="program-brochure-head">
           <h2>Télécharger le programme de formation</h2>
@@ -21,12 +22,14 @@ export default function ProgramBrochureSection({ programId, programImage, brochu
           </ul>
 
           <div className="program-brochure-form-wrap">
-            <img
+            <Image
               src={programImage}
               alt=""
               className="program-brochure-visual"
-              loading="lazy"
-              decoding="async"
+              width={520}
+              height={640}
+              sizes="(max-width: 900px) 84vw, 520px"
+              unoptimized
             />
             <form className="program-brochure-form" aria-label="Recevoir la brochure">
               <div className="program-brochure-form-grid">

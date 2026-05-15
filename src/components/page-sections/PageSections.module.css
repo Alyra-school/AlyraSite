@@ -1,0 +1,46 @@
+.heroShell {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.pageIntro {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.center {
+  text-align: center;
+  justify-items: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-strong, #252465);
+}
+
+.pageIntro h1 {
+  margin: 0;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 58ch;
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.richText {
+  display: grid;
+  gap: 1rem;
+}

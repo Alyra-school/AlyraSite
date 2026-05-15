@@ -7,9 +7,12 @@ export function useCarouselAutoplay({
   trackRef,
   pauseOnHover = true,
   pauseOnPointer = true,
+  pauseOnFocus = true,
   isPaused = false,
+  reducedMotionAware = true,
 }) {
   const pausedRef = useRef(false);
+  const reducedMotionRef = useRef(false);
 
   useEffect(() => {
     const container = trackRef?.current;
@@ -31,6 +34,17 @@ export function useCarouselAutoplay({
       pausedRef.current = false;
     };
 
+    const handleFocusIn = () => {
+      if (pauseOnFocus) pausedRef.current = true;
+    };
+
+    const handleFocusOut = () => {
+      if (!pauseOnFocus) return;
+      const active = document.activeElement;
+      if (active && container.contains(active)) return;
+      pausedRef.current = false;
+    };
+
     if (pauseOnPointer) {
       container.addEventListener("pointerdown", handlePointerDown);
       window.addEventListener("pointerup", handlePointerUp);
@@ -39,6 +53,11 @@ export function useCarouselAutoplay({
     if (pauseOnHover) {
       container.addEventListener("mouseenter", handleMouseEnter);
       container.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    if (pauseOnFocus) {
+      container.addEventListener("focusin", handleFocusIn);
+      container.addEventListener("focusout", handleFocusOut);
     }
 
     return () => {
@@ -50,14 +69,33 @@ export function useCarouselAutoplay({
         container.removeEventListener("mouseenter", handleMouseEnter);
         container.removeEventListener("mouseleave", handleMouseLeave);
       }
+      if (pauseOnFocus) {
+        container.removeEventListener("focusin", handleFocusIn);
+        container.removeEventListener("focusout", handleFocusOut);
+      }
     };
-  }, [enabled, pauseOnHover, pauseOnPointer, trackRef]);
+  }, [enabled, pauseOnHover, pauseOnPointer, pauseOnFocus, trackRef]);
+
+  useEffect(() => {
+    if (!reducedMotionAware || typeof window === "undefined" || !window.matchMedia) {
+      reducedMotionRef.current = false;
+      return undefined;
+    }
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const applyPreference = () => {
+      reducedMotionRef.current = media.matches;
+    };
+    applyPreference();
+    media.addEventListener("change", applyPreference);
+    return () => media.removeEventListener("change", applyPreference);
+  }, [reducedMotionAware]);
 
   useEffect(() => {
     if (!enabled) return undefined;
     const id = window.setInterval(() => {
       if (pausedRef.current) return;
       if (isPaused) return;
+      if (reducedMotionRef.current) return;
       if (document.visibilityState === "hidden") return;
       onTick();
     }, delay);

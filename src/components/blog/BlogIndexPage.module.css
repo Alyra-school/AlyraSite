@@ -1,0 +1,147 @@
+.heroHead {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  gap: 1rem;
+}
+
+.heroHead p {
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+.filters button {
+  border: 1px solid rgba(34, 33, 89, 0.16);
+  background: #f6f6ff;
+  color: #252465;
+  border-radius: 999px;
+  padding: 0.56rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.filters .active {
+  background: #252465;
+  color: #fff;
+  border-color: #252465;
+}
+
+.listingSection {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card {
+  border: 1px solid rgba(34, 33, 89, 0.12);
+  border-radius: 18px;
+  background: #ffffffbf;
+  overflow: hidden;
+}
+
+.cardLink {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.95fr) 1.35fr;
+  text-decoration: none;
+  color: inherit;
+  min-height: 100%;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+}
+
+.body {
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: linear-gradient(120deg, #493cff, #2f2a84);
+  color: white;
+  border-radius: 9px;
+  padding: 0.3rem 0.62rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.reading {
+  font-weight: 700;
+  color: #252465;
+}
+
+.body h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 1.35vw, 2.1rem);
+  line-height: 1.15;
+}
+
+.date {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.excerpt {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.45;
+}
+
+.link {
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .listingSection {
+    width: calc(100% - 24px);
+  }
+
+  .cardLink {
+    grid-template-columns: 1fr;
+  }
+
+  .cover {
+    min-height: 220px;
+  }
+
+  .body h2 {
+    font-size: clamp(1.55rem, 6vw, 1.95rem);
+  }
+
+  .excerpt {
+    font-size: 1.04rem;
+  }
+}

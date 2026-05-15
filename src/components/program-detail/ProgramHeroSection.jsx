@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Breadcrumbs from "../Breadcrumbs";
 
 function formatPrice(price) {
@@ -99,14 +100,15 @@ export default function ProgramHeroSection({
         <div className="program-hero-visual">
           <span className="program-hero-shape" aria-hidden="true" />
           {program.image ? (
-            <img
+            <Image
               src={program.image}
               alt={program.title}
               className="program-panel-image"
-              loading="eager"
-              decoding="async"
-              width="360"
-              height="450"
+              priority
+              width={360}
+              height={450}
+              sizes="(max-width: 900px) 72vw, 360px"
+              unoptimized
             />
           ) : null}
           <span className="program-hero-dot dot-a" aria-hidden="true" />

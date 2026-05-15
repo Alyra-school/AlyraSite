@@ -21,6 +21,7 @@ export async function generateMetadata({ params }) {
     title: article.title,
     description: article.excerpt,
     path: `/blog/${article.slug}`,
+    image: article.imageUrl || undefined,
   });
 }
 
@@ -45,6 +46,10 @@ export default async function BlogArticleRoute({ params }) {
       "@type": "Organization",
       name: "Alyra",
       url: "https://www.alyra.fr",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.alyra.fr/logo_bleu.svg",
+      },
     },
   };
 

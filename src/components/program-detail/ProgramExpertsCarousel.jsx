@@ -75,11 +75,11 @@ export default function ProgramExpertsCarousel({ items }) {
         <h2>Nos <span>experts</span></h2>
       </div>
 
-      <div className="program-experts-carousel-controls" aria-label="Navigation du carrousel experts">
+      <nav className="program-experts-carousel-controls" aria-label="Navigation du carrousel experts">
         <button type="button" aria-label="Expert precedent" onClick={() => scrollByStep(-1)}>←</button>
         <span aria-hidden="true" />
         <button type="button" aria-label="Expert suivant" onClick={() => scrollByStep(1)}>→</button>
-      </div>
+      </nav>
 
       <div
         className={`program-experts-carousel-track-shell ${fadeState.left ? "has-left-fade" : ""} ${fadeState.right ? "has-right-fade" : ""}`.trim()}

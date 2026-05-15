@@ -1,4 +1,6 @@
 import { getSupabaseServerClient } from "./supabaseServer";
+import { normalizeProgramPageContent } from "./content/programPageMapper";
+const loggedSupabaseErrors = new Set();
 
 const PROGRAMS_SELECT =
   "id, slug, title, subtitle, tags, start_date_label, duration_label, price_eur, image_url, is_featured";
@@ -39,6 +41,15 @@ function isMissingOptionalTableError(error, tableName) {
   const code = String(error.code || "");
   if (code === "PGRST205") return true;
   return message.includes(`Could not find the table 'public.${tableName}'`);
+}
+
+function logProgramDataErrorOnce(scope, error) {
+  const message = String(error?.message || error || "Unknown error");
+  if (message.toLowerCase().includes("fetch failed")) return;
+  const key = `${scope}:${message}`;
+  if (loggedSupabaseErrors.has(key)) return;
+  loggedSupabaseErrors.add(key);
+  console.warn(`[programData.${scope}] ${message}`);
 }
 
 function mapProgram(row) {
@@ -87,7 +98,7 @@ export async function getPrograms() {
     .order("id", { ascending: true });
 
   if (error) {
-    console.error("[programData.getPrograms] Supabase error:", error.message);
+    logProgramDataErrorOnce("getPrograms", error);
     return [];
   }
   return (data ?? []).map(mapProgram);
@@ -104,7 +115,7 @@ export async function getProgramBySlug(slug) {
     .maybeSingle();
 
   if (error) {
-    console.error("[programData.getProgramBySlug] Supabase error:", error.message);
+    logProgramDataErrorOnce("getProgramBySlug", error);
     return null;
   }
   if (!data) return null;
@@ -249,7 +260,7 @@ export async function getProgramPageByProgramId(programId) {
 
   const pageError = pageResult.error;
   if (pageError) {
-    console.error("[programData.getProgramPageByProgramId] program_pages error:", pageError.message);
+    logProgramDataErrorOnce("getProgramPageByProgramId.program_pages", pageError);
   }
 
   const blockResults = [
@@ -281,7 +292,7 @@ export async function getProgramPageByProgramId(programId) {
   blockResults.forEach(([name, error, tableName]) => {
     if (error) {
       if (isMissingOptionalTableError(error, tableName)) return;
-      console.error(`[programData.getProgramPageByProgramId] ${name} error:`, error.message);
+      logProgramDataErrorOnce(`getProgramPageByProgramId.${name}`, error);
     }
   });
 
@@ -361,7 +372,7 @@ export async function getProgramPageByProgramId(programId) {
       .in("id", expertIds);
 
     if (expertsError) {
-      console.error("[programData.getProgramPageByProgramId] experts error:", expertsError.message);
+      logProgramDataErrorOnce("getProgramPageByProgramId.experts", expertsError);
     } else {
       const expertMap = new Map((expertsData ?? []).map((item) => [item.id, item]));
       experts = expertLinks
@@ -496,7 +507,7 @@ export async function getProgramPageByProgramId(programId) {
     }
   }
 
-  return {
+  return normalizeProgramPageContent({
     ...legacy,
     heroBullets: (heroBulletsResult.data ?? []).map((item) => item.text),
     ctas,
@@ -512,5 +523,5 @@ export async function getProgramPageByProgramId(programId) {
     certification,
     faqs,
     relatedPrograms,
-  };
+  });
 }

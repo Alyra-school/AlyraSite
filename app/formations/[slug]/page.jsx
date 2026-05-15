@@ -20,6 +20,7 @@ export async function generateMetadata({ params }) {
     title: program.title,
     description: `${program.subtitle} - Date: ${program.date}, Duree: ${program.duration}.`,
     path: `/formations/${slug}`,
+    image: program.image || undefined,
   });
 }
 
@@ -44,11 +45,14 @@ export default async function ProgramPage({ params }) {
     "@type": "Course",
     name: program.title,
     description: program.subtitle,
+    image: program.image ? [program.image] : undefined,
     provider: {
       "@type": "EducationalOrganization",
       name: "Alyra",
       url: "https://www.alyra.fr",
     },
+    educationalCredentialAwarded: "Certification professionnelle",
+    courseMode: "online",
     offers: {
       "@type": "Offer",
       price: String(program.price),

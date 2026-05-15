@@ -83,11 +83,11 @@ export default function ProgramTestimonialsCarousel({ items }) {
         </div>
       </div>
 
-      <div className="program-testimonials-carousel-controls" aria-label="Navigation du carrousel des avis">
+      <nav className="program-testimonials-carousel-controls" aria-label="Navigation du carrousel des avis">
         <button type="button" aria-label="Avis precedent" onClick={() => scrollByStep(-1)}>←</button>
         <span aria-hidden="true" />
         <button type="button" aria-label="Avis suivant" onClick={() => scrollByStep(1)}>→</button>
-      </div>
+      </nav>
 
       <div
         className={`program-testimonials-carousel-track-shell ${fadeState.left ? "has-left-fade" : ""} ${fadeState.right ? "has-right-fade" : ""}`.trim()}

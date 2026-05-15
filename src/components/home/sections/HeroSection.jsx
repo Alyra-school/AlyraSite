@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./HeroSection.module.css";
 import { heroData } from "../../../data/home";
 
@@ -104,7 +105,7 @@ export default function HeroSection() {
         <div className="hero-orbit" ref={orbitRef}>
           <div className="orbit-ring" />
           <div className="orbit-center" data-depth="0.1" data-drift="1.2" data-speed="0.6" data-phase="0.4">
-            <img src="/symbole_blanc.svg" alt="" width="84" height="84" loading="eager" decoding="async" className="hero-orbit-logo" />
+            <Image src="/symbole_blanc.svg" alt="" width={84} height={84} priority className="hero-orbit-logo" />
           </div>
           {heroData.orbitPills.map((pill) => (
             <Link

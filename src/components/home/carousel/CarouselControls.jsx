@@ -10,13 +10,13 @@ export default function CarouselControls({
   buttonClassName = "",
 }) {
   return (
-    <div className={`${styles.root} ${className}`.trim()} aria-label={ariaLabel}>
+    <nav className={`${styles.root} ${className}`.trim()} aria-label={ariaLabel}>
       <button type="button" className={buttonClassName} onClick={onPrev} aria-label={prevLabel}>
         ←
       </button>
       <button type="button" className={buttonClassName} onClick={onNext} aria-label={nextLabel}>
         →
       </button>
-    </div>
+    </nav>
   );
 }

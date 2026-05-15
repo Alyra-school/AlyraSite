@@ -2,6 +2,7 @@ export const siteUrl = "https://www.alyra.fr";
 export const siteName = "Alyra, l'ecole Blockchain et IA";
 export const defaultDescription =
   "Formations professionnelles en blockchain et intelligence artificielle: catalogue, financement, rendez-vous et accompagnement carriere.";
+export const defaultOgImage = "/inspired/home/hero-main.avif";
 
 export const defaultMetadata = {
   metadataBase: new URL(siteUrl),
@@ -37,15 +38,18 @@ export const defaultMetadata = {
     siteName,
     title: siteName,
     description: defaultDescription,
+    images: [{ url: defaultOgImage }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteName,
     description: defaultDescription,
+    images: [defaultOgImage],
   },
 };
 
-export function pageMetadata({ title, description, path }) {
+export function pageMetadata({ title, description, path, image }) {
+  const resolvedImage = image || defaultOgImage;
   return {
     title,
     description,
@@ -56,10 +60,12 @@ export function pageMetadata({ title, description, path }) {
       title: `${title} | Alyra`,
       description,
       url: `${siteUrl}${path}`,
+      images: [{ url: resolvedImage }],
     },
     twitter: {
       title: `${title} | Alyra`,
       description,
+      images: [resolvedImage],
     },
   };
 }
