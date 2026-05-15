@@ -291,74 +291,78 @@ export const staticPagesData = {
         },
       ],
     },
-    sections: [
-      {
-        anchorId: "notre-ecole-blockchain-ia",
-        title: "Notre ecole blockchain et IA",
-        points: [
-          "Rendre accessibles des competences techniques exigeantes.",
-          "Former a des pratiques alignees avec les besoins du marche.",
-          "Accompagner la transformation des talents et des entreprises.",
-        ],
-      },
-      {
-        anchorId: "les-chiffres-de-lecole",
-        title: "Les chiffres de l'ecole",
-        points: [
-          "5000+ alumni accompagnes depuis 2019.",
-          "120+ entreprises partenaires et recruteuses.",
-          "Des cohortes en ligne, en direct et en rythme flexible.",
-        ],
-      },
-      {
-        anchorId: "notre-equipe",
-        title: "Notre equipe",
-        points: [
-          "Une equipe pedagogique et operationnelle engagee.",
-          "Un accompagnement personnalise des apprenants.",
-          "Des experts metiers connectes aux besoins reels des entreprises.",
-        ],
-      },
-      {
-        anchorId: "nos-experts",
-        title: "Nos experts",
-        points: [
-          "Des professionnels actifs dans le Web3, l'IA et la data.",
-          "Des retours terrain concrets pour monter en competence vite.",
-          "Un reseau d'intervenants qui allie theorie, pratique et mentorat.",
-        ],
-      },
-    ],
+    sections: [],
   },
   "nos-anciens": {
     title: "Nos Anciens",
     subtitle:
       "Decouvrez les parcours des alumni Alyra et les roles qu'ils occupent apres la formation.",
-    sections: [
-      {
-        title: "Reussites recentes",
-        points: [
-          "Transition vers des postes blockchain engineer en startup.",
-          "Evolution vers des fonctions AI product manager.",
-          "Creation de projets entrepreneurs en Web3 et IA.",
-        ],
-      },
-      {
-        title: "Reseau alumni",
-        points: [
-          "Meetups mensuels et groupes de partage metier.",
-          "Partage d'opportunites et cooptation active.",
-          "Mentorat entre promotions.",
-        ],
-      },
-      {
-        title: "Carriere",
-        points: [
-          "Ateliers recherche d'emploi et posture en entretien.",
-          "Portfolio projects et validation des acquis.",
-          "Suivi post-formation sur la duree.",
-        ],
-      },
-    ],
+    alumniHall: {
+      anchorId: "hall-of-fame",
+      eyebrow: "Hall of fame",
+      title: "Ils avaient un plan pour leur futur, ils ont choisi Alyra pour le concretiser.",
+      subtitle:
+        "Des profils divers, une meme trajectoire: transformer leurs competences en impact concret.",
+      people: [
+        {
+          id: "agathe-gautier",
+          name: "Agathe Gautier",
+          role: "Content Marketing manager chez Meria !",
+          imageUrl: "/inspired/team/christian.avif",
+          socials: [{ label: "LinkedIn", symbol: "in", href: "https://www.linkedin.com/" }],
+          description:
+            "Agathe Gautier est une experte en redaction web et reference SEO. Apres un parcours remarquable en Finance Decentralisee chez Alyra, elle a accelere sa carriere avec une posture produit et contenu plus strategique.",
+        },
+        {
+          id: "monsieur-tk",
+          name: "Monsieur TK",
+          role: "L'oeil critique du Web3 forme chez Alyra",
+          imageUrl: "/inspired/team/gaetan.avif",
+          socials: [
+            { label: "LinkedIn", symbol: "in", href: "https://www.linkedin.com/" },
+            { label: "X", symbol: "x", href: "https://x.com/" },
+          ],
+          description:
+            "Monsieur TK est createur de contenu et vulgarisateur Web3. Il anime l'une des communautes francophones les plus dynamiques autour des cryptos et de la decentralisation. Sa formation chez Alyra lui a permis de structurer une approche technique solide.",
+        },
+        {
+          id: "louis-alexandre-de-froissard",
+          name: "Louis Alexandre de Froissard",
+          role: "Le 1er CGP Crypto de France",
+          imageUrl: "/inspired/team/ph.avif",
+          socials: [{ label: "LinkedIn", symbol: "in", href: "https://www.linkedin.com/" }],
+          description:
+            "Louis Alexandre de Froissard, fondateur de Montaigne Patrimoine et Montaigne Conseil, est une figure de la finance et de l'innovation. Ses societes accompagnent les investisseurs avec une vision long terme sur les actifs numeriques.",
+        },
+        {
+          id: "nicolas-fruneau",
+          name: "Nicolas Fruneau",
+          role: "Consultant Web3 en entreprise",
+          imageUrl: "/inspired/team/corco.avif",
+          socials: [{ label: "LinkedIn", symbol: "in", href: "https://www.linkedin.com/" }],
+          description:
+            "Nicolas est passe d'une posture operationnelle a une posture de conseil. Il aide des equipes produit a cadrer leurs usages blockchain et a securiser leurs projets d'innovation.",
+        },
+        {
+          id: "julie-morel",
+          name: "Julie Morel",
+          role: "Product builder dans l'ecosysteme blockchain",
+          imageUrl: "/inspired/team/daniel.avif",
+          socials: [{ label: "LinkedIn", symbol: "in", href: "https://www.linkedin.com/" }],
+          description:
+            "Julie a transforme sa curiosite pour les technologies decentralisees en expertise projet, avec une approche terrain et produit. Aujourd'hui, elle pilote des sujets Web3 en lien direct avec les utilisateurs.",
+        },
+        {
+          id: "amine-benali",
+          name: "Amine Benali",
+          role: "Consultant tokenomics et finance decentralisee",
+          imageUrl: "/inspired/team/cyril.avif",
+          socials: [{ label: "LinkedIn", symbol: "in", href: "https://www.linkedin.com/" }],
+          description:
+            "Amine accompagne des equipes sur la structuration de protocoles, la securite economique et les usages DeFi. Son parcours Alyra a servi de tremplin vers des missions a plus forte responsabilite.",
+        },
+      ],
+    },
+    sections: [],
   },
 };

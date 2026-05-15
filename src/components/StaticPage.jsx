@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import TeamShowcaseSection from "./TeamShowcaseSection";
+import AlumniHallSection from "./AlumniHallSection";
 
 export default function StaticPage({ page }) {
+  const isAlumniPage = page.title === "Nos Anciens";
   const [selectedFinancing, setSelectedFinancing] = useState(
     page.financingOptions?.[0]?.key ?? null
   );
@@ -13,13 +15,15 @@ export default function StaticPage({ page }) {
 
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
-      <header className="hero programs-hero">
-        <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: page.title }]} />
-        <div className="section-head">
-          <h1>{page.title}</h1>
-          <p>{page.subtitle}</p>
-        </div>
-      </header>
+      {!isAlumniPage ? (
+        <header className="hero programs-hero">
+          <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: page.title }]} />
+          <div className="section-head">
+            <h1>{page.title}</h1>
+            <p>{page.subtitle}</p>
+          </div>
+        </header>
+      ) : null}
 
       {page.financingOptions ? (
         <section className="section">
@@ -59,7 +63,7 @@ export default function StaticPage({ page }) {
           )}
         </section>
       ) : (
-        <section className="section">
+        <section className={`section ${isAlumniPage ? "alumni-standalone-start" : ""}`}>
           {page.aboutSchool ? (
             <article id="notre-ecole-blockchain-ia" className="about-school-block anchor-section">
               <p className="about-school-overline">{page.aboutSchool.overline}</p>
@@ -145,6 +149,7 @@ export default function StaticPage({ page }) {
 
           {page.teamShowcase ? <TeamShowcaseSection section={page.teamShowcase} /> : null}
           {page.expertsShowcase ? <TeamShowcaseSection section={page.expertsShowcase} /> : null}
+          {page.alumniHall ? <AlumniHallSection section={page.alumniHall} /> : null}
 
           <div className="cards">
             {page.sections
@@ -166,11 +171,13 @@ export default function StaticPage({ page }) {
               </article>
             ))}
           </div>
-          <div className="hero-actions">
-            <Link href="/rendez-vous" className="primary">
-              Prendre rendez-vous
-            </Link>
-          </div>
+          {!isAlumniPage ? (
+            <div className="hero-actions">
+              <Link href="/rendez-vous" className="primary">
+                Prendre rendez-vous
+              </Link>
+            </div>
+          ) : null}
         </section>
       )}
     </main>
