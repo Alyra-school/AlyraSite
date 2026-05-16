@@ -1,0 +1,734 @@
+.alumniSpotlight {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  margin-top: clamp(-30px, -2.6vw, -14px);
+  padding-block: clamp(16px, 1.8vw, 32px) clamp(68px, 6vw, 106px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(72, 63, 255, 0.13), transparent 36%),
+    linear-gradient(90deg, #ffffff 0%, #f7fbff 34%, #e7e8f7 56%, #f8f7ff 100%);
+}
+
+.alumniSurface {
+  display: block;
+  width: min(100%, 1200px);
+  margin-inline: auto;
+}
+
+.alumniHead {
+  position: relative;
+  z-index: 3;
+  width: min(100% - 40px, 920px);
+  margin-inline: auto;
+  display: grid;
+  gap: 8px;
+  text-align: center;
+}
+
+.alumniHead h2 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--formation-h2);
+  line-height: 1.08;
+  font-weight: var(--formation-title-weight);
+}
+
+.alumniHead p {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--formation-subtitle);
+  font-weight: var(--formation-subtitle-weight);
+}
+
+.alumniControls {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(28, 26, 88, 0.08);
+  box-shadow: 0 14px 34px rgba(39, 37, 94, 0.12);
+  overflow: hidden;
+  margin: 22px auto 0;
+}
+
+.alumniControls button {
+  width: 48px;
+  height: 46px;
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.alumniControls span {
+  width: 1px;
+  height: 24px;
+  background: rgba(33, 30, 97, 0.14);
+}
+
+.alumniTrackShell {
+  position: relative;
+  margin-top: 22px;
+}
+
+.alumniTrackShell::before,
+.alumniTrackShell::after {
+  content: "";
+  position: absolute;
+  inset-block: -8px;
+  z-index: 2;
+  width: min(14vw, 170px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.alumniTrackShell::before {
+  left: 0;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.alumniTrackShell::after {
+  right: 0;
+  background: linear-gradient(270deg, #f8f7ff 0%, rgba(248, 247, 255, 0) 100%);
+}
+
+.alumniTrackShell.hasLeftFade::before,
+.alumniTrackShell.hasRightFade::after {
+  opacity: 1;
+}
+
+.alumniTrack {
+  display: flex;
+  gap: clamp(52px, 6vw, 96px);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  cursor: grab;
+  padding: 36px max(42px, calc((100vw - 1220px) / 2)) 52px;
+  scroll-padding-inline: max(42px, calc((100vw - 1220px) / 2));
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+}
+
+.alumniTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.alumniTrack:global(.is-dragging) {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.alumniCard {
+  position: relative;
+  flex: 0 0 clamp(600px, 39vw, 720px);
+  min-height: 295px;
+  display: grid;
+  grid-template-columns: minmax(210px, 0.86fr) minmax(280px, 1.14fr);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 24px 54px rgba(47, 44, 111, 0.16);
+  overflow: visible;
+}
+
+.alumniImageWrap {
+  min-height: 295px;
+  border-radius: 28px 0 0 28px;
+  overflow: hidden;
+  background: #e9e9f4;
+}
+
+.alumniImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.alumniBody {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 64px 42px 38px;
+  color: #211e61;
+}
+
+.alumniTransition {
+  position: absolute;
+  top: -36px;
+  left: -98px;
+  right: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  pointer-events: none;
+}
+
+.alumniPill {
+  min-width: 104px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-inline: 18px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 28px rgba(30, 28, 91, 0.08);
+  color: var(--text-strong);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.alumniPill img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.alumniPillAlyra img {
+  width: 26px;
+  height: 26px;
+}
+
+.alumniArrow {
+  color: var(--text-strong);
+  font-size: 3.2rem;
+  line-height: 1;
+  transform: rotate(-12deg) translateY(-6px);
+}
+
+.alumniBody h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--formation-h3);
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.alumniBody h3 a {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--text-strong);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.alumniRole {
+  margin: 0;
+  font-size: var(--formation-body);
+  font-weight: 700;
+}
+
+.alumniBody p:not(.alumniRole) {
+  margin: 0;
+  max-width: 34ch;
+  color: #2f2b68;
+  font-size: var(--formation-body-sm);
+  line-height: 1.5;
+  font-weight: var(--formation-body-weight);
+}
+
+.alumniCta {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.expertsSection {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  padding-block: clamp(52px, 6vw, 84px);
+}
+
+.expertsHead h2 {
+  margin: 0;
+  font-size: var(--formation-h2);
+  line-height: 1.08;
+  font-weight: var(--formation-title-weight);
+  color: #221f63;
+  text-align: center;
+}
+
+.expertsHead h2 span {
+  color: #4d49f7;
+}
+
+.expertsControls,
+.testimonialsControls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(30, 29, 71, 0.16);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.expertsControls button,
+.testimonialsControls button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: #21205f;
+  font-size: 1.18rem;
+  cursor: pointer;
+}
+
+.expertsControls span,
+.testimonialsControls span {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(31, 29, 71, 0.14);
+}
+
+.expertsControls button:focus-visible,
+.alumniControls button:focus-visible,
+.testimonialsControls button:focus-visible {
+  outline: 2px solid #4d49f7;
+  outline-offset: -2px;
+}
+
+.expertsTrackShell {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.expertsTrack {
+  --program-experts-edge-padding: clamp(12px, 2.2vw, 26px);
+  --program-experts-gap: clamp(16px, 2vw, 28px);
+  display: flex;
+  gap: var(--program-experts-gap);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  padding: 18px var(--program-experts-edge-padding) 10px;
+  scroll-padding-inline: var(--program-experts-edge-padding);
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+  user-select: none;
+}
+
+.expertsTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.expertsTrack:global(.is-dragging) {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.expertCard {
+  flex: 0 0 min(31%, 360px);
+  min-height: 520px;
+  scroll-snap-align: start;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  text-align: center;
+}
+
+.expertPhotoWrap {
+  position: relative;
+  width: 164px;
+  height: 218px;
+  margin-bottom: 18px;
+}
+
+.expertPhotoWrap > span {
+  position: absolute;
+  inset: -12px 12px 12px -12px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #eab9fb 0%, #a8f2d9 48%, #aedfff 100%);
+  opacity: 0.95;
+}
+
+.expertPhotoWrap img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.expertName {
+  margin: 0 0 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: #232160;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.expertRole {
+  margin: 0;
+  color: #4a4979;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.expertCard > a,
+.expertLinkPlaceholder {
+  margin-top: 8px;
+  min-height: 18px;
+  color: #272562;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.expertBio {
+  margin: 8px 0 0;
+  color: #333568;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  max-width: 35ch;
+}
+
+.testimonialsSection {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  padding-block: clamp(66px, 7vw, 102px);
+  overflow: hidden;
+  background: linear-gradient(180deg, #f7f8fd 0%, #f4f5fb 100%);
+}
+
+.testimonialsHead {
+  width: min(100% - 40px, 920px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.testimonialsHead h2 {
+  margin: 0;
+  color: #211f63;
+  font-size: var(--formation-h2);
+  font-weight: var(--formation-title-weight);
+  line-height: 1.08;
+}
+
+.testimonialsHead h2 span {
+  color: #4b46f5;
+}
+
+.trustpilot {
+  display: inline-grid;
+  gap: 7px;
+  justify-items: start;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.trustpilot strong {
+  color: #1c1c1c;
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.trustpilotStars {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.trustpilotStars span {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  background: #00b67a;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.trustpilot p {
+  margin: 0;
+  color: #171717;
+}
+
+.testimonialsControls {
+  margin: 30px auto 0;
+}
+
+.testimonialsTrackShell {
+  position: relative;
+  margin-top: 30px;
+}
+
+.testimonialsTrackShell::before,
+.testimonialsTrackShell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(20px, 3.2vw, 44px);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.testimonialsTrackShell::before {
+  left: 0;
+  background: linear-gradient(to right, #f7f8fd 12%, rgba(247, 248, 253, 0));
+}
+
+.testimonialsTrackShell::after {
+  right: 0;
+  background: linear-gradient(to left, #f7f8fd 12%, rgba(247, 248, 253, 0));
+}
+
+.testimonialsTrackShell.hasLeftFade::before,
+.testimonialsTrackShell.hasRightFade::after {
+  opacity: 1;
+}
+
+.testimonialsTrack {
+  --program-testimonials-edge-padding: clamp(12px, 2vw, 28px);
+  --program-testimonials-gap: clamp(14px, 1.8vw, 22px);
+  display: flex;
+  gap: var(--program-testimonials-gap);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  padding: 8px var(--program-testimonials-edge-padding) 18px;
+  scroll-padding-inline: var(--program-testimonials-edge-padding);
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+  user-select: none;
+}
+
+.testimonialsTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonialsTrack:global(.is-dragging) {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.testimonialCard {
+  flex: 0 0 min(30.5%, 430px);
+  min-height: 300px;
+  scroll-snap-align: start;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(205, 208, 230, 0.9);
+  border-radius: 16px;
+  background: #f9f9ff;
+  box-shadow: 0 8px 18px rgba(33, 31, 89, 0.06);
+}
+
+.testimonialRating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #00b67a;
+  font-weight: 800;
+}
+
+.testimonialRating b {
+  color: #00b67a;
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.testimonialRating span {
+  color: #00b67a;
+  letter-spacing: 0.03em;
+}
+
+.testimonialCard h3 {
+  margin: 0;
+  color: #26245f;
+  font-size: var(--formation-h3);
+  line-height: 1.16;
+  font-weight: 700;
+}
+
+.testimonialCard p {
+  margin: 0;
+  color: #323468;
+  font-size: var(--formation-body-sm);
+  line-height: 1.5;
+  font-weight: var(--formation-body-weight);
+}
+
+.testimonialCard a {
+  margin-top: auto;
+  color: #23215f;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.testimonialAuthor {
+  color: #23215f !important;
+  font-weight: 500;
+}
+
+.testimonialsCta {
+  margin-top: 18px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 1100px) {
+  .alumniCard {
+    flex-basis: min(82vw, 640px);
+  }
+
+  .expertCard {
+    flex-basis: min(44vw, 336px);
+    min-height: 470px;
+  }
+
+  .testimonialCard {
+    flex-basis: min(44vw, 440px);
+  }
+}
+
+@media (max-width: 760px) {
+  .alumniSpotlight {
+    padding-block: 62px 70px;
+  }
+
+  .alumniSurface {
+    gap: 18px;
+  }
+
+  .alumniHead {
+    width: min(100% - 28px, 540px);
+  }
+
+  .alumniHead h2 {
+    font-size: 2.1rem;
+  }
+
+  .alumniTrackShell {
+    margin-top: 20px;
+  }
+
+  .alumniTrack {
+    gap: 22px;
+    padding: 24px 20px 38px;
+    scroll-padding-inline: 20px;
+  }
+
+  .alumniCard {
+    flex: 0 0 min(86vw, 360px);
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .alumniImageWrap {
+    min-height: 210px;
+    max-height: 230px;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .alumniBody {
+    padding: 56px 22px 24px;
+  }
+
+  .alumniTransition {
+    top: -34px;
+    left: 14px;
+    right: 14px;
+    gap: 10px;
+  }
+
+  .alumniPill {
+    min-width: 88px;
+    height: 48px;
+    padding-inline: 12px;
+    font-size: 0.72rem;
+  }
+
+  .alumniArrow {
+    font-size: 2.4rem;
+  }
+
+  .alumniBody h3 {
+    font-size: 1.45rem;
+  }
+
+  .alumniBody p:not(.alumniRole) {
+    font-size: 0.86rem;
+  }
+
+  .expertsHead h2 {
+    font-size: 2.3rem;
+  }
+
+  .expertCard {
+    flex-basis: min(80vw, 330px);
+    min-height: 430px;
+  }
+
+  .expertPhotoWrap {
+    width: 138px;
+    height: 184px;
+  }
+
+  .expertBio {
+    font-size: 0.89rem;
+  }
+
+  .testimonialsHead h2 {
+    font-size: 2.2rem;
+  }
+
+  .trustpilot strong {
+    font-size: 1.7rem;
+  }
+
+  .trustpilotStars span {
+    width: 26px;
+    height: 26px;
+    font-size: 1.05rem;
+  }
+
+  .testimonialCard {
+    flex-basis: min(80vw, 360px);
+    min-height: 260px;
+  }
+
+  .testimonialsCta {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

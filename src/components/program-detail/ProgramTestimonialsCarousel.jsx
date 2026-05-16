@@ -1,19 +1,21 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef } from "react";
 import Link from "next/link";
 import { useCarouselAutoplay } from "../../hooks/home/useCarouselAutoplay";
 import { useDragScroll } from "../../hooks/home/useDragScroll";
 import { useInfiniteLoopCarousel } from "../../hooks/home/useInfiniteLoopCarousel";
 import { useCarouselFadeAndProgress } from "../../hooks/home/useCarouselFadeAndProgress";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
+import styles from "./ProgramCarousels.module.css";
 
 export default function ProgramTestimonialsCarousel({ items }) {
+  const trackId = useId();
   const trackRef = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const trackItems = useMemo(() => (items.length > 1 ? [...items, ...items, ...items] : items), [items]);
 
   const { getLogicalOffset, normalizeLoop, setInitialPosition, scrollByStep } = useInfiniteLoopCarousel({
     trackRef,
-    itemSelector: ".program-testimonial-carousel-card",
+    itemSelector: `.${styles.testimonialCard}`,
     itemCount: items.length,
     enabled: items.length > 1,
   });
@@ -32,7 +34,7 @@ export default function ProgramTestimonialsCarousel({ items }) {
   const dragScrollOptions = useMemo(
     () => ({
       onScroll: handleTrackScroll,
-      itemSelector: ".program-testimonial-carousel-card",
+      itemSelector: `.${styles.testimonialCard}`,
       enableSwipeSnap: true,
       swipeThreshold: 22,
       mobileOnlySnap: true,
@@ -70,36 +72,51 @@ export default function ProgramTestimonialsCarousel({ items }) {
 
   if (items.length === 0) return null;
 
+  const handleKeyNav = (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      scrollByStep(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      scrollByStep(1);
+    }
+  };
+
   return (
-    <section className="section program-section program-testimonials-carousel-section">
-      <div className="program-testimonials-carousel-head">
+    <section className={`section program-section ${styles.testimonialsSection}`}>
+      <div className={styles.testimonialsHead}>
         <h2>Les retours de <span>nos apprenants</span></h2>
-        <div className="program-testimonials-trustpilot" aria-label="Notation Trustpilot">
+        <div className={styles.trustpilot} aria-label="Notation Trustpilot">
           <strong>★ Trustpilot</strong>
-          <div>
+          <div className={styles.trustpilotStars}>
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
           <p>TrustScore <b>4.9</b> | <u>273 avis</u></p>
         </div>
       </div>
 
-      <nav className="program-testimonials-carousel-controls" aria-label="Navigation du carrousel des avis">
-        <button type="button" aria-label="Avis precedent" onClick={() => scrollByStep(-1)}>←</button>
+      <nav className={styles.testimonialsControls} aria-label="Navigation du carrousel des avis">
+        <button type="button" aria-label="Avis precedent" aria-controls={trackId} onClick={() => scrollByStep(-1)}>←</button>
         <span aria-hidden="true" />
-        <button type="button" aria-label="Avis suivant" onClick={() => scrollByStep(1)}>→</button>
+        <button type="button" aria-label="Avis suivant" aria-controls={trackId} onClick={() => scrollByStep(1)}>→</button>
       </nav>
 
       <div
-        className={`program-testimonials-carousel-track-shell ${fadeState.left ? "has-left-fade" : ""} ${fadeState.right ? "has-right-fade" : ""}`.trim()}
+        className={`${styles.testimonialsTrackShell} ${fadeState.left ? styles.hasLeftFade : ""} ${fadeState.right ? styles.hasRightFade : ""}`.trim()}
+        role="group"
+        aria-label="Carrousel des avis apprenants"
+        tabIndex={0}
+        onKeyDown={handleKeyNav}
       >
-        <div className="program-testimonials-carousel-track" ref={trackRef}>
+        <div className={styles.testimonialsTrack} ref={trackRef} id={trackId} aria-live="off">
           {trackItems.map((item, index) => (
             <article
               key={`${item.key ?? item.author}-${index}`}
-              className="program-testimonial-carousel-card"
+              className={styles.testimonialCard}
               aria-hidden={items.length > 1 ? index < items.length || index >= items.length * 2 : false}
             >
-              <div className="program-testimonial-carousel-rating">
+              <div className={styles.testimonialRating}>
                 <b>{item.rating ?? "5.0"}</b>
                 <span>★★★★★</span>
               </div>
@@ -111,13 +128,13 @@ export default function ProgramTestimonialsCarousel({ items }) {
               >
                 Lire la suite
               </Link>
-              <p className="program-testimonial-carousel-author">{item.author}</p>
+              <p className={styles.testimonialAuthor}>{item.author}</p>
             </article>
           ))}
         </div>
       </div>
 
-      <div className="program-testimonials-carousel-cta">
+      <div className={styles.testimonialsCta}>
         <a href="#programme-brochure" className="program-cta-secondary">Télécharger le programme</a>
         <Link href="/rendez-vous" className="primary">Prendre rendez-vous</Link>
       </div>

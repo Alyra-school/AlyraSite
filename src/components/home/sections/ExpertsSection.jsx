@@ -107,7 +107,7 @@ export default function ExpertsSection() {
                 <div className="expert-card-body">
                   <div className="expert-card-head">
                     <h3>{expert.name}</h3>
-                    <a href={expert.linkedin} target="_blank" rel="noreferrer" aria-label={`Profil LinkedIn de ${expert.name}`}>
+                    <a href={expert.linkedin} target="_blank" rel="noopener noreferrer nofollow" aria-label={`Profil LinkedIn de ${expert.name}`}>
                       in
                     </a>
                   </div>

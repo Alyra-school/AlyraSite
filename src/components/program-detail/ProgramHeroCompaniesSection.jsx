@@ -1,8 +1,10 @@
+import styles from "./ProgramHeroSection.module.css";
+
 export default function ProgramHeroCompaniesSection({ companies }) {
   if (!companies.length) return null;
 
   return (
-    <section className="program-hero-companies" aria-label="Entreprises qui recrutent nos apprenants">
+    <section className={styles.heroCompanies} aria-label="Entreprises qui recrutent nos apprenants">
       <h2><span className="hero-accent">Nos apprenants formés en blockchain</span> sont demandés par :</h2>
       <div className="company-marquee">
         <div className="company-track">

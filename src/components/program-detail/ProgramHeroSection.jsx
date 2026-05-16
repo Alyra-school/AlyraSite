@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Breadcrumbs from "../Breadcrumbs";
+import styles from "./ProgramHeroSection.module.css";
 
 function formatPrice(price) {
   if (Number.isFinite(price)) return `${price.toLocaleString("fr-FR")} EUR`;
@@ -11,7 +12,7 @@ function renderCtaLink(cta, className) {
   if (!cta?.href) return null;
   if (cta.isExternal) {
     return (
-      <a href={cta.href} className={className} target="_blank" rel="noreferrer">
+      <a href={cta.href} className={className} target="_blank" rel="noopener noreferrer nofollow">
         {cta.label}
       </a>
     );
@@ -35,12 +36,12 @@ export default function ProgramHeroSection({
   detailContent,
 }) {
   return (
-    <div className="program-hero anchor-section" id="resume">
+    <div className={`anchor-section ${styles.heroRoot}`} id="resume">
       <div className="program-hero-main">
         <span className="program-tag">{program.tags.join(" / ")}</span>
-        <h1>{heroTitle}</h1>
-        <p className="program-subtitle">{program.subtitle}</p>
-        <div className="program-meta">
+        <h1 className={styles.heroTitle}>{heroTitle}</h1>
+        <p className={styles.subtitle}>{program.subtitle}</p>
+        <div className={`program-meta ${styles.heroMeta}`}>
           <div>
             <strong>Date</strong>
             <span>{program.date}</span>
@@ -56,36 +57,36 @@ export default function ProgramHeroSection({
         </div>
 
         {heroBullets.length > 0 ? (
-          <ul className="program-hero-bullets">
+          <ul className={styles.heroBullets}>
             {heroBullets.map((item, index) => (
               <li key={`${program.id}-hero-bullet-${index}`}>{item}</li>
             ))}
           </ul>
         ) : null}
 
-        <div className="program-hero-actions">
-          {renderCtaLink(webinarCta, "primary program-cta-main")}
+        <div className={styles.heroActions}>
+          {renderCtaLink(webinarCta, `primary ${styles.ctaMain}`)}
           {applyCta ? (
-            renderCtaLink(applyCta, "program-cta-secondary")
+            renderCtaLink(applyCta, styles.ctaSecondary)
           ) : (
-            <Link href="/rendez-vous" className="program-cta-secondary">
+            <Link href="/rendez-vous" className={styles.ctaSecondary}>
               Je candidate
             </Link>
           )}
         </div>
 
-        <div className="program-hero-ratings" aria-label="Avis de satisfaction">
+        <div className={styles.heroRatings} aria-label="Avis de satisfaction">
           <p>
-            <strong>Excellent</strong> <span>4.9 sur 5</span> <span className="program-rating-brand trustpilot">Trustpilot</span>
+            <strong>Excellent</strong> <span>4.9 sur 5</span> <span className={`${styles.ratingBrand} ${styles.ratingBrandTrustpilot}`}>Trustpilot</span>
           </p>
           <p>
-            <span className="program-rating-stars" aria-hidden="true">★★★★★</span>{" "}
-            <strong>4.9/5</strong> <span className="program-rating-brand">Google</span>
+            <span className={styles.ratingStars} aria-hidden="true">★★★★★</span>{" "}
+            <strong>4.9/5</strong> <span className={styles.ratingBrand}>Google</span>
           </p>
           <span className="sr-only">{trustedScoreText} et {googleScoreText}</span>
         </div>
 
-        <div className="program-breadcrumbs-bottom">
+        <div className={styles.breadcrumbsBottom}>
           <Breadcrumbs
             items={[
               { label: "Accueil", href: "/" },
@@ -96,14 +97,14 @@ export default function ProgramHeroSection({
         </div>
       </div>
 
-      <div className="program-panel">
-        <div className="program-hero-visual">
-          <span className="program-hero-shape" aria-hidden="true" />
+      <div className={styles.panel}>
+        <div className={styles.heroVisual}>
+          <span className={styles.heroShape} aria-hidden="true" />
           {program.image ? (
             <Image
               src={program.image}
               alt={program.title}
-              className="program-panel-image"
+              className={styles.panelImage}
               priority
               width={360}
               height={450}
@@ -111,11 +112,11 @@ export default function ProgramHeroSection({
               unoptimized
             />
           ) : null}
-          <span className="program-hero-dot dot-a" aria-hidden="true" />
-          <span className="program-hero-dot dot-b" aria-hidden="true" />
-          <span className="program-hero-dot dot-c" aria-hidden="true" />
+          <span className={`${styles.heroDot} ${styles.heroDotA}`} aria-hidden="true" />
+          <span className={`${styles.heroDot} ${styles.heroDotB}`} aria-hidden="true" />
+          <span className={`${styles.heroDot} ${styles.heroDotC}`} aria-hidden="true" />
         </div>
-        <span className="program-panel-label">Descriptif</span>
+        <span className={styles.panelLabel}>Descriptif</span>
         {isContentLoading ? (
           <p>Chargement du descriptif...</p>
         ) : (
@@ -123,7 +124,7 @@ export default function ProgramHeroSection({
             <p>{detailContent?.overview}</p>
             <p>{detailContent?.overviewSecondary}</p>
             {applyCta?.formId ? (
-              <p className="program-form-id">
+              <p className={styles.formId}>
                 Formulaire d inscription: <strong>{applyCta.formId}</strong>
               </p>
             ) : null}

@@ -1,11 +1,13 @@
+import styles from "./ProgramSections.module.css";
+
 export default function ProgramAudienceSection({ programId, jobs }) {
   return (
-    <section className="section program-section program-audience-section">
+    <section className={`section program-section ${styles.audienceSection}`}>
       <h2>À qui s'adresse cette formation ?</h2>
-      <div className="program-audience-layout">
-        <div className="program-audience-sectors" aria-label="Secteurs d'activité impactés">
+      <div className={styles.audienceLayout}>
+        <div className={styles.audienceSectors} aria-label="Secteurs d'activité impactés">
           <p>Les secteurs d'activité impactés par la blockchain sont nombreux :</p>
-          <div className="program-audience-sector-pills">
+          <div className={styles.audienceSectorPills}>
             {["Finance", "Logistique", "Santé", "Immobilier", "Media", "Assurance", "Gouvernance"].map((sector) => (
               <span key={sector}>{sector}</span>
             ))}
@@ -17,7 +19,7 @@ export default function ProgramAudienceSection({ programId, jobs }) {
           </p>
         </div>
 
-        <div className="program-audience-career-card">
+        <div className={styles.audienceCareerCard}>
           <div>
             <h3>Cette certification enrichit votre CV et ouvre la voie du Web3 et de la blockchain aux :</h3>
             <ul>

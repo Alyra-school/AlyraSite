@@ -8,3 +8,4 @@ function parseBooleanEnv(value, defaultValue = false) {
 
 export const SUPABASE_ONLY_MODE = parseBooleanEnv(process.env.SUPABASE_ONLY_MODE, true);
 export const SUPABASE_ENABLED = parseBooleanEnv(process.env.SUPABASE_ENABLED, true);
+export const PROGRAM_PAGE_V1_ENABLED = parseBooleanEnv(process.env.PROGRAM_PAGE_V1_ENABLED, true);

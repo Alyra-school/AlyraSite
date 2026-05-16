@@ -1,0 +1,629 @@
+.kpiShowcase {
+  display: grid;
+  gap: clamp(20px, 2.4vw, 34px);
+}
+
+.kpiHead {
+  text-align: center !important;
+  align-items: center;
+}
+
+.kpiHead h2 {
+  max-width: 22ch;
+  margin-inline: auto;
+}
+
+.kpiAccent {
+  color: var(--brand);
+}
+
+.kpiLayout {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.95fr) minmax(360px, 1.05fr);
+  gap: clamp(20px, 3vw, 44px);
+  align-items: center;
+}
+
+.kpiVisual {
+  margin: 0;
+  min-height: 430px;
+  position: relative;
+  display: grid;
+  place-items: end center;
+}
+
+.kpiVisualShape {
+  position: absolute;
+  inset: 70px 34px 10px;
+  border-radius: 88px 24px 88px 24px;
+  background: rgba(79, 73, 231, 0.12);
+}
+
+.kpiVisualImage {
+  width: min(100%, 370px);
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 16px 34px rgba(22, 18, 74, 0.16));
+}
+
+.kpiDot {
+  position: absolute;
+  border-radius: 50%;
+  background: #5b63ff;
+  z-index: 1;
+  opacity: 0.86;
+}
+
+.kpiDot1 {
+  width: 16px;
+  height: 16px;
+  left: 6%;
+  top: 42%;
+}
+
+.kpiDot2 {
+  width: 12px;
+  height: 12px;
+  right: 5%;
+  top: 38%;
+}
+
+.kpiDot3 {
+  width: 22px;
+  height: 22px;
+  right: 10%;
+  bottom: 12%;
+  opacity: 0.5;
+}
+
+.kpiDot4 {
+  width: 10px;
+  height: 10px;
+  left: 15%;
+  bottom: 28%;
+}
+
+.kpiStack {
+  display: grid;
+  gap: 18px;
+}
+
+.kpiPanel {
+  border-radius: 12px;
+  border: 1px solid rgba(198, 198, 231, 0.85);
+  padding: clamp(18px, 2vw, 24px);
+  text-align: center;
+  box-shadow: 0 10px 22px rgba(23, 20, 78, 0.08);
+  display: grid;
+  gap: 10px;
+}
+
+.kpiPanel h3 {
+  margin: 0;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1;
+}
+
+.kpiPanel p {
+  margin: 0;
+  font-size: clamp(1rem, 1.2vw, 1.28rem);
+}
+
+.kpiPanelFeatured {
+  color: #fff;
+  border-color: rgba(65, 61, 206, 0.7);
+  background: linear-gradient(92deg, #3a33de 0%, #2b257f 92%);
+}
+
+.kpiPanelFeatured p {
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.kpiPanelNeutral {
+  background: rgba(255, 255, 255, 0.72);
+  color: #352f8f;
+}
+
+.kpiPanelNeutral p {
+  color: #211d61;
+}
+
+.learningHead {
+  text-align: center !important;
+  align-items: center;
+  gap: 14px;
+}
+
+.learningHead h2 {
+  max-width: 22ch;
+  margin-inline: auto;
+}
+
+.learningHead p {
+  margin: 0;
+  font-size: clamp(1.02rem, 1.3vw, 1.35rem);
+  color: #2a2865;
+}
+
+.learningShowcaseGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.2vw, 18px);
+}
+
+.learningShowcaseCard {
+  border-radius: 16px;
+  min-height: 132px;
+  padding: clamp(18px, 1.8vw, 24px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #423be7 0%, #6f72e9 100%);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(59, 62, 207, 0.18);
+}
+
+.learningShowcaseCard p {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.22vw, 1.42rem);
+  line-height: 1.32;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brochureShowcase {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: radial-gradient(circle at 18% 8%, #4f4ff0 0%, rgba(79, 79, 240, 0.18) 20%, transparent 38%),
+    linear-gradient(160deg, #3c37d5 0%, #241f89 65%, #211c70 100%);
+  padding: clamp(44px, 5vw, 76px) 0;
+}
+
+.brochureShell {
+  width: min(var(--layout-wide), calc(100% - 56px));
+  margin-inline: auto;
+  display: grid;
+  gap: clamp(26px, 3vw, 42px);
+}
+
+.brochureHead {
+  text-align: center;
+  display: grid;
+  gap: 12px;
+}
+
+.brochureHead h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.1rem, 3.2vw, 3.4rem);
+  line-height: 1.06;
+}
+
+.brochureHead p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.06rem, 1.4vw, 1.42rem);
+}
+
+.brochureContent {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(360px, 1fr);
+  gap: clamp(26px, 3.2vw, 54px);
+  align-items: center;
+}
+
+.brochureBenefits {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.brochureBenefits li {
+  color: #fff;
+  font-size: clamp(1.06rem, 1.3vw, 1.42rem);
+  line-height: 1.35;
+  padding-left: 28px;
+  position: relative;
+}
+
+.brochureBenefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  color: #fff;
+  font-size: 0.74rem;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.brochureFormWrap {
+  position: relative;
+  min-height: 420px;
+  display: grid;
+  align-items: end;
+}
+
+.brochureVisual {
+  position: absolute;
+  top: 8px;
+  right: 8%;
+  width: min(58%, 290px);
+  transform: rotate(22deg);
+  border-radius: 12px;
+  opacity: 0.55;
+  filter: saturate(0.8) brightness(0.84);
+  pointer-events: none;
+}
+
+.brochureForm {
+  position: relative;
+  z-index: 2;
+  background: rgba(117, 113, 251, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 10px;
+  padding: 14px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.brochureFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
+}
+
+.brochureFormGrid label {
+  display: grid;
+  gap: 6px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.brochureFormGrid label span {
+  color: #ffcece;
+}
+
+.brochureFormGrid input {
+  border: none;
+  border-radius: 999px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 0 12px;
+  color: #201d63;
+}
+
+.brochureFormGrid input:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.brochurePrivacy {
+  margin: 12px 0 8px;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.9rem;
+}
+
+.brochureCheckbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.92rem;
+  margin-top: 8px;
+}
+
+.brochureCheckbox input {
+  margin-top: 3px;
+}
+
+.brochureCheckbox span {
+  line-height: 1.3;
+}
+
+.brochureAction {
+  margin-top: 14px;
+  justify-content: flex-start;
+  display: flex;
+}
+
+.brochureAction .primary {
+  border-radius: 999px;
+  padding-inline: 22px;
+}
+
+.modalitiesHead {
+  text-align: center !important;
+  align-items: center;
+  gap: 10px;
+}
+
+.modalitiesHead h2 {
+  margin-inline: auto;
+}
+
+.modalitiesHead h2 span {
+  color: #4d48ff;
+}
+
+.modalitiesHead p {
+  margin: 0;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  color: #26235f;
+  font-weight: 600;
+}
+
+.modalitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.5vw, 24px);
+  align-items: stretch;
+}
+
+.modalityCard {
+  border: 1px solid rgba(190, 191, 223, 0.85);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 14px 30px rgba(24, 20, 84, 0.09);
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+}
+
+.modalityTop {
+  padding: 30px 28px 18px;
+  border-bottom: 1px solid rgba(196, 196, 228, 0.7);
+}
+
+.modalityBrand {
+  margin: 0;
+  font-size: 2.15rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: #2b2869;
+}
+
+.modalityTop h3 {
+  margin: 10px 0 14px;
+  font-size: 2rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.modalityTop h3 span {
+  display: inline-flex;
+  padding: 3px 7px;
+  border-radius: 8px;
+}
+
+.modalityDuration {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.modalityDuration strong {
+  color: #2a2a7d;
+  font-size: clamp(1.26rem, 1.65vw, 1.72rem);
+  line-height: 1.2;
+}
+
+.modalitySubtitle {
+  margin: 0;
+  color: #2f2b6d;
+  font-size: 1.02rem;
+  line-height: 1.42;
+}
+
+.modalityBody {
+  padding: 18px 28px 12px;
+  display: grid;
+  gap: 12px;
+}
+
+.modalityList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 9px;
+}
+
+.modalityList li {
+  position: relative;
+  padding-left: 18px;
+  color: #2d2a66;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.modalityList li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.02em;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #4b4ff5;
+  color: #ffffff;
+  font-size: 0.56rem;
+  line-height: 12px;
+  text-align: center;
+}
+
+.modalityListSecondary {
+  padding-top: 10px;
+  border-top: 1px solid rgba(182, 184, 218, 0.78);
+}
+
+.modalityCertification {
+  display: grid;
+  gap: 3px;
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(182, 184, 218, 0.78);
+}
+
+.modalityCertification strong {
+  color: #1f1a61;
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+
+.modalityCertification span {
+  color: #2d317f;
+  font-size: 0.9rem;
+}
+
+.modalityPrice {
+  padding: 14px 20px;
+  text-align: center;
+}
+
+.modalityPrice strong {
+  font-size: clamp(1.78rem, 2.35vw, 2.4rem);
+  color: #201b67;
+  line-height: 1;
+}
+
+.modalityCta {
+  padding: 14px 20px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.modalityCta .primary {
+  border-radius: 10px;
+  font-size: 0.98rem;
+  padding: 11px 18px;
+}
+
+.modalityEssentiel .modalityTop h3 span {
+  background: linear-gradient(90deg, #eab7f0 0%, #e8d0ef 100%);
+}
+
+.modalitySession {
+  border-color: rgba(157, 157, 250, 0.85);
+  box-shadow: 0 16px 32px rgba(80, 77, 244, 0.22);
+}
+
+.modalitySession .modalityTop h3 span {
+  background: linear-gradient(90deg, #b8daef 0%, #d2e8f6 100%);
+}
+
+.modalityPremium .modalityTop h3 span {
+  background: linear-gradient(90deg, #bcefd9 0%, #d3f4e4 100%);
+}
+
+.modalityEssentiel .modalityPrice {
+  background: linear-gradient(90deg, #ebb5ea 0%, #e7d7ee 100%);
+}
+
+.modalitySession .modalityPrice {
+  background: linear-gradient(90deg, #acd3ea 0%, #d2e7f3 100%);
+}
+
+.modalityPremium .modalityPrice {
+  background: linear-gradient(90deg, #aae9cc 0%, #d4f2e3 100%);
+}
+
+@media (max-width: 1100px) {
+  .modalitiesGrid,
+  .kpiLayout,
+  .brochureContent,
+  .learningShowcaseGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .brochureShell {
+    width: min(100%, calc(100% - 28px));
+  }
+
+  .brochureFormWrap {
+    min-height: 370px;
+  }
+
+  .kpiVisual {
+    min-height: 360px;
+  }
+
+  .kpiVisualShape {
+    inset: 50px 60px 12px;
+  }
+
+  .modalityTop {
+    padding: 22px 18px 16px;
+  }
+
+  .modalityBody {
+    padding: 16px 18px 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .brochureShowcase {
+    padding-block: 36px;
+  }
+
+  .brochureShell {
+    width: min(100%, calc(100% - 20px));
+  }
+
+  .brochureHead h2 {
+    font-size: clamp(1.56rem, 7vw, 2.08rem);
+  }
+
+  .brochureHead p {
+    font-size: 0.95rem;
+  }
+
+  .brochureBenefits li {
+    font-size: 0.95rem;
+  }
+
+  .brochureFormWrap {
+    min-height: 0;
+  }
+
+  .brochureVisual {
+    display: none;
+  }
+
+  .brochureFormGrid,
+  .learningShowcaseGrid,
+  .modalitiesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .learningShowcaseCard {
+    min-height: 112px;
+    padding: 16px 14px;
+  }
+
+  .kpiHead h2 {
+    max-width: 100%;
+  }
+
+  .kpiVisual {
+    min-height: 300px;
+  }
+
+  .kpiVisualShape {
+    inset: 44px 26px 10px;
+    border-radius: 54px 16px 54px 16px;
+  }
+
+  .kpiVisualImage {
+    width: min(100%, 280px);
+  }
+}

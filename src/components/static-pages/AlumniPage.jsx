@@ -1,10 +1,11 @@
 import AlumniHallSection from "../AlumniHallSection";
-import styles from "./StaticPages.module.css";
+import layoutStyles from "./StaticPages.module.css";
+import alumniStyles from "../AlumniHallSection.module.css";
 
 export default function AlumniPage({ page }) {
   return (
-    <main className={`main-content ${styles.main}`} id="main-content" tabIndex="-1">
-      <section className={`section ${styles.section} alumni-standalone-start`}>
+    <main className={`main-content ${layoutStyles.main}`} id="main-content" tabIndex="-1">
+      <section className={`section ${layoutStyles.section} ${alumniStyles.standaloneStart}`}>
         {page.alumniHall ? <AlumniHallSection section={page.alumniHall} /> : null}
       </section>
     </main>

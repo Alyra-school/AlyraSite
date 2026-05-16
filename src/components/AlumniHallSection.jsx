@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./AlumniHallSection.module.css";
 
 function SocialLink({ social, personName }) {
   if (!social?.href) return null;
@@ -10,7 +11,7 @@ function SocialLink({ social, personName }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${social.label} de ${personName}`}
-      className="alumni-social-link"
+      className={styles.socialLink}
     >
       {social.symbol}
     </a>
@@ -21,26 +22,26 @@ function AlumniCard({ alumni }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <article className="alumni-card">
-      <figure className="alumni-card-image-wrap">
-        <img src={alumni.imageUrl} alt={alumni.name} loading="lazy" decoding="async" />
+    <article className={styles.card}>
+      <figure className={styles.imageWrap}>
+        <img className={styles.image} src={alumni.imageUrl} alt={alumni.name} loading="lazy" decoding="async" />
       </figure>
 
-      <div className="alumni-card-head">
-        <h3>{alumni.name}</h3>
-        <div className="alumni-card-socials" aria-label={`Reseaux de ${alumni.name}`}>
+      <div className={styles.cardHead}>
+        <h3 className={styles.cardName}>{alumni.name}</h3>
+        <div className={styles.cardSocials} aria-label={`Reseaux de ${alumni.name}`}>
           {(alumni.socials || []).map((social) => (
             <SocialLink key={`${alumni.id}-${social.label}`} social={social} personName={alumni.name} />
           ))}
         </div>
       </div>
 
-      <p className="alumni-card-role">{alumni.role}</p>
+      <p className={styles.cardRole}>{alumni.role}</p>
 
-      <p className={`alumni-card-text ${expanded ? "is-open" : ""}`}>{alumni.description}</p>
+      <p className={`${styles.cardText} ${expanded ? "" : styles.cardTextClosed}`}>{alumni.description}</p>
       <button
         type="button"
-        className="alumni-more-btn"
+        className={styles.moreBtn}
         aria-expanded={expanded}
         onClick={() => setExpanded((current) => !current)}
       >
@@ -59,17 +60,14 @@ export default function AlumniHallSection({ section }) {
   });
 
   return (
-    <section id={section.anchorId ?? "hall-of-fame"} className="alumni-hall-section anchor-section">
-      <p className="alumni-hall-eyebrow">{section.eyebrow}</p>
-      <h2>{section.title}</h2>
-      <p className="alumni-hall-subtitle">{section.subtitle}</p>
+    <section id={section.anchorId ?? "hall-of-fame"} className={`${styles.hallSection} anchor-section`}>
+      <p className={styles.eyebrow}>{section.eyebrow}</p>
+      <h2 className={styles.title}>{section.title}</h2>
+      <p className={styles.subtitle}>{section.subtitle}</p>
 
-      <div className="alumni-masonry-columns">
+      <div className={styles.columns}>
         {columns.map((column, idx) => (
-          <div
-            key={`alumni-col-${idx}`}
-            className={`alumni-masonry-col ${idx === 1 ? "alumni-masonry-col-mid" : ""}`}
-          >
+          <div key={`alumni-col-${idx}`} className={`${styles.column} ${idx === 1 ? styles.columnMid : ""}`}>
             {column.map((alumni) => (
               <AlumniCard key={alumni.id} alumni={alumni} />
             ))}

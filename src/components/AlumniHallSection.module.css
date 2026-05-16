@@ -1,0 +1,229 @@
+.hallSection {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 1240px);
+  margin: 0 auto clamp(60px, 6vw, 92px);
+  padding: clamp(24px, 3vw, 40px) 0 clamp(24px, 3vw, 40px);
+  background: transparent;
+  text-align: center;
+  overflow: visible;
+}
+
+.hallSection::before,
+.hallSection::after {
+  content: "";
+  position: absolute;
+  top: clamp(120px, 10vw, 180px);
+  width: clamp(300px, 30vw, 460px);
+  height: clamp(700px, 68vw, 1040px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  filter: blur(10px);
+  background: radial-gradient(70% 65% at 50% 50%, rgba(186, 181, 255, 0.6) 0%, rgba(186, 181, 255, 0.32) 62%, rgba(186, 181, 255, 0.04) 100%);
+}
+
+.hallSection::before {
+  left: clamp(-320px, -24vw, -180px);
+  border-radius: 999px;
+}
+
+.hallSection::after {
+  right: clamp(-320px, -24vw, -180px);
+  border-radius: 999px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #20215d;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.title {
+  width: min(100%, 980px);
+  margin: 14px auto 0;
+  color: #1f1d62;
+  font-size: clamp(2rem, 4.1vw, 4.3rem);
+  line-height: 1.12;
+  font-weight: 700;
+}
+
+.subtitle {
+  width: min(100%, 980px);
+  margin: clamp(16px, 2vw, 22px) auto 0;
+  color: #2c2f69;
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.columns {
+  margin-top: clamp(34px, 3.8vw, 54px);
+  padding-top: 102px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.2vw, 30px);
+  text-align: left;
+}
+
+.column {
+  display: grid;
+  align-content: start;
+  gap: clamp(24px, 2.8vw, 34px);
+}
+
+.columnMid {
+  margin-top: -102px;
+}
+
+.card {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.imageWrap {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eceffa;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.45) saturate(0.75) contrast(0.92) brightness(0.93);
+  transform: scale(1.02);
+  transition: filter 320ms ease, transform 320ms ease;
+}
+
+.imageWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(229, 232, 255, 0.42) 0%, rgba(196, 188, 255, 0.48) 48%, rgba(157, 166, 255, 0.38) 100%);
+  mix-blend-mode: multiply;
+  transition: opacity 320ms ease;
+  pointer-events: none;
+}
+
+.card:hover .image {
+  filter: grayscale(0) saturate(1) contrast(1) brightness(1);
+  transform: scale(1.085);
+}
+
+.card:hover .imageWrap::after {
+  opacity: 0.08;
+}
+
+.cardHead {
+  margin-top: 6px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardName {
+  margin: 0;
+  color: #212360;
+  font-size: clamp(1.22rem, 1.3vw, 1.62rem);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.cardSocials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.socialLink {
+  color: #2a2b69;
+  text-decoration: none;
+  font-size: 1.85rem;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.cardRole {
+  margin: 0;
+  color: #232561;
+  font-size: clamp(1.06rem, 1.1vw, 1.3rem);
+  line-height: 1.32;
+  font-weight: 700;
+}
+
+.cardText {
+  margin: 0;
+  color: #2f326f;
+  font-size: 1.02rem;
+  line-height: 1.52;
+}
+
+.cardTextClosed {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.moreBtn {
+  width: fit-content;
+  border: 0;
+  background: transparent;
+  color: #2f33ea;
+  font-weight: 700;
+  font-size: 0.96rem;
+  padding: 0;
+  cursor: pointer;
+}
+
+.standaloneStart {
+  padding-top: calc(var(--nav-height, 80px) + clamp(28px, 4vw, 56px));
+}
+
+@media (max-width: 980px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-top: 0;
+  }
+
+  .columnMid {
+    margin-top: 0;
+  }
+
+  .hallSection::before,
+  .hallSection::after {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .columns {
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+    gap: 20px;
+    padding-top: 0;
+  }
+
+  .image {
+    aspect-ratio: 1 / 1;
+  }
+
+  .cardName {
+    font-size: 1.12rem;
+  }
+
+  .cardRole {
+    font-size: 0.95rem;
+  }
+
+  .cardText {
+    font-size: 0.92rem;
+  }
+}

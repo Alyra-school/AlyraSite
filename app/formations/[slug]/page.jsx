@@ -29,7 +29,7 @@ export default async function ProgramPage({ params }) {
   const [program, programs] = await Promise.all([getProgramBySlug(slug), getPrograms()]);
   if (!program) notFound();
 
-  const detailContent = await getProgramPageByProgramId(program.id);
+  const detailContent = await getProgramPageByProgramId(program.id, { slug: program.slug });
 
   const similarPrograms = programs
     .filter((item) => item.slug !== program.slug)

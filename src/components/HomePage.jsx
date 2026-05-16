@@ -1,5 +1,3 @@
-"use client";
-
 import HeroSection from "./home/sections/HeroSection";
 import RecruitersMarqueeSection from "./home/sections/RecruitersMarqueeSection";
 import EmployabilitySection from "./home/sections/EmployabilitySection";
@@ -17,7 +15,7 @@ import AlyraTeamSection from "./home/sections/AlyraTeamSection";
 import PressMarqueeSection from "./home/sections/PressMarqueeSection";
 import BlogRecapSection from "./home/sections/BlogRecapSection";
 
-export default function HomePage() {
+export default function HomePage({ latestBlogPosts = [] }) {
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
       <HeroSection />
@@ -35,7 +33,7 @@ export default function HomePage() {
       <FreeCoursesSection />
       <AlyraTeamSection />
       <PressMarqueeSection />
-      <BlogRecapSection />
+      <BlogRecapSection posts={latestBlogPosts} />
     </main>
   );
 }

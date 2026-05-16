@@ -1,3 +1,5 @@
+import styles from "./ProgramSections.module.css";
+
 export default function ProgramCertificationSection({ programTitle, certification }) {
   const meta = certification?.meta ?? {};
   const iconMap = {
@@ -11,8 +13,8 @@ export default function ProgramCertificationSection({ programTitle, certificatio
   };
 
   return (
-    <section className="section program-section anchor-section program-certification-section" id="certification">
-      <div className="program-certification-hero">
+    <section className={`section program-section anchor-section ${styles.certificationSection}`} id="certification">
+      <div className={styles.certificationHero}>
         <div>
           <h2>
             {meta.headlinePrefix ?? "La certification enregistrée par"}{" "}
@@ -31,29 +33,29 @@ export default function ProgramCertificationSection({ programTitle, certificatio
         ) : null}
       </div>
 
-      <div className="program-certification-intro">
-        <figure className="program-certification-intro-visual" aria-hidden="true">
-          <span className="program-certification-visual-shape" />
+      <div className={styles.certificationIntro}>
+        <figure className={styles.certificationIntroVisual} aria-hidden="true">
+          <span className={styles.certificationVisualShape} />
           <img src="/inspired/team/corco.webp" alt="" loading="lazy" decoding="async" width="360" height="420" />
-          <span className="dot dot-1" />
-          <span className="dot dot-2" />
-          <span className="dot dot-3" />
+          <span className={`${styles.certificationDot} ${styles.certificationDot1}`} />
+          <span className={`${styles.certificationDot} ${styles.certificationDot2}`} />
+          <span className={`${styles.certificationDot} ${styles.certificationDot3}`} />
         </figure>
-        <div className="program-certification-intro-copy">
-          {meta.introLabel ? <p className="program-certification-intro-label">{meta.introLabel}</p> : null}
+        <div className={styles.certificationIntroCopy}>
+          {meta.introLabel ? <p className={styles.certificationIntroLabel}>{meta.introLabel}</p> : null}
           <h3>{meta.introTitle || `Certification ${programTitle}`}</h3>
           {meta.introDescription ? <p>{meta.introDescription}</p> : null}
           {meta.introReference ? <p>{meta.introReference}</p> : null}
-          <p className="program-certification-trustpilot">
+          <p className={styles.certificationTrustpilot}>
             <strong>Excellent</strong> {meta.trustpilotScore ?? "4.9 sur 5"}{" "}
             <span>★ Trustpilot</span>
           </p>
         </div>
       </div>
 
-      <div className="program-certification-prereqs">
+      <div>
         <h3>Quels prérequis ?</h3>
-        <div className="program-certification-prereq-cards">
+        <div className={styles.certificationPrereqCards}>
           {certification.prereqCards.map((card) => (
             <article key={`prereq-card-${card.position}`}>
               <span>{iconMap[card.iconKey] ?? "✓"}</span>
@@ -61,7 +63,7 @@ export default function ProgramCertificationSection({ programTitle, certificatio
             </article>
           ))}
         </div>
-        <div className="program-certification-prereq-tools">
+        <div className={styles.certificationPrereqTools}>
           {certification.prereqTools.map((tool) => (
             <div key={`prereq-tool-${tool.position}`}>
               <span>{iconMap[tool.iconKey] ?? "•"}</span>
@@ -69,16 +71,16 @@ export default function ProgramCertificationSection({ programTitle, certificatio
             </div>
           ))}
         </div>
-        <ul className="program-certification-prereq-bullets">
+        <ul className={styles.certificationPrereqBullets}>
           {certification.prereqBullets.map((item) => (
             <li key={`prereq-bullet-${item.position}`}>{item.text}</li>
           ))}
         </ul>
       </div>
 
-      <div className="program-certification-competencies">
+      <div>
         <h3><span>Compétences</span> certifiées</h3>
-        <div className="program-certification-competencies-panel">
+        <div className={styles.certificationCompetenciesPanel}>
           {certification.competencies.map((item) => (
             <article key={`competency-${item.position}`}>
               <h4>✓ {item.title}</h4>
@@ -88,22 +90,22 @@ export default function ProgramCertificationSection({ programTitle, certificatio
         </div>
       </div>
 
-      <div className="program-certification-objectives">
+      <div>
         <h3><span>Objectifs</span> de la certification</h3>
-        <div className="program-certification-objectives-panel">
+        <div className={styles.certificationObjectivesPanel}>
           {certification.objectives.map((item) => (
             <p key={`objective-${item.position}`}>{item.text}</p>
           ))}
         </div>
       </div>
 
-      <div className="program-certification-final-grid">
-        <div className="program-certification-evaluation">
+      <div className={styles.certificationFinalGrid}>
+        <div>
           <h3><span>Modalités d’évaluation</span> des compétences</h3>
-          <p className="program-certification-evaluation-subtitle">
+          <p className={styles.certificationEvaluationSubtitle}>
             La certification est obtenue par tout(e) candidat(e) maîtrisant l'ensemble des compétences.
           </p>
-          <div className="program-certification-evaluation-cards">
+          <div className={styles.certificationEvaluationCards}>
             {certification.evaluations.map((item) => (
               <article key={`evaluation-${item.position}`}>
                 <h4>{item.title}</h4>
@@ -113,9 +115,9 @@ export default function ProgramCertificationSection({ programTitle, certificatio
           </div>
         </div>
 
-        <div className="program-certification-validation">
+        <div>
           <h3>Conditions à respecter pour <span>valider cette formation</span></h3>
-          <div>
+          <div className={styles.certificationValidationBox}>
             <span>{iconMap.check}</span>
             <ul>
               {certification.validationRules.map((item) => (

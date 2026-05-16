@@ -1,18 +1,21 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef } from "react";
+import Image from "next/image";
 import { useCarouselAutoplay } from "../../hooks/home/useCarouselAutoplay";
 import { useDragScroll } from "../../hooks/home/useDragScroll";
 import { useInfiniteLoopCarousel } from "../../hooks/home/useInfiniteLoopCarousel";
 import { useCarouselFadeAndProgress } from "../../hooks/home/useCarouselFadeAndProgress";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
+import styles from "./ProgramCarousels.module.css";
 
 export default function ProgramExpertsCarousel({ items }) {
+  const trackId = useId();
   const trackRef = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const trackItems = useMemo(() => (items.length > 1 ? [...items, ...items, ...items] : items), [items]);
 
   const { getLogicalOffset, normalizeLoop, setInitialPosition, scrollByStep } = useInfiniteLoopCarousel({
     trackRef,
-    itemSelector: ".program-expert-carousel-card",
+    itemSelector: `.${styles.expertCard}`,
     itemCount: items.length,
     enabled: items.length > 1,
   });
@@ -31,7 +34,7 @@ export default function ProgramExpertsCarousel({ items }) {
   const dragScrollOptions = useMemo(
     () => ({
       onScroll: handleTrackScroll,
-      itemSelector: ".program-expert-carousel-card",
+      itemSelector: `.${styles.expertCard}`,
       enableSwipeSnap: true,
       swipeThreshold: 22,
       mobileOnlySnap: true,
@@ -69,48 +72,72 @@ export default function ProgramExpertsCarousel({ items }) {
 
   if (items.length === 0) return null;
 
+  const handleKeyNav = (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      scrollByStep(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      scrollByStep(1);
+    }
+  };
+
   return (
-    <section className="section program-section program-experts-carousel-section">
-      <div className="program-experts-carousel-head">
+    <section className={`section program-section ${styles.expertsSection}`}>
+      <div className={styles.expertsHead}>
         <h2>Nos <span>experts</span></h2>
       </div>
 
-      <nav className="program-experts-carousel-controls" aria-label="Navigation du carrousel experts">
-        <button type="button" aria-label="Expert precedent" onClick={() => scrollByStep(-1)}>←</button>
+      <nav className={styles.expertsControls} aria-label="Navigation du carrousel experts">
+        <button type="button" aria-label="Expert precedent" aria-controls={trackId} onClick={() => scrollByStep(-1)}>←</button>
         <span aria-hidden="true" />
-        <button type="button" aria-label="Expert suivant" onClick={() => scrollByStep(1)}>→</button>
+        <button type="button" aria-label="Expert suivant" aria-controls={trackId} onClick={() => scrollByStep(1)}>→</button>
       </nav>
 
       <div
-        className={`program-experts-carousel-track-shell ${fadeState.left ? "has-left-fade" : ""} ${fadeState.right ? "has-right-fade" : ""}`.trim()}
+        className={`${styles.expertsTrackShell} ${fadeState.left ? styles.hasLeftFade : ""} ${fadeState.right ? styles.hasRightFade : ""}`.trim()}
+        role="group"
+        aria-label="Carrousel des experts"
+        tabIndex={0}
+        onKeyDown={handleKeyNav}
       >
-        <div className="program-experts-carousel-track" ref={trackRef}>
+        <div className={styles.expertsTrack} ref={trackRef} id={trackId} aria-live="off">
           {trackItems.map((expert, index) => (
             <article
               key={`${expert.id ?? expert.name}-${index}`}
-              className="program-expert-carousel-card"
+              className={styles.expertCard}
               aria-hidden={items.length > 1 ? index < items.length || index >= items.length * 2 : false}
             >
-              <div className="program-expert-carousel-photo-wrap">
+              <div className={styles.expertPhotoWrap}>
                 <span aria-hidden="true" />
-                {expert.imageUrl ? <img src={expert.imageUrl} alt={expert.name ?? "Expert"} loading="lazy" decoding="async" /> : null}
+                {expert.imageUrl ? (
+                  <Image
+                    src={expert.imageUrl}
+                    alt={expert.name ?? "Expert"}
+                    width={420}
+                    height={420}
+                    sizes="(max-width: 760px) 72vw, (max-width: 1280px) 30vw, 22vw"
+                    unoptimized
+                  />
+                ) : null}
               </div>
-              <div className="program-expert-carousel-name">{expert.name}</div>
-              <p className="program-expert-carousel-role">{expert.role}</p>
+              <div className={styles.expertName}>{expert.name}</div>
+              <p className={styles.expertRole}>{expert.role}</p>
               {expert.linkedinUrl ? (
-                <a
-                  href={expert.linkedinUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Profil LinkedIn de ${expert.name}`}
-                  tabIndex={items.length > 1 && (index < items.length || index >= items.length * 2) ? -1 : 0}
-                >
+                  <a
+                    href={expert.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    aria-label={`Profil LinkedIn de ${expert.name}`}
+                    tabIndex={items.length > 1 && (index < items.length || index >= items.length * 2) ? -1 : 0}
+                  >
                   in
                 </a>
               ) : (
-                <span className="program-expert-carousel-link-placeholder" aria-hidden="true"> </span>
+                <span className={styles.expertLinkPlaceholder} aria-hidden="true"> </span>
               )}
-              <p className="program-expert-carousel-bio">{expert.bio}</p>
+              <p className={styles.expertBio}>{expert.bio}</p>
             </article>
           ))}
         </div>
