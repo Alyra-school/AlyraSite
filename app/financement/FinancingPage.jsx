@@ -107,7 +107,7 @@ export default function FinancingPage() {
                       ) : card.logoVariant === "opcoep" ? (
                         <div className={`${styles.profileCardLogoLabel} ${styles.logoopcoep}`}>
                           <span>OPCO EP</span>
-                          <span>Operateur de competences des Entreprises de Proximite</span>
+                          <span>Operateur de compétences des Entreprises de Proximite</span>
                         </div>
                       ) : card.logoVariant === "francetravailAif" ? (
                         <div className={`${styles.profileCardLogoLabel} ${styles.logofrancetravail}`}>

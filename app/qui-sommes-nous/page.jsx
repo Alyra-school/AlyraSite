@@ -3,9 +3,9 @@ import { getStaticPageContent } from "../../src/lib/content/staticPageMapper";
 import { pageMetadata } from "../../src/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Qui sommes nous",
+  title: "Qui sommes-nous",
   description:
-    "Notre mission, notre pedagogie et notre equipe pour former les talents de la blockchain et de l'IA.",
+    "Notre mission, notre pédagogie et notre équipe pour former les talents de la blockchain et de l'IA.",
   path: "/qui-sommes-nous",
 });
 

@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { parseDurationWeeks } from "../utils/programUtils";
 
 const staticPages = [
-  { label: "Financement", href: "/financement" },
   { label: "Blog", href: "/blog" },
   { label: "Nos Anciens", href: "/nos-anciens" },
 ];
@@ -196,6 +195,15 @@ export default function NavBar({ programs = [] }) {
               )}
             </div>
           </div>
+
+          <Link
+            className={`nav-link ${pathname === "/financement" ? "active" : ""}`}
+            href="/financement"
+            onClick={closeMenus}
+            aria-current={pathname === "/financement" ? "page" : undefined}
+          >
+            Financement
+          </Link>
 
           <div className={`nav-programs ${isNeedsOpen ? "open" : ""}`}>
             <button
