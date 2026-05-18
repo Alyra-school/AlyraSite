@@ -13,7 +13,14 @@ export default function ProgramCatalog({ programsList, isLoading = false, error 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const audienceParam = searchParams.get("audience");
+  const audience = audienceParam === "entreprise" ? "entreprise" : "particulier";
   const { hydratedPrograms, clientLoading, clientError } = useProgramHydration(programsList);
+  const audiencePrograms = hydratedPrograms.filter((program) => {
+    const tags = Array.isArray(program.tags) ? program.tags : [];
+    const isEnterprise = tags.some((tag) => String(tag).toLowerCase() === "entreprise");
+    return audience === "entreprise" ? isEnterprise : !isEnterprise;
+  });
   const {
     tagOptions,
     filteredPrograms,
@@ -27,12 +34,24 @@ export default function ProgramCatalog({ programsList, isLoading = false, error 
     toggleTag,
     resetFilters,
   } = useProgramFilters({
-    programs: hydratedPrograms,
+    programs: audiencePrograms,
     searchParams,
     pathname,
     router,
     showPriceFilter: SHOW_PRICE_FILTER,
   });
+
+  const onAudienceChange = (nextAudience) => {
+    const next = nextAudience === "entreprise" ? "entreprise" : "particulier";
+    const params = new URLSearchParams(searchParams.toString());
+    if (next === "particulier") {
+      params.delete("audience");
+    } else {
+      params.set("audience", "entreprise");
+    }
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  };
 
   return (
     <main className="main-content" id="main-content" tabIndex="-1">
@@ -48,6 +67,25 @@ export default function ProgramCatalog({ programsList, isLoading = false, error 
       </section>
 
       <section className="catalog-layout">
+        <div className="catalog-audience-selector" role="radiogroup" aria-label="Type de profil">
+          <span className="catalog-audience-label">Je suis ...</span>
+          <button
+            type="button"
+            className={`catalog-audience-option ${audience === "particulier" ? "active" : ""}`}
+            aria-pressed={audience === "particulier"}
+            onClick={() => onAudienceChange("particulier")}
+          >
+            Un particulier
+          </button>
+          <button
+            type="button"
+            className={`catalog-audience-option ${audience === "entreprise" ? "active" : ""}`}
+            aria-pressed={audience === "entreprise"}
+            onClick={() => onAudienceChange("entreprise")}
+          >
+            Une entreprise
+          </button>
+        </div>
         <CatalogFilters
           tagOptions={tagOptions}
           durationMode={durationMode}

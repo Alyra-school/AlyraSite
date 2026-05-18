@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { priceBuckets } from "../data/catalogFilters";
 import {
   getDateCategory,
@@ -58,16 +58,18 @@ export function useProgramFilters({
     [searchParams, tagOptions]
   );
 
-  const [durationMode, setDurationMode] = useState(initialFilters.durationMode);
-  const [dateMode, setDateMode] = useState(initialFilters.dateMode);
-  const [selectedTags, setSelectedTags] = useState(initialFilters.selectedTags);
-  const [priceMode, setPriceMode] = useState(0);
+  const durationMode = initialFilters.durationMode;
+  const dateMode = initialFilters.dateMode;
+  const selectedTags = initialFilters.selectedTags;
+  const priceParam = Number(searchParams.get("price"));
+  const priceMode = showPriceFilter && [1, 2, 3].includes(priceParam) ? priceParam : 0;
 
-  useEffect(() => {
-    setDurationMode(initialFilters.durationMode);
-    setDateMode(initialFilters.dateMode);
-    setSelectedTags(initialFilters.selectedTags);
-  }, [initialFilters]);
+  const updateParams = (mutator) => {
+    const params = new URLSearchParams(searchParams.toString());
+    mutator(params);
+    const nextQuery = params.toString();
+    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
+  };
 
   const filteredPrograms = useMemo(() => {
     return programs.filter((program) => {
@@ -105,49 +107,25 @@ export function useProgramFilters({
     showPriceFilter,
   ]);
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete("track");
-    params.delete("duration");
-    params.delete("date");
-    params.delete("tags");
-    params.delete("price");
-
-    if (durationMode !== "any") params.set("duration", durationMode);
-    if (dateMode === 1) params.set("date", "now");
-    if (dateMode === 2) params.set("date", "later");
-    if (selectedTags.length > 0) params.set("tags", selectedTags.join(","));
-    if (showPriceFilter && priceMode !== 0) params.set("price", String(priceMode));
-
-    const nextQuery = params.toString();
-    const currentQuery = searchParams.toString();
-    if (nextQuery !== currentQuery) {
-      router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
-    }
-  }, [
-    durationMode,
-    dateMode,
-    selectedTags,
-    priceMode,
-    showPriceFilter,
-    searchParams,
-    router,
-    pathname,
-  ]);
-
   const toggleTag = (value) => {
-    setSelectedTags((current) =>
-      current.includes(value)
-        ? current.filter((item) => item !== value)
-        : [...current, value]
-    );
+    updateParams((params) => {
+      const currentTags = selectedTags.includes(value)
+        ? selectedTags.filter((item) => item !== value)
+        : [...selectedTags, value];
+      params.delete("track");
+      if (currentTags.length === 0) params.delete("tags");
+      else params.set("tags", currentTags.join(","));
+    });
   };
 
   const resetFilters = () => {
-    setDurationMode("any");
-    setDateMode(0);
-    setSelectedTags([]);
-    setPriceMode(0);
+    updateParams((params) => {
+      params.delete("duration");
+      params.delete("date");
+      params.delete("tags");
+      params.delete("track");
+      params.delete("price");
+    });
   };
 
   return {
@@ -157,9 +135,23 @@ export function useProgramFilters({
     dateMode,
     selectedTags,
     priceMode,
-    setDurationMode,
-    setDateMode,
-    setPriceMode,
+    setDurationMode: (value) =>
+      updateParams((params) => {
+        params.delete("track");
+        if (!value || value === "any") params.delete("duration");
+        else params.set("duration", value);
+      }),
+    setDateMode: (value) =>
+      updateParams((params) => {
+        if (value === 1) params.set("date", "now");
+        else if (value === 2) params.set("date", "later");
+        else params.delete("date");
+      }),
+    setPriceMode: (value) =>
+      updateParams((params) => {
+        if (!showPriceFilter || value === 0) params.delete("price");
+        else params.set("price", String(value));
+      }),
     toggleTag,
     resetFilters,
   };

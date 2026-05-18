@@ -151,28 +151,28 @@ export default function NavBar({ programs = [] }) {
                 <span>Toutes nos formations</span>
               </Link>
               <Link
-                href="/formations?track=blockchain"
+                href="/formations/blockchain"
                 className="nav-dropdown-item"
                 onClick={closeMenus}
               >
                 <span>Nos Formations Blockchain</span>
               </Link>
               <Link
-                href="/formations?track=ia"
+                href="/formations/intelligence-artificielle"
                 className="nav-dropdown-item"
                 onClick={closeMenus}
               >
                 <span>Nos Formations IA</span>
               </Link>
               <Link
-                href="/formations?type=gratuite"
+                href="/formations/gratuites"
                 className="nav-dropdown-item"
                 onClick={closeMenus}
               >
                 <span>Nos formations gratuites</span>
               </Link>
               <Link
-                href="/formations?type=entreprise"
+                href="/formations/entreprises"
                 className="nav-dropdown-item"
                 onClick={closeMenus}
               >

@@ -1,0 +1,41 @@
+.layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.topText,
+.bottomText {
+  border: 1px solid var(--stroke);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.3rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.topText h2,
+.bottomText h2 {
+  margin: 0;
+}
+
+.topText p,
+.bottomText p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.seoLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.seoLinks a {
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: rgba(212, 203, 255, 0.26);
+}
+
