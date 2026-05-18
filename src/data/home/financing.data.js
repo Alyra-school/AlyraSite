@@ -1,22 +1,22 @@
 export const distanceLearningData = {
-  title: "Formation 100% a distance",
+  title: "Formation 100% à distance",
   body:
-    "Tous nos parcours de formation sont 100% en ligne, afin que vous puissiez les suivre d'ou vous voulez dans le monde.",
+    "Tous nos parcours de formation sont 100% en ligne, afin que vous puissiez les suivre d’où vous voulez dans le monde.",
   points: [
     "75% des cours sont en live",
-    "Replays disponibles en illimite",
-    "Projet reel pour mettre en pratique vos competences",
+    "Replays disponibles en illimité",
+    "Projet réel pour mettre en pratique vos compétences",
   ],
   cta: { label: "Je prends RDV", href: "/rendez-vous" },
   image: "/inspired/home/hero-secondary.avif",
 };
 
 export const financingSupportData = {
-  title: "Faites financer votre formation a 100%",
+  title: "Faites financer votre formation à 100%",
   bodyTop:
-    "+15 organismes de financement sont a votre disposition : Financement CPF, conventions SYNTEC & CINOV, OPCOAtlas, et bien d'autres...",
+    "+15 organismes de financement sont à votre disposition : Financement CPF, conventions SYNTEC & CINOV, OPCOAtlas, et bien d'autres...",
   bodyBottom:
-    "Que vous soyez salarie, entrepreneur, en reconversion ou en recherche d'emploi, votre formation peut etre financee a 100 %.",
+    "Que vous soyez salarié, entrepreneur, en reconversion ou en recherche d'emploi, votre formation peut être financée à 100 %.",
   payment: {
     text: "Ou payez en",
     terms: ["2x", "3x", "4x"],

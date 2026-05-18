@@ -18,9 +18,9 @@ export const whyTechData = {
     {
       id: "skills-gap",
       titlePrefix: "Un manque de",
-      titleAccent: "profils qualifies",
+      titleAccent: "profils qualifiés",
       body:
-        "La France compte 11701 emplois dans la blockchain, mais les entreprises peinent a recruter : plus de 80 % declarent manquer de profils qualifies.",
+        "La France compte 11701 emplois dans la blockchain, mais les entreprises peinent a recruter : plus de 80 % declarent manquer de profils qualifiés.",
       source: "Source : Coincub/Opiiec",
     },
   ],

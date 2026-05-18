@@ -1,6 +1,6 @@
 export const employabilityData = {
   title: "Propulsez votre vie professionnelle & personnelle",
-  subtitle: "En maitrisant de nouvelles competences recherchees sur le marche du travail",
+  subtitle: "En maîtrisant de nouvelles compétences recherchées sur le marché du travail",
   rows: [
     {
       id: "salary",
@@ -19,7 +19,7 @@ export const employabilityData = {
       sourceList: [
         "+175% de croissance du secteur blockchain d'ici 2028",
         "10 475 emplois prevus en France",
-        "Une montee en puissance du Web3",
+        "Une montée en puissance du Web3",
       ],
       sourceFooter: "Source : Opiiec",
       badge: { value: "+175%", label: "d'offres d'emploi", className: "employability-badge employability-badge-jobs" },

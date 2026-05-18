@@ -1,7 +1,7 @@
 export const siteUrl = "https://www.alyra.fr";
-export const siteName = "Alyra, l'ecole Blockchain et IA";
+export const siteName = "Alyra, l'école Blockchain et IA";
 export const defaultDescription =
-  "Formations professionnelles en blockchain et intelligence artificielle: catalogue, financement, rendez-vous et accompagnement carriere.";
+  "Formations professionnelles en blockchain et intelligence artificielle: catalogue, financement, rendez-vous et accompagnement carrière.";
 export const defaultOgImage = "/inspired/home/hero-main.avif";
 
 export const defaultMetadata = {
@@ -13,7 +13,7 @@ export const defaultMetadata = {
   },
   description: defaultDescription,
   keywords: [
-    "ecole blockchain",
+    "école blockchain",
     "formation blockchain",
     "formation intelligence artificielle",
     "web3",

@@ -5,7 +5,7 @@ import { pageMetadata } from "../../src/lib/seo";
 export const metadata = pageMetadata({
   title: "Vos besoins",
   description:
-    "Choisissez un parcours adapte a votre objectif: reconversion, montee en competences ou besoins entreprise.",
+    "Choisissez un parcours adapté à votre objectif : reconversion, montée en compétences ou besoins entreprise.",
   path: "/vos-besoins",
 });
 

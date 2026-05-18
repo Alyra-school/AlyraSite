@@ -1,5 +1,5 @@
 export const certificationData = {
-  title: "Des formations concues pour vous mener a",
+  title: "Des formations conçues pour vous mener à",
   accent: "la certification",
   stats: [
     { id: "learners", value: "+2500", text: "Apprenants depuis 2019", type: "solid" },

@@ -1,6 +1,7 @@
 .page {
   width: min(1360px, calc(100% - 48px));
   margin: 0 auto;
+  padding-top: calc(var(--nav-height, 80px) + 18px);
 }
 
 .hero {
@@ -56,6 +57,7 @@
   border: 1px solid rgba(68, 76, 255, 0.4);
   display: block;
   max-height: 440px;
+  max-width: 860px;
   object-fit: cover;
 }
 
@@ -92,6 +94,50 @@
   line-height: 1.5;
 }
 
+.ttsWrap {
+  margin-top: 0.9rem;
+}
+
+.ttsButtons {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.ttsButtons .ttsButton {
+  min-width: 120px;
+}
+
+.ttsButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 38px;
+  border-radius: 10px;
+  border: 1px solid rgba(34, 33, 89, 0.18);
+  background: rgba(212, 203, 255, 0.22);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ttsIcon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.ttsButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ttsHint {
+  margin-top: 0.8rem !important;
+  font-size: 0.92rem;
+}
+
 .form {
   margin-top: 0.9rem;
   display: grid;
@@ -118,6 +164,38 @@
   cursor: pointer;
 }
 
+.shareRow {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.shareButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 33, 89, 0.2);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+  background: rgba(212, 203, 255, 0.24);
+  cursor: pointer;
+}
+
+.shareButton:hover {
+  background: rgba(212, 203, 255, 0.4);
+}
+
+.shareHint {
+  margin-top: 0.6rem !important;
+  font-size: 0.86rem;
+  opacity: 0.8;
+}
+
 .content {
   font-size: 1.15rem;
   line-height: 1.7;
@@ -136,12 +214,21 @@
   margin: 0 0 1.25rem;
 }
 
+.content ul,
+.content ol {
+  padding-left: clamp(1.35rem, 2.3vw, 2rem);
+  margin-left: clamp(0.3rem, 1.1vw, 0.9rem);
+}
+
 .content img {
   width: min(100%, 760px);
+  max-width: 760px;
+  max-height: 520px;
   height: auto;
   display: block;
   border-radius: 12px;
   margin: 0 auto;
+  object-fit: contain;
 }
 
 @media (max-width: 1024px) {
@@ -159,6 +246,10 @@
   .page,
   .contentWrap {
     width: calc(100% - 24px);
+  }
+
+  .page {
+    padding-top: calc(var(--nav-height, 80px) + 12px);
   }
 
   .aside {
