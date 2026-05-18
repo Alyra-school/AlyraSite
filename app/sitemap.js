@@ -9,6 +9,10 @@ export default async function sitemap() {
   const staticRoutes = [
     "/",
     "/formations",
+    "/formations/blockchain",
+    "/formations/intelligence-artificielle",
+    "/formations/gratuites",
+    "/formations/entreprises",
     "/financement",
     "/vos-besoins",
     "/blog",

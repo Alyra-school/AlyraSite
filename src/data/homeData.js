@@ -419,8 +419,10 @@ export const footerColumns = [
     title: "Formations",
     links: [
       { label: "Catalogue", href: "/formations" },
-      { label: "Formations Blockchain", href: "/formations?track=blockchain" },
-      { label: "Formations IA", href: "/formations?track=ia" },
+      { label: "Formations Blockchain", href: "/formations/blockchain" },
+      { label: "Formations IA", href: "/formations/intelligence-artificielle" },
+      { label: "Formations gratuites", href: "/formations/gratuites" },
+      { label: "Formations entreprises", href: "/formations/entreprises" },
     ],
   },
   {
